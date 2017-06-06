@@ -1,9 +1,4 @@
-﻿/*
- * 
- * 作者：wanqian
- * 作用：通信心跳
- * 
- * */
+﻿
 
 using UnityEngine;
 using System.Collections;

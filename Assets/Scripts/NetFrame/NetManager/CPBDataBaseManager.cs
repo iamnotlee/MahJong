@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using proto.NetGame;
 
 
 public class PBDataManager :Singleton<PBDataManager>
@@ -101,15 +102,35 @@ public class PBDataManager :Singleton<PBDataManager>
     private void RegisterInterface()
     {
         #region 链接&&Ping
-
+        // 第一次链接
         AddInterface<RQConnect>(GameTools.getCmd_M(0,2));
-        AddInterface<RPConnect>(GameTools.getCmd_M(0,2));
+        AddInterface<NetLoginConfirm>(GameTools.getCmd_M(0,2));
+        // ping
         AddInterface<RQPing>(GameTools.getCmd_M(0, 1));
         AddInterface<RPPing>(GameTools.getCmd_M(0, 1));
 
         #endregion
+        // 创建房间
         AddInterface<RQCreateRoom>(GameTools.getCmd_M(10, 1));
         AddInterface<RPCreateRoom>(GameTools.getCmd_M(10, 1));
+        // 进入房间
+        AddInterface<RQEnterRoom>(GameTools.getCmd_M(10, 2));
+        AddInterface<RPEnterRoom>(GameTools.getCmd_M(10, 2));
+        // 推出房间
+        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 3));
+        AddInterface<RQExit>(GameTools.getCmd_M(10, 3));
+        // 托管
+        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 4));
+        //准备
+        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 5));
+        // 投票解散
+        AddInterface<RPVote>(GameTools.getCmd_M(10, 6));
+        // 游戏
+        AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
+        // 结算
+        AddInterface<RQREsult>(GameTools.getCmd_M(11, 2));
+        // 压跑
+        AddInterface<NetOprateData>(GameTools.getCmd_M(11, 3));
     }
     /// <summary>
     /// 添加接口

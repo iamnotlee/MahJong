@@ -1,24 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using proto.NetGame;
 public class MahJongModel : Singleton<MahJongModel> {
 
 	
     public void RegistCallBack()
     {
-        //CDataListManager.Instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
+        CDataListManager.Instance.RegisterDelegate<NetResponse>(MahJongActions);
 
     }
-    void CreateRoom(PB_BaseData baseData)
+
+    public void RqReady()
     {
-        //RPCreateRoom rp = baseData.GetObj<RPCreateRoom>();
-        //if (rp != null)
-        //{
-        //    //28682766
-        //    UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
-        //    UnityEngine.SceneManagement.SceneManager.LoadScene("game");
-        //    Debug.Log(rp.roomId);
-        //}
+        PB_BaseData rq = new PB_BaseData();
+        int cmd = GameTools.getCmd_M(10, 5);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
+    }
+    void MahJongActions(PB_BaseData baseData)
+    {
+         NetResponse rp = baseData.GetObj<NetResponse>();
+        if (rp != null)
+        {
+            
+          
+        }
     }
 
 }

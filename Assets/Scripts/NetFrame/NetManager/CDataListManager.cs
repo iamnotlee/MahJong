@@ -86,7 +86,7 @@ public class CDataListManager : MonoBehaviour
     public void ParseFrom(PB_BaseData data)
     {
         if (data == null) return;
-        //Debug.Log("----------------------start解析出的数据---------------------- " + data.cmd + "   " + data.sequence);
+        MyLogger.LogS2C("----------------------start解析出的数据---------------------- " + data.cmd + "   " + data.sequence);
         lock (_receiveQue)
         {
             _receiveQue.Enqueue(data);

@@ -9,6 +9,11 @@ public class GameUI : MonoBehaviour
     public GameObject HelpBtn;
     public GameObject ChatBtn;
     public GameObject InviteBtn;
+
+    void Awake()
+    {
+        MahJongModel.Instance.RegistCallBack();
+    }
 	void Start ()
 	{
         AudioManager.Instance.PlayMusic(EMusicType.GameMusic);
@@ -17,6 +22,7 @@ public class GameUI : MonoBehaviour
 	    UIEventListener.Get(HelpBtn).onClick = ClickHelp;
 	    UIEventListener.Get(ChatBtn).onClick = ClickChat;
 	    UIEventListener.Get(InviteBtn).onClick = ClickInvite;
+        MahJongModel.Instance.RqReady();
 	}
 
     private void ClickSetting(GameObject go)

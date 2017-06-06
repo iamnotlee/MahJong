@@ -18,12 +18,20 @@ public class LoginModel : Singleton<LoginModel> {
     }
     void CallBackAppList(PB_BaseData baseData)
     {
-        RPConnect rp = baseData.GetObj<RPConnect>();
+        RQConnect rp = baseData.GetObj<RQConnect>();
         if (rp != null && rp.roomId == 0)
         {
             //PingManager.Instance.StartPing();
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("main");
+            if (rp.roomId != 0)
+            {
+                MyLogger.Log(rp.roomId);
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("game");
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("main");
+            }
+            
         }
-        Debug.Log(rp.roomId);
     }
 }
