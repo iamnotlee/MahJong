@@ -17,3 +17,4 @@
 *.RTF	 diff=astextplain
 Temp
 Library
+.vs
