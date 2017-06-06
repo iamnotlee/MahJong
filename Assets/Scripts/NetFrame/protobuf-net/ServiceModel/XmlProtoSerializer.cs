@@ -30,7 +30,7 @@ namespace ProtoBuf.ServiceModel
         /// <summary>
         /// Attempt to create a new serializer for the given model and type
         /// </summary>
-        /// <returns>A new serializer instance if the type is recognised by the model; null otherwise</returns>
+        /// <returns>A new serializer Instance if the type is recognised by the model; null otherwise</returns>
         public static XmlProtoSerializer TryCreate(TypeModel model, Type type)
         {
             if (model == null) throw new ArgumentNullException("model");

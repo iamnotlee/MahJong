@@ -7,14 +7,14 @@ public class LoginModel : Singleton<LoginModel> {
 
     public void Regist()
     {
-        CDataListManager.instance.RegisterDelegate<RQConnect>(CallBackAppList);
+        CDataListManager.Instance.RegisterDelegate<RQConnect>(CallBackAppList);
     }
     public void RequestConent()
     {
         NetLoginConfirm rq = new NetLoginConfirm();
         rq.uid = HttpModel.Instance.GetHttpUid();
         int cmd = GameTools.getCmd_M(GameConst.ModelSystem, 2);
-        CDataListManager.instance.SendBaseDataToPB_Net(cmd,rq);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
     }
     void CallBackAppList(PB_BaseData baseData)
     {

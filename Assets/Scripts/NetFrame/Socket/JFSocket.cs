@@ -232,7 +232,7 @@ namespace DataFrame.Net
                     byte[] cmd_data = buffer.getOneCmdData();
                     //当没有数据可以解析的时候跳出
                     if (cmd_data == null) break;
-                    PBDataManager.Instance.GetBaseDataFromPB(cmd_data);
+                    PBDataManager.Instance.GetBaseDataFromPb(cmd_data);
 //#if Debug
                     //PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
                     //Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata);

@@ -683,7 +683,7 @@ namespace ProtoBuf.Serializers
 
         void IProtoTypeSerializer.EmitCreateInstance(Compiler.CompilerContext ctx)
         {
-            // different ways of creating a new instance
+            // different ways of creating a new Instance
             bool callNoteObject = true;
             if (factory != null)
             {

@@ -92,7 +92,7 @@ public class UIRectEditor : Editor
 	}
 
 	/// <summary>
-	/// Clear the instance reference.
+	/// Clear the Instance reference.
 	/// </summary>
 
 	protected virtual void OnDisable () { instance = null; }

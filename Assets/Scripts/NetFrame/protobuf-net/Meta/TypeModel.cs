@@ -203,18 +203,18 @@ namespace ProtoBuf.Meta
         }
 #endif
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream.
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream.
         /// </summary>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="dest">The destination stream to write to.</param>
         public void Serialize(Stream dest, object value)
         {
             Serialize(dest, value, null);
         }
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream.
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream.
         /// </summary>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="dest">The destination stream to write to.</param>
         /// <param name="context">Additional information about this serialization operation.</param>
         public void Serialize(Stream dest, object value, SerializationContext context)
@@ -231,9 +231,9 @@ namespace ProtoBuf.Meta
 #endif
         }
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied writer.
+        /// Writes a protocol-buffer representation of the given Instance to the supplied writer.
         /// </summary>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="dest">The destination writer to write to.</param>
         public void Serialize(ProtoWriter dest, object value)
         {
@@ -250,17 +250,17 @@ namespace ProtoBuf.Meta
         }
 
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (or null), using length-prefixed
+        /// Applies a protocol-buffer stream to an existing Instance (or null), using length-prefixed
         /// data - useful with network IO.
         /// </summary>
         /// <param name="type">The type being merged.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
         /// <param name="style">How to encode the length prefix.</param>
         /// <param name="fieldNumber">The tag used as a prefix to each record (only used with base-128 style prefixes).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object DeserializeWithLengthPrefix(Stream source, object value, Type type, PrefixStyle style, int fieldNumber)
         {
             int bytesRead;
@@ -269,18 +269,18 @@ namespace ProtoBuf.Meta
 
 
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (or null), using length-prefixed
+        /// Applies a protocol-buffer stream to an existing Instance (or null), using length-prefixed
         /// data - useful with network IO.
         /// </summary>
         /// <param name="type">The type being merged.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
         /// <param name="style">How to encode the length prefix.</param>
         /// <param name="expectedField">The tag used as a prefix to each record (only used with base-128 style prefixes).</param>
         /// <param name="resolver">Used to resolve types on a per-field basis.</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object DeserializeWithLengthPrefix(Stream source, object value, Type type, PrefixStyle style, int expectedField, Serializer.TypeResolver resolver)
         {
             int bytesRead;
@@ -288,19 +288,19 @@ namespace ProtoBuf.Meta
         }
 
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (or null), using length-prefixed
+        /// Applies a protocol-buffer stream to an existing Instance (or null), using length-prefixed
         /// data - useful with network IO.
         /// </summary>
         /// <param name="type">The type being merged.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
         /// <param name="style">How to encode the length prefix.</param>
         /// <param name="expectedField">The tag used as a prefix to each record (only used with base-128 style prefixes).</param>
         /// <param name="resolver">Used to resolve types on a per-field basis.</param>
         /// <param name="bytesRead">Returns the number of bytes consumed by this operation (includes length-prefix overheads and any skipped data).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object DeserializeWithLengthPrefix(Stream source, object value, Type type, PrefixStyle style, int expectedField, Serializer.TypeResolver resolver, out int bytesRead)
         {
             bool haveObject;
@@ -511,13 +511,13 @@ namespace ProtoBuf.Meta
         }
 
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream,
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream,
         /// with a length-prefix. This is useful for socket programming,
         /// as DeserializeWithLengthPrefix can be used to read the single object back
         /// from an ongoing stream.
         /// </summary>
         /// <param name="type">The type being serialized.</param>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="style">How to encode the length prefix.</param>
         /// <param name="dest">The destination stream to write to.</param>
         /// <param name="fieldNumber">The tag used as a prefix to each record (only used with base-128 style prefixes).</param>
@@ -526,13 +526,13 @@ namespace ProtoBuf.Meta
             SerializeWithLengthPrefix(dest, value, type, style, fieldNumber, null);
         }
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream,
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream,
         /// with a length-prefix. This is useful for socket programming,
         /// as DeserializeWithLengthPrefix can be used to read the single object back
         /// from an ongoing stream.
         /// </summary>
         /// <param name="type">The type being serialized.</param>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="style">How to encode the length prefix.</param>
         /// <param name="dest">The destination stream to write to.</param>
         /// <param name="fieldNumber">The tag used as a prefix to each record (only used with base-128 style prefixes).</param>
@@ -564,27 +564,27 @@ namespace ProtoBuf.Meta
             }
         }
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="type">The type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object Deserialize(Stream source, object value, System.Type type)
         {
             return Deserialize(source, value, type, null);
         }
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="type">The type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         /// <param name="context">Additional information about this serialization operation.</param>
         public object Deserialize(Stream source, object value, System.Type type, SerializationContext context)
         {
@@ -634,29 +634,29 @@ namespace ProtoBuf.Meta
         }
 
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="type">The type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
         /// <param name="length">The number of bytes to consume.</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object Deserialize(Stream source, object value, System.Type type, int length)
         {
             return Deserialize(source, value, type, length, null);
         }
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="type">The type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
         /// <param name="length">The number of bytes to consume (or -1 to read to the end of the stream).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         /// <param name="context">Additional information about this serialization operation.</param>
         public object Deserialize(Stream source, object value, System.Type type, int length, SerializationContext context)
         {
@@ -680,14 +680,14 @@ namespace ProtoBuf.Meta
 #endif
         }
         /// <summary>
-        /// Applies a protocol-buffer reader to an existing instance (which may be null).
+        /// Applies a protocol-buffer reader to an existing Instance (which may be null).
         /// </summary>
         /// <param name="type">The type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The reader to apply to the instance (cannot be null).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The reader to apply to the Instance (cannot be null).</param>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         public object Deserialize(ProtoReader source, object value, System.Type type)
         {
 #if FEAT_IKVM
@@ -1260,21 +1260,21 @@ namespace ProtoBuf.Meta
         /// </summary>
         protected abstract int GetKeyImpl(Type type);
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream.
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream.
         /// </summary>
         /// <param name="key">Represents the type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="dest">The destination stream to write to.</param>
         protected internal abstract void Serialize(int key, object value, ProtoWriter dest);
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="key">Represents the type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         protected internal abstract object Deserialize(int key, object value, ProtoReader source);
         
         //internal ProtoSerializer Create(IProtoSerializer head)
@@ -1297,7 +1297,7 @@ namespace ProtoBuf.Meta
             /// </summary>
             AfterSerialize,
             /// <summary>
-            /// Invoked before an object is deserialized (or when a new instance is created)
+            /// Invoked before an object is deserialized (or when a new Instance is created)
             /// </summary>            
             BeforeDeserialize,
             /// <summary>
@@ -1306,7 +1306,7 @@ namespace ProtoBuf.Meta
             AfterDeserialize
         }
         /// <summary>
-        /// Create a deep clone of the supplied instance; any sub-items are also cloned.
+        /// Create a deep clone of the supplied Instance; any sub-items are also cloned.
         /// </summary>
         public object DeepClone(object value)
         {

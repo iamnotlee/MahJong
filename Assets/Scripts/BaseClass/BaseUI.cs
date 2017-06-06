@@ -170,7 +170,7 @@ public abstract class BaseUI : MonoBehaviour
 
     #region 对外接口
     /// <summary>
-    /// Release this instance.
+    /// Release this Instance.
     /// </summary>
     public void Release()
     {

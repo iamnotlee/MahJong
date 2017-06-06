@@ -133,7 +133,7 @@ public class NGUISelectionTools
 	{
 		if (Selection.activeTransform != null)
 		{
-			// Check if the selected object is a prefab instance and display a warning
+			// Check if the selected object is a prefab Instance and display a warning
 			PrefabType type = PrefabUtility.GetPrefabType(Selection.activeGameObject);
 
 			if (type == PrefabType.PrefabInstance)

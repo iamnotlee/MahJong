@@ -28,14 +28,14 @@
 //            this.value = value;
 //        }
 //        /// <summary>
-//        /// Convert a surrogate instance to a standard pair instance.
+//        /// Convert a surrogate Instance to a standard pair Instance.
 //        /// </summary>
 //        public static implicit operator KeyValuePair<TKey, TValue> (KeyValuePairSurrogate<TKey, TValue> value)
 //        {
 //            return new KeyValuePair<TKey,TValue>(value.key, value.value);
 //        }
 //        /// <summary>
-//        /// Convert a standard pair instance to a surrogate instance.
+//        /// Convert a standard pair Instance to a surrogate Instance.
 //        /// </summary>
 //        public static implicit operator KeyValuePairSurrogate<TKey, TValue>(KeyValuePair<TKey, TValue> value)
 //        {

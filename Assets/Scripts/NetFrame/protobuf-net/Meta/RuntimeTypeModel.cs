@@ -755,10 +755,10 @@ namespace ProtoBuf.Meta
             }
         }
         /// <summary>
-        /// Writes a protocol-buffer representation of the given instance to the supplied stream.
+        /// Writes a protocol-buffer representation of the given Instance to the supplied stream.
         /// </summary>
         /// <param name="key">Represents the type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be serialized (cannot be null).</param>
+        /// <param name="value">The existing Instance to be serialized (cannot be null).</param>
         /// <param name="dest">The destination stream to write to.</param>
         protected internal override void Serialize(int key, object value, ProtoWriter dest)
         {
@@ -770,14 +770,14 @@ namespace ProtoBuf.Meta
 #endif
         }
         /// <summary>
-        /// Applies a protocol-buffer stream to an existing instance (which may be null).
+        /// Applies a protocol-buffer stream to an existing Instance (which may be null).
         /// </summary>
         /// <param name="key">Represents the type (including inheritance) to consider.</param>
-        /// <param name="value">The existing instance to be modified (can be null).</param>
-        /// <param name="source">The binary stream to apply to the instance (cannot be null).</param>
-        /// <returns>The updated instance; this may be different to the instance argument if
-        /// either the original instance was null, or the stream defines a known sub-type of the
-        /// original instance.</returns>
+        /// <param name="value">The existing Instance to be modified (can be null).</param>
+        /// <param name="source">The binary stream to apply to the Instance (cannot be null).</param>
+        /// <returns>The updated Instance; this may be different to the Instance argument if
+        /// either the original Instance was null, or the stream defines a known sub-type of the
+        /// original Instance.</returns>
         protected internal override object Deserialize(int key, object value, ProtoReader source)
         {
 #if FEAT_IKVM
@@ -904,10 +904,10 @@ namespace ProtoBuf.Meta
         }
 
         /// <summary>
-        /// Fully compiles the current model into a static-compiled model instance
+        /// Fully compiles the current model into a static-compiled model Instance
         /// </summary>
         /// <remarks>A full compilation is restricted to accessing public types / members</remarks>
-        /// <returns>An instance of the newly created compiled type-model</returns>
+        /// <returns>An Instance of the newly created compiled type-model</returns>
         public TypeModel Compile()
         {
             CompilerOptions options = new CompilerOptions();
@@ -1075,7 +1075,7 @@ namespace ProtoBuf.Meta
         /// <remarks>A full compilation is restricted to accessing public types / members</remarks>
         /// <param name="name">The name of the TypeModel class to create</param>
         /// <param name="path">The path for the new dll</param>
-        /// <returns>An instance of the newly created compiled type-model</returns>
+        /// <returns>An Instance of the newly created compiled type-model</returns>
         public TypeModel Compile(string name, string path)
         {
             CompilerOptions options = new CompilerOptions();
@@ -1089,7 +1089,7 @@ namespace ProtoBuf.Meta
         /// (the serialization dll still requires protobuf-net for support services).
         /// </summary>
         /// <remarks>A full compilation is restricted to accessing public types / members</remarks>
-        /// <returns>An instance of the newly created compiled type-model</returns>
+        /// <returns>An Instance of the newly created compiled type-model</returns>
         public TypeModel Compile(CompilerOptions options)
         {
             if (options == null) throw new ArgumentNullException("options");

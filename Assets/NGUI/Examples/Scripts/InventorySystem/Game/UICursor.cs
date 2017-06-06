@@ -25,7 +25,7 @@ public class UICursor : MonoBehaviour
 	string mSpriteName;
 
 	/// <summary>
-	/// Keep an instance reference so this class can be easily found.
+	/// Keep an Instance reference so this class can be easily found.
 	/// </summary>
 
 	void Awake () { instance = this; }

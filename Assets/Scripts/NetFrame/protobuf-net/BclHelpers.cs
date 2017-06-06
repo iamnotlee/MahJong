@@ -27,10 +27,10 @@ namespace ProtoBuf
         class BclHelpers
     {
         /// <summary>
-        /// Creates a new instance of the specified type, bypassing the constructor.
+        /// Creates a new Instance of the specified type, bypassing the constructor.
         /// </summary>
         /// <param name="type">The type to create</param>
-        /// <returns>The new instance</returns>
+        /// <returns>The new Instance</returns>
         /// <exception cref="NotSupportedException">If the platform does not support constructor-skipping</exception>
         public static object GetUninitializedObject(Type type)
         {

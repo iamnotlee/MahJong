@@ -30,7 +30,7 @@ public class UIPanelTool : EditorWindow
 	}
 
 	/// <summary>
-	/// First sort by depth, then alphabetically, then by instance ID.
+	/// First sort by depth, then alphabetically, then by Instance ID.
 	/// </summary>
 
 	static int Compare (Entry a, Entry b)

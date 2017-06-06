@@ -28,7 +28,7 @@ namespace ProtoBuf
 
 #if !NO_RUNTIME && !NO_GENERICS
         /// <summary>
-        /// All this does is call GetExtendedValuesTyped with the correct type for "instance";
+        /// All this does is call GetExtendedValuesTyped with the correct type for "Instance";
         /// this ensures that we don't get issues with subclasses declaring conflicting types -
         /// the caller must respect the fields defined for the type they pass in.
         /// </summary>
@@ -41,7 +41,7 @@ namespace ProtoBuf
         }
 #endif
         /// <summary>
-        /// All this does is call GetExtendedValuesTyped with the correct type for "instance";
+        /// All this does is call GetExtendedValuesTyped with the correct type for "Instance";
         /// this ensures that we don't get issues with subclasses declaring conflicting types -
         /// the caller must respect the fields defined for the type they pass in.
         /// </summary>
@@ -135,15 +135,15 @@ namespace ProtoBuf
         }
 //#if !NO_GENERICS
 //        /// <summary>
-//        /// Stores the given value into the instance's stream; the serializer
+//        /// Stores the given value into the Instance's stream; the serializer
 //        /// is inferred from TValue and format.
 //        /// </summary>
 //        /// <remarks>Needs to be public to be callable thru reflection in Silverlight</remarks>
 //        public static void AppendExtendValueTyped<TSource, TValue>(
-//            TypeModel model, TSource instance, int tag, DataFormat format, TValue value)
+//            TypeModel model, TSource Instance, int tag, DataFormat format, TValue value)
 //            where TSource : class, IExtensible
 //        {
-//            AppendExtendValue(model, instance, tag, format, value);
+//            AppendExtendValue(model, Instance, tag, format, value);
 //        }
 //#endif
     }

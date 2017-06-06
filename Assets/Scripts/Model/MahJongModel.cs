@@ -6,7 +6,7 @@ public class MahJongModel : Singleton<MahJongModel> {
 	
     public void RegistCallBack()
     {
-        //CDataListManager.instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
+        //CDataListManager.Instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
 
     }
     void CreateRoom(PB_BaseData baseData)

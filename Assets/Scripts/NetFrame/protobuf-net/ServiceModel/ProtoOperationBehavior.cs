@@ -27,7 +27,7 @@ namespace ProtoBuf.ServiceModel
 
         }
         /// <summary>
-        /// Create a new ProtoOperationBehavior instance
+        /// Create a new ProtoOperationBehavior Instance
         /// </summary>
         public ProtoOperationBehavior(OperationDescription operation) : base(operation)
         {
@@ -42,7 +42,7 @@ namespace ProtoBuf.ServiceModel
         /// </summary>
         public override XmlObjectSerializer CreateSerializer(Type type, System.Xml.XmlDictionaryString name, System.Xml.XmlDictionaryString ns, IList<Type> knownTypes)
         {
-            if (model == null) throw new InvalidOperationException("No Model instance has been assigned to the ProtoOperationBehavior");
+            if (model == null) throw new InvalidOperationException("No Model Instance has been assigned to the ProtoOperationBehavior");
             return XmlProtoSerializer.TryCreate(model, type) ?? base.CreateSerializer(type, name, ns, knownTypes);
         }
     }

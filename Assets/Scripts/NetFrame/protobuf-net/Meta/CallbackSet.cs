@@ -67,25 +67,25 @@ namespace ProtoBuf.Meta
             return new NotSupportedException("Invalid callback signature in " + method.DeclaringType.FullName + "." + method.Name);
         }
         private MethodInfo beforeSerialize, afterSerialize, beforeDeserialize, afterDeserialize;
-        /// <summary>Called before serializing an instance</summary>
+        /// <summary>Called before serializing an Instance</summary>
         public MethodInfo BeforeSerialize
         {
             get { return beforeSerialize; }
             set { beforeSerialize = SanityCheckCallback(metaType.Model, value); }
         }
-        /// <summary>Called before deserializing an instance</summary>
+        /// <summary>Called before deserializing an Instance</summary>
         public MethodInfo BeforeDeserialize
         {
             get { return beforeDeserialize; }
             set { beforeDeserialize = SanityCheckCallback(metaType.Model, value); }
         }
-        /// <summary>Called after serializing an instance</summary>
+        /// <summary>Called after serializing an Instance</summary>
         public MethodInfo AfterSerialize
         {
             get { return afterSerialize; }
             set { afterSerialize = SanityCheckCallback(metaType.Model, value); }
         }
-        /// <summary>Called after deserializing an instance</summary>
+        /// <summary>Called after deserializing an Instance</summary>
         public MethodInfo AfterDeserialize
         {
             get { return afterDeserialize; }

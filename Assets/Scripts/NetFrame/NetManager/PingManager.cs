@@ -39,7 +39,7 @@ public class PingManager : MonoSingleton<PingManager> {
     void OnEnable(){
         seqDic = new Dictionary<int, float>();
 
-        CDataListManager.instance.RegisterDelegate<RPPing>(CallBackPing);
+        CDataListManager.Instance.RegisterDelegate<RPPing>(CallBackPing);
 
         if (isStart) { 
             InvokeRepeating("SendPing", PingSpace, PingSpace);
@@ -48,7 +48,7 @@ public class PingManager : MonoSingleton<PingManager> {
     }
 
     void OnDisable() {
-        CDataListManager.instance.DeleteDelegate<RPPing>(CallBackPing);
+        CDataListManager.Instance.DeleteDelegate<RPPing>(CallBackPing);
         CancelInvoke();
         seqDic = null;
     }
@@ -83,7 +83,7 @@ public class PingManager : MonoSingleton<PingManager> {
         //if (!seqDic.ContainsKey(rq.sequence))
         //{
         //    seqDic.Add(rq.sequence, Time.time);
-        //    CDataListManager.instance.SendBaseDataToPB_Net(rq, false);
+        //    CDataListManager.Instance.SendBaseDataToPB_Net(rq, false);
         //}
     }
 

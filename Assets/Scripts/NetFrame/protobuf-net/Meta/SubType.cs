@@ -41,7 +41,7 @@ namespace ProtoBuf.Meta
         private readonly MetaType derivedType;
 
         /// <summary>
-        /// Creates a new SubType instance.
+        /// Creates a new SubType Instance.
         /// </summary>
         /// <param name="fieldNumber">The field-number that is used to encapsulate the data (as a nested
         /// message) for the derived dype.</param>

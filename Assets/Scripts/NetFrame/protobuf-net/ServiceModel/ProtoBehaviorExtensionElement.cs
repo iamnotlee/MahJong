@@ -11,7 +11,7 @@ namespace ProtoBuf.ServiceModel
     public class ProtoBehaviorExtension : BehaviorExtensionElement
     {
         /// <summary>
-        /// Creates a new ProtoBehaviorExtension instance.
+        /// Creates a new ProtoBehaviorExtension Instance.
         /// </summary>
         public ProtoBehaviorExtension()
         {

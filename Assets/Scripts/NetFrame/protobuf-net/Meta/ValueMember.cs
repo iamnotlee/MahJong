@@ -61,7 +61,7 @@ namespace ProtoBuf.Meta
 
         private readonly RuntimeTypeModel model;
         /// <summary>
-        /// Creates a new ValueMember instance
+        /// Creates a new ValueMember Instance
         /// </summary>
         public ValueMember(RuntimeTypeModel model, Type parentType, int fieldNumber, MemberInfo member, Type memberType, Type itemType, Type defaultType, DataFormat dataFormat, object defaultValue) 
             : this(model, fieldNumber,memberType, itemType, defaultType, dataFormat)
@@ -94,7 +94,7 @@ namespace ProtoBuf.Meta
             }
         }
         /// <summary>
-        /// Creates a new ValueMember instance
+        /// Creates a new ValueMember Instance
         /// </summary>
         internal ValueMember(RuntimeTypeModel model, int fieldNumber, Type memberType, Type itemType, Type defaultType, DataFormat dataFormat) 
         {

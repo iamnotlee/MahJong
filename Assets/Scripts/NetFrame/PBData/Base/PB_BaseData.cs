@@ -146,7 +146,6 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
         ms.Position = 0;
         byte[] temp = ms.ToArray();
         ms.Close();
-
         return temp;
     }
 
@@ -188,7 +187,7 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
     /// <returns></returns>
     public T GetObj<T>() 
     {
-        //if (!EncryptManager.instance.CompareServerSnWithLocalSn(this.sn, this.obj, GameConst.GameKey))
+        //if (!EncryptManager.Instance.CompareServerSnWithLocalSn(this.sn, this.obj, GameConst.GameKey))
         //{
         //    return null;
         //}

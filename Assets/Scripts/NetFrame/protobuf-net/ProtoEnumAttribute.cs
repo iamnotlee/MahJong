@@ -19,7 +19,7 @@ namespace ProtoBuf
         }
 
         /// <summary>
-        /// Indicates whether this instance has a customised value mapping
+        /// Indicates whether this Instance has a customised value mapping
         /// </summary>
         /// <returns>true if a specific value is set</returns>
         public bool HasValue() { return hasValue; }

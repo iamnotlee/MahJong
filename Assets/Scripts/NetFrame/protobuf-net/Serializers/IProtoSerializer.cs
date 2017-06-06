@@ -61,7 +61,7 @@ namespace ProtoBuf.Serializers
         /// Emit the IL necessary to perform the given actions to deserialize this data.
         /// </summary>
         /// <param name="ctx">Details and utilities for the method being generated.</param>
-        /// <param name="entity">For nested values, the instance holding the values; note
+        /// <param name="entity">For nested values, the Instance holding the values; note
         /// that this is not always provided - a null means not supplied. Since this is always
         /// a variable or argument, it is not necessary to consume this value.</param>
         void EmitRead(Compiler.CompilerContext ctx, Compiler.Local entity);

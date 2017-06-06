@@ -195,7 +195,7 @@ namespace ProtoBuf.Meta
         /// </summary>
         /// <param name="beforeSerialize">The method (or null) called before serialization begins.</param>
         /// <param name="afterSerialize">The method (or null) called when serialization is complete.</param>
-        /// <param name="beforeDeserialize">The method (or null) called before deserialization begins (or when a new instance is created during deserialization).</param>
+        /// <param name="beforeDeserialize">The method (or null) called before deserialization begins (or when a new Instance is created during deserialization).</param>
         /// <param name="afterDeserialize">The method (or null) called when deserialization is complete.</param>
         /// <returns>The set of callbacks.</returns>
         public MetaType SetCallbacks(MethodInfo beforeSerialize, MethodInfo afterSerialize, MethodInfo beforeDeserialize, MethodInfo afterDeserialize)
@@ -212,7 +212,7 @@ namespace ProtoBuf.Meta
         /// </summary>
         /// <param name="beforeSerialize">The name of the method (or null) called before serialization begins.</param>
         /// <param name="afterSerialize">The name of the method (or null) called when serialization is complete.</param>
-        /// <param name="beforeDeserialize">The name of the method (or null) called before deserialization begins (or when a new instance is created during deserialization).</param>
+        /// <param name="beforeDeserialize">The name of the method (or null) called before deserialization begins (or when a new Instance is created during deserialization).</param>
         /// <param name="afterDeserialize">The name of the method (or null) called when deserialization is complete.</param>
         /// <returns>The set of callbacks.</returns>
         public MetaType SetCallbacks(string beforeSerialize, string afterSerialize, string beforeDeserialize, string afterDeserialize)
@@ -314,7 +314,7 @@ namespace ProtoBuf.Meta
         {
             if (Helpers.IsNullOrEmpty(name)) return null;
 #if WINRT || COREFX
-            return instance ? Helpers.GetInstanceMethod(typeInfo, name) : Helpers.GetStaticMethod(typeInfo, name);
+            return Instance ? Helpers.GetInstanceMethod(typeInfo, name) : Helpers.GetStaticMethod(typeInfo, name);
 #else
             return instance ? Helpers.GetInstanceMethod(type, name) : Helpers.GetStaticMethod(type, name);
 #endif
@@ -708,7 +708,7 @@ namespace ProtoBuf.Meta
                     isPublic = field.IsPublic;
                     isField = true;
                     if (isEnum && !field.IsStatic)
-                    { // only care about static things on enums; WinRT has a __value instance field!
+                    { // only care about static things on enums; WinRT has a __value Instance field!
                         continue;
                     }
                     ApplyDefaultBehaviour_AddMembers(model, family, isEnum, partialMembers, dataMemberOffset, inferTagByName, implicitMode, members, member, ref forced, isPublic, isField, ref effectiveType);
@@ -1262,7 +1262,7 @@ namespace ProtoBuf.Meta
             set { SetFlag(OPTIONS_SkipConstructor, !value, true); }
         }
         /// <summary>
-        /// The concrete type to create when a new instance of this type is needed; this may be useful when dealing
+        /// The concrete type to create when a new Instance of this type is needed; this may be useful when dealing
         /// with dynamic proxies, or with interface-based APIs
         /// </summary>
         public Type ConstructType

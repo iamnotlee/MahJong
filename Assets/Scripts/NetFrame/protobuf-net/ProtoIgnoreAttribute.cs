@@ -22,7 +22,7 @@ namespace ProtoBuf
     public sealed class ProtoPartialIgnoreAttribute : ProtoIgnoreAttribute
     {
         /// <summary>
-        /// Creates a new ProtoPartialIgnoreAttribute instance.
+        /// Creates a new ProtoPartialIgnoreAttribute Instance.
         /// </summary>
         /// <param name="memberName">Specifies the member to be ignored.</param>
         public ProtoPartialIgnoreAttribute(string memberName)

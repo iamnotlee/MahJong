@@ -10,50 +10,38 @@ public class CDataListManager : MonoBehaviour
     /// <summary>
     /// 保存解析数据
     /// </summary>
-    private List<PB_BaseData> baseDataList = null;
+    private Queue<PB_BaseData> _receiveQue = new Queue<PB_BaseData>();
     /// <summary>
     /// 注册回调
     /// </summary>
-    private Dictionary<int, List<GetDataCallback>> delegateDic;
+    private Dictionary<int, List<GetDataCallback>> _delegateDic = new Dictionary<int, List<GetDataCallback>>();
     /// <summary>
     /// 获取数据回调
     /// </summary>
     /// <param name="rp"></param>
     public delegate void GetDataCallback(PB_BaseData rp);
 
-    public static CDataListManager instance;
+    public static CDataListManager Instance;
     void Awake()
     {
-        instance = this;
-        baseDataList = new List<PB_BaseData>();
-        delegateDic = new Dictionary<int, List<GetDataCallback>>();
+        Instance = this;
+        _delegateDic = new Dictionary<int, List<GetDataCallback>>();
         DontDestroyOnLoad(gameObject);
-    }
-    void Start()
-    {
-        //InvokeRepeating("CheckeTime", 0, 1.0f);
-        //InvokeRepeating("ParseByteData", 0, 0.1f);
     }
     void Update()
     {
-        ParseByteData();      
-    }
-    void OnApplicationQuit()
-    {
-        SocketManager.Instance.CloseAllSocket();
+        ParseByteData();
     }
     /// <summary>
     /// 解析数据
     /// </summary>
     private void ParseByteData()
     {
-        lock (baseDataList)
+        lock (_receiveQue)
         {
-            if (baseDataList.Count > 0)
+            if (_receiveQue.Count > 0)
             {
-                GetDataCallBack(baseDataList[0]);
-                baseDataList.RemoveAt(0);
-
+                GetDataCallBack(_receiveQue.Dequeue());
             }
         }
     }
@@ -64,12 +52,10 @@ public class CDataListManager : MonoBehaviour
     /// <param name="data"></param>
     void GetDataCallBack(PB_BaseData data)
     {
-        //Debug.Log(data.status);
         if (data.status == 0)
         {
             List<GetDataCallback> tempListDelegate = GetDelegateListByCmd(data.cmd);
-            //Debug.LogError("返回的cmd : "+data.cmd+ "tempListDelegate : "+ tempListDelegate.Count);
-            if (data != null && tempListDelegate != null)
+            if (tempListDelegate != null)
             {
                 for (int i = tempListDelegate.Count - 1; i >= 0; i--)
                 {
@@ -84,6 +70,10 @@ public class CDataListManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            MyLogger.Log("返回错误码："+data.status);
+        }
     }
 
 
@@ -97,9 +87,9 @@ public class CDataListManager : MonoBehaviour
     {
         if (data == null) return;
         //Debug.Log("----------------------start解析出的数据---------------------- " + data.cmd + "   " + data.sequence);
-        lock (baseDataList)
+        lock (_receiveQue)
         {
-            baseDataList.Add(data);
+            _receiveQue.Enqueue(data);
         }
     }
     /* 以前的方法
@@ -114,7 +104,7 @@ public class CDataListManager : MonoBehaviour
         {
         }
 
-        //string error = CPBDataBaseManager.instance.SendBaseDataToPB_Net(rq);
+        //string error = CPBDataBaseManager.Instance.SendBaseDataToPB_Net(rq);
         //if (!error.Equals("发送数据成功"))
         //{
 
@@ -163,20 +153,14 @@ public class CDataListManager : MonoBehaviour
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="callBack"></param>
-    public void RegisterDelegate(Type cpbType, GetDataCallback callBack)
+    private void RegisterDelegate(Type cpbType, GetDataCallback callBack)
     {
         int tempCmd = PBDataManager.Instance.GetCmdByType(cpbType);
-        //Debug.LogError("注册时Cmd: " + tempCmd);
-        RegisterDelegate(tempCmd, callBack);
-    }
-
-    private void RegisterDelegate(int cmd, GetDataCallback callBack)
-    {
-        if (delegateDic.ContainsKey(cmd))
+        if (_delegateDic.ContainsKey(tempCmd))
         {
-            if (!delegateDic[cmd].Contains(callBack))
+            if (!_delegateDic[tempCmd].Contains(callBack))
             {
-                delegateDic[cmd].Add(callBack);
+                _delegateDic[tempCmd].Add(callBack);
             }
             else
             {
@@ -185,12 +169,10 @@ public class CDataListManager : MonoBehaviour
         }
         else
         {
-            List<GetDataCallback> templist = new List<GetDataCallback>();
-            templist.Add(callBack);
-            delegateDic.Add(cmd, templist);
+            List<GetDataCallback> templist = new List<GetDataCallback> {callBack};
+            _delegateDic.Add(tempCmd, templist);
         }
     }
-
     #endregion
 
     #region 删除回掉
@@ -210,23 +192,14 @@ public class CDataListManager : MonoBehaviour
     /// 删除回调
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <param name="cpbType"></param>
     /// <param name="callBack"></param>
-    public void DeleteDelegate(Type cpbType, GetDataCallback callBack)
+    private void DeleteDelegate(Type cpbType, GetDataCallback callBack)
     {
         int tempCmd = PBDataManager.Instance.GetCmdByType(cpbType);
-        DeleteDelegate(tempCmd, callBack);
-    }
-
-    /// <summary>
-    /// 删除回调
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="callBack"></param>
-    private void DeleteDelegate(int cmd, GetDataCallback callBack)
-    {
-        if (delegateDic.ContainsKey(cmd))
+        if (_delegateDic.ContainsKey(tempCmd))
         {
-            List<GetDataCallback> tempList = delegateDic[cmd];
+            List<GetDataCallback> tempList = _delegateDic[tempCmd];
             if (tempList != null)
             {
                 for (int i = 0; i < tempList.Count; i++)
@@ -239,7 +212,6 @@ public class CDataListManager : MonoBehaviour
             }
         }
     }
-
     #endregion
 
 
@@ -248,21 +220,25 @@ public class CDataListManager : MonoBehaviour
     /// </summary>
     /// <param name="cmd"></param>
     /// <returns></returns>
-    public List<GetDataCallback> GetDelegateListByCmd(int cmd)
+    private List<GetDataCallback> GetDelegateListByCmd(int cmd)
     {
-        if (delegateDic.ContainsKey(cmd))
+        if (_delegateDic.ContainsKey(cmd))
         {
-            return delegateDic[cmd];
+            return _delegateDic[cmd];
         }
-        return null;      
+        return null;
     }
 
     void OnDestroy()
     {
-        baseDataList.Clear();
-        baseDataList = null;
-        delegateDic.Clear();
-        delegateDic = null;
-        instance = null;
+        _receiveQue.Clear();
+        _receiveQue = null;
+        _delegateDic.Clear();
+        _delegateDic = null;
+        //Instance = null;
+    }
+    void OnApplicationQuit()
+    {
+        SocketManager.Instance.CloseAllSocket();
     }
 }

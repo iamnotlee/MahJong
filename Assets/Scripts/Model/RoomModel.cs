@@ -13,7 +13,7 @@ public class RoomModel : Singleton<RoomModel>
 
     public void RegisterCreameRoom()
     {
-        CDataListManager.instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
+        CDataListManager.Instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
     }
 
     public void RequestCreateRoom()
@@ -22,7 +22,7 @@ public class RoomModel : Singleton<RoomModel>
         rq.gameId = 1;
         rq.type = new List<int>() {4, 2, 1};
         int cmd = GameTools.getCmd_M(GameConst.ModelGameComm, 1);
-        CDataListManager.instance.SendBaseDataToPB_Net(cmd, rq);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
     }
 
     void CreateRoom(PB_BaseData baseData)
@@ -46,7 +46,7 @@ public class RoomModel : Singleton<RoomModel>
     #region 进入房间
     public void RegisterEnterRoom()
     {
-        CDataListManager.instance.RegisterDelegate<RPEnterRoom>(EnterRoom);
+        CDataListManager.Instance.RegisterDelegate<RPEnterRoom>(EnterRoom);
     }
 
     public void RequestEnterRoom(int roomid)
@@ -54,7 +54,7 @@ public class RoomModel : Singleton<RoomModel>
         RQEnterRoom rq = new RQEnterRoom();
         rq.roomId = roomid;
         int cmd = GameTools.getCmd_M(GameConst.ModelGameComm, 2);
-        CDataListManager.instance.SendBaseDataToPB_Net(cmd, rq);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
     }
     void EnterRoom(PB_BaseData baseData)
     {

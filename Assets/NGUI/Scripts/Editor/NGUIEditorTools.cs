@@ -415,7 +415,7 @@ static public class NGUIEditorTools
 
 		if (root.transform != null)
 		{
-			// Check if the selected object is a prefab instance and display a warning
+			// Check if the selected object is a prefab Instance and display a warning
 			PrefabType type = PrefabUtility.GetPrefabType(root);
 
 			if (type == PrefabType.PrefabInstance)
@@ -1865,7 +1865,7 @@ static public class NGUIEditorTools
 			UIWidget selectedTex = (UIWidgetInspector.instance != null && UIWidgetInspector.instance.target != null) ?
 				UIWidgetInspector.instance.target as UITexture : null;
 
-			// Determine the object instance ID of the UISprite class
+			// Determine the object Instance ID of the UISprite class
 			int spriteID = GetClassID<UISprite>();
 
 			// Run through all the UI textures and change them to sprites
@@ -1891,7 +1891,7 @@ static public class NGUIEditorTools
 			{
 				// Repaint() doesn't work in this case because Unity doesn't realize that the underlying
 				// script type has changed and that a new editor script needs to be chosen.
-				//UIWidgetInspector.instance.Repaint();
+				//UIWidgetInspector.Instance.Repaint();
 				Selection.activeGameObject = null;
 			}
 		}

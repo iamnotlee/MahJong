@@ -62,8 +62,8 @@ namespace ProtoBuf
         
         /// <summary>
         /// Gets / sets a flag indicating whether strings should be checked for repetition; if
-        /// true, any repeated UTF-8 byte sequence will result in the same String instance, rather
-        /// than a second instance of the same string. Enabled by default. Note that this uses
+        /// true, any repeated UTF-8 byte sequence will result in the same String Instance, rather
+        /// than a second Instance of the same string. Enabled by default. Note that this uses
         /// a <i>custom</i> interner - the system-wide string interner is not used.
         /// </summary>
         public bool InternStrings { get { return internStrings; } set { internStrings = value; } }
@@ -1200,7 +1200,7 @@ namespace ProtoBuf
         }
 
         /// <summary>
-        /// Copies the current field into the instance as extension data
+        /// Copies the current field into the Instance as extension data
         /// </summary>
         public void AppendExtensionData(IExtensible instance)
         {

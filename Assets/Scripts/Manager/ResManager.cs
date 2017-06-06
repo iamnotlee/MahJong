@@ -116,9 +116,9 @@ public class ResManager : Singleton<ResManager>
     #region Load Resources & Instantiate Object
 
     /// <summary>
-    /// Loads the instance.
+    /// Loads the Instance.
     /// </summary>
-    /// <returns>The instance.</returns>
+    /// <returns>The Instance.</returns>
     /// <param name="_path">_path.</param>
     public UnityEngine.Object LoadInstance(string _path)
     {
@@ -127,7 +127,7 @@ public class ResManager : Singleton<ResManager>
     }
 
     /// <summary>
-    /// Loads the coroutine instance.
+    /// Loads the coroutine Instance.
     /// </summary>
     /// <param name="_path">_path.</param>
     /// <param name="_loaded">_loaded.</param>
@@ -137,7 +137,7 @@ public class ResManager : Singleton<ResManager>
     }
 
     /// <summary>
-    /// Loads the async instance.
+    /// Loads the async Instance.
     /// </summary>
     /// <param name="_path">_path.</param>
     /// <param name="_loaded">_loaded.</param>
@@ -147,7 +147,7 @@ public class ResManager : Singleton<ResManager>
     }
 
     /// <summary>
-    /// Loads the async instance.
+    /// Loads the async Instance.
     /// </summary>
     /// <param name="_path">_path.</param>
     /// <param name="_loaded">_loaded.</param>

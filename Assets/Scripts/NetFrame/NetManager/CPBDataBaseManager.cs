@@ -1,10 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
-
-
 using System.IO;
 
 
@@ -13,11 +10,11 @@ public class PBDataManager :Singleton<PBDataManager>
     /// <summary>
     /// 注册接口
     /// </summary>
-    private Dictionary<Type, int> registerInterfaceDic;
+    private Dictionary<Type, int> _registerInterfaceDic;
 
     public override void Init()
     {
-        registerInterfaceDic = new Dictionary<Type, int>();
+        _registerInterfaceDic = new Dictionary<Type, int>();
         RegisterInterface();
 
     }
@@ -26,13 +23,13 @@ public class PBDataManager :Singleton<PBDataManager>
     /// 解析从pb来的数据
     /// </summary>
     /// <param name="pbData"></param>
-    public void GetBaseDataFromPB(byte[] pbData)
+    public void GetBaseDataFromPb(byte[] pbData)
     {
         PB_BaseData baseData = PB_BaseData.Create(pbData);
         if (baseData != null)
         {
 
-            CDataListManager.instance.ParseFrom(baseData);
+            CDataListManager.Instance.ParseFrom(baseData);
         }
     }
     /// <summary>
@@ -63,9 +60,9 @@ public class PBDataManager :Singleton<PBDataManager>
     public int GetCmdByType(Type t)
     {
         int tempCmd = -1;
-        if (!t.Equals(typeof(PB_BaseData)) && registerInterfaceDic.ContainsKey(t))
+        if (!t.Equals(typeof(PB_BaseData)) && _registerInterfaceDic.ContainsKey(t))
         {
-            tempCmd = registerInterfaceDic[t];
+            tempCmd = _registerInterfaceDic[t];
         }
         else
         {
@@ -81,9 +78,9 @@ public class PBDataManager :Singleton<PBDataManager>
     /// <returns></returns>
     public Type GetTypeByCmd(int cmd)
     {
-        foreach (Type t in registerInterfaceDic.Keys)
+        foreach (Type t in _registerInterfaceDic.Keys)
         {
-            if (registerInterfaceDic[t] == cmd)
+            if (_registerInterfaceDic[t] == cmd)
             {
                 return t;
             }
@@ -121,13 +118,13 @@ public class PBDataManager :Singleton<PBDataManager>
     /// <param name="cmd"></param>
     private void AddInterface<T>(int cmd)
     {
-        if (registerInterfaceDic == null) return;
-        if (registerInterfaceDic.ContainsKey(typeof(T)))
+        if (_registerInterfaceDic == null) return;
+        if (_registerInterfaceDic.ContainsKey(typeof(T)))
         {
             Debug.LogError("AddInterface with same key : " + typeof(T));
             return;
         }
-        registerInterfaceDic.Add(typeof(T), cmd);
+        _registerInterfaceDic.Add(typeof(T), cmd);
     }
 
     #endregion

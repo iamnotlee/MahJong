@@ -36,7 +36,7 @@ public class NGUIDebug : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Ensure we have an instance present.
+	/// Ensure we have an Instance present.
 	/// </summary>
 
 	static public void CreateInstance ()

@@ -287,7 +287,7 @@ namespace ProtoBuf
         /// <summary>
         /// Indicates the start of a nested record.
         /// </summary>
-        /// <param name="instance">The instance to write.</param>
+        /// <param name="instance">The Instance to write.</param>
         /// <param name="writer">The destination.</param>
         /// <returns>A token representing the state of the stream; this token is given to EndSubItem.</returns>
         public static SubItemToken StartSubItem(object instance, ProtoWriter writer)
@@ -892,7 +892,7 @@ namespace ProtoBuf
         }
 
         /// <summary>
-        /// Copies any extension data stored for the instance to the underlying stream
+        /// Copies any extension data stored for the Instance to the underlying stream
         /// </summary>
         public static void AppendExtensionData(IExtensible instance, ProtoWriter writer)
         {

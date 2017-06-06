@@ -12,7 +12,7 @@ namespace ProtoBuf
     {
         /// <summary>
         /// Retrieves the <see cref="IExtension">extension</see> object for the current
-        /// instance, optionally creating it if it does not already exist.
+        /// Instance, optionally creating it if it does not already exist.
         /// </summary>
         /// <param name="createIfMissing">Should a new extension object be
         /// created if it does not already exist?</param>
