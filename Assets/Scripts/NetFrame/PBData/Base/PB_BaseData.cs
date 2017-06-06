@@ -177,7 +177,7 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
         ms.Close();
 
         //Debug.LogError("cmd=====:" + rp.cmd);
-        Debug.LogError("rp=====:" + rp.ToString());
+        //Debug.LogError("rp=====:" + rp.ToString());
         return rp;
     }
 

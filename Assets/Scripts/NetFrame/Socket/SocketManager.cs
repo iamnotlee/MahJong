@@ -64,10 +64,6 @@ public class SocketManager : Singleton<SocketManager>
 #endif
 
         myCallBack = callback;
-        //Debug.LogError("ConnectNewSocket " + ip +":" + port);
-
-
-
         if (mySocketDic.ContainsKey(type) && mySocketDic[type].isConnected)
         {
             Debug.LogError("该地方的 socket 连接着，无需连接新的socket   " + type);
@@ -114,26 +110,26 @@ public class SocketManager : Singleton<SocketManager>
     /// 发送消息
     /// </summary>
     /// <param name="data"></param>
-    public string SendMessageToSocket(byte[] data) {
+    public bool SendMessageToSocket(byte[] data) {
 
         if (mySocketDic.ContainsKey(curConnectSocket))
         {
             if (mySocketDic[curConnectSocket].isConnected)
             {
-                string error = mySocketDic[curConnectSocket].SendMessage(data);
-                if (!error.Equals("发送数据成功")) {
+                bool isSuccess = mySocketDic[curConnectSocket].SendMessage(data);
+                if (!isSuccess) {
                     CloseSocket(curConnectSocket);
                 }
-                return error;
+                return isSuccess;
             }
             else
             {
-                return "服务器连接已断开";
+                return false;
             }
         }
         else {
             Debug.LogError(curConnectSocket + "这个socket 已断开了连接");
-            return curConnectSocket + " 已断开了连接";
+            return false;
         }
     }
 

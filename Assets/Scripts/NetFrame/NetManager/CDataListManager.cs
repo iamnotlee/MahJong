@@ -4,9 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-
-
-
 public class CDataListManager : MonoBehaviour
 {
 
@@ -14,17 +11,10 @@ public class CDataListManager : MonoBehaviour
     /// 保存解析数据
     /// </summary>
     private List<PB_BaseData> baseDataList = null;
-
     /// <summary>
     /// 注册回调
     /// </summary>
     private Dictionary<int, List<GetDataCallback>> delegateDic;
-
-    /// <summary>
-    /// 保存发送的数据
-    /// </summary>
-    //private Dictionary<int, SaveRQData> saveDataDic = null;
-
     /// <summary>
     /// 获取数据回调
     /// </summary>
@@ -37,7 +27,6 @@ public class CDataListManager : MonoBehaviour
         instance = this;
         baseDataList = new List<PB_BaseData>();
         delegateDic = new Dictionary<int, List<GetDataCallback>>();
-        //saveDataDic = new Dictionary<int, SaveRQData>();
         DontDestroyOnLoad(gameObject);
     }
     void Start()
@@ -53,7 +42,6 @@ public class CDataListManager : MonoBehaviour
     {
         SocketManager.Instance.CloseAllSocket();
     }
-
     /// <summary>
     /// 解析数据
     /// </summary>
@@ -69,8 +57,6 @@ public class CDataListManager : MonoBehaviour
             }
         }
     }
-
-
     /// <summary>
     /// 数据回调
     /// </summary>
@@ -110,13 +96,13 @@ public class CDataListManager : MonoBehaviour
     public void ParseFrom(PB_BaseData data)
     {
         if (data == null) return;
-        Debug.Log("----------------------start解析出的数据---------------------- " + data.cmd + "   " + data.sequence);
+        //Debug.Log("----------------------start解析出的数据---------------------- " + data.cmd + "   " + data.sequence);
         lock (baseDataList)
         {
             baseDataList.Add(data);
         }
     }
-
+    /* 以前的方法
     /// <summary>
     /// 发送数据
     /// </summary>
@@ -149,17 +135,14 @@ public class CDataListManager : MonoBehaviour
             }
         }
     }
-
+    */
     public void SendBaseDataToPB_Net(int cmd, object rq)
     {
-
-
-        string error = PBDataManager.Instance.SendBaseDataToPB_Net(cmd, rq);
-        if (!error.Equals("发送数据成功"))
+        bool isSucc = PBDataManager.Instance.SendBaseDataToPB_Net(cmd, rq);
+        if (!isSucc)
         {
-
+            MyLogger.LogC2S("发送失败");
         }
-
     }
 
     #region 注册回掉
@@ -183,7 +166,7 @@ public class CDataListManager : MonoBehaviour
     public void RegisterDelegate(Type cpbType, GetDataCallback callBack)
     {
         int tempCmd = PBDataManager.Instance.GetCmdByType(cpbType);
-        Debug.LogError("注册时Cmd: " + tempCmd);
+        //Debug.LogError("注册时Cmd: " + tempCmd);
         RegisterDelegate(tempCmd, callBack);
     }
 

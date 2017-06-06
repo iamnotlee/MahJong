@@ -41,16 +41,17 @@ public class PBDataManager :Singleton<PBDataManager>
     /// <param name="cmd"></param>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public string SendBaseDataToPB_Net(int cmd,object obj)
+    public bool SendBaseDataToPB_Net(int cmd,object obj)
     {
         if (obj == null)
         {      
-            return "发送数据为空";
+            MyLogger.Log("发送数据不能为空");
+            return false;
         }
         PB_BaseData baseData = new PB_BaseData();
         baseData.cmd = cmd;
         baseData.Init(obj);
-        string error = SocketManager.Instance.SendMessageToSocket(baseData.ConvertToByteArr());
+        bool error = SocketManager.Instance.SendMessageToSocket(baseData.ConvertToByteArr());
         return error;
     }
 

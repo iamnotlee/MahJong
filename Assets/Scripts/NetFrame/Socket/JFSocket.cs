@@ -209,13 +209,7 @@ namespace DataFrame.Net
                     CReciverData rc = new CReciverData();
                     rc.data = new byte[CReciverData.BufferDataLength];
                     rc.len = clientSocket.Receive(rc.data);
-                    Debug.Log("[Socket Lower Reciver] : Recive Data :" + rc.len);
-                    //string s = "";
-                    //for (int i = 0; i < rc.data.Length; i++)
-                    //{
-                    //    s += "." + rc.data[i];
-                    //}
-                    //Debug.LogError("AllContent:"+s);
+                    //Debug.Log("[Socket Lower Reciver] : Recive Data :" + rc.len);
                     SplitPackage(recive_data_buffer, rc);
 
 
@@ -240,8 +234,8 @@ namespace DataFrame.Net
                     if (cmd_data == null) break;
                     PBDataManager.Instance.GetBaseDataFromPB(cmd_data);
 //#if Debug
-                    PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
-                    Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata);
+                    //PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
+                    //Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata);
 //#endif
                 }
                 while (true);
@@ -260,50 +254,21 @@ namespace DataFrame.Net
         /// 发送一个对象
         /// </summary>
         /// <param name="data"></param>
-        public string SendMessage(byte[] data)
+        public bool SendMessage(byte[] data)
         {
             if (!clientSocket.Connected)
             {
                 Debug.LogError("[Socket Lower Sender]停止接受数据~！~");
-                return "[Socket Lower Sender]Socket已断开连接";
+                return false;
             }
-
             try
             {
-                int Length = data.Length;
-                byte[] head = BitConverter.GetBytes(Length);
+                int length = data.Length;
+                byte[] head = BitConverter.GetBytes(length);
                 Array.Reverse(head, 0, 4);
-                //string hS= "";
-                //for (int i = 0; i < head.Length; i++)
-                //{
-                //    hS += "." + head[i];
-
-                //}
-                //Debug.Log("head: " + hS+"data"+data.Length);
-                byte[] pushdata = new byte[Length + head.Length];
-                //hS = "";
-                //for (int i = 0; i < pushdata.Length; i++)
-                //{
-                //    hS += "." + pushdata[i];
-
-                //}
-                //Debug.Log("head: " + hS+"leng:"+pushdata.Length);
+                byte[] pushdata = new byte[length + head.Length];
                 Array.Copy(head, pushdata, head.Length);
-                //hS = "";
-                //for (int i = 0; i < pushdata.Length; i++)
-                //{
-                //    hS += "." + pushdata[i];
-
-                //}
-                //Debug.Log("head: " + hS+"leng:" + pushdata.Length);
-                Array.Copy(data, 0, pushdata, head.Length, Length);
-                //hS = "";
-                //for (int i = 0; i < pushdata.Length; i++)
-                //{
-                //    hS += "." + pushdata[i];
-
-                //}
-                //Debug.Log("head: " + hS+ "leng:" + pushdata.Length);
+                Array.Copy(data, 0, pushdata, head.Length, length);
                 IAsyncResult asyncSend = clientSocket.BeginSend(pushdata
                     , 0
                     , pushdata.Length
@@ -311,25 +276,23 @@ namespace DataFrame.Net
                     , new AsyncCallback(sendCallback)
                     , clientSocket);
 
-                bool success = asyncSend.AsyncWaitHandle.WaitOne(5000, true);
-                if (!success)
+                bool waitOne = asyncSend != null && asyncSend.AsyncWaitHandle.WaitOne(5000, true);
+                if (!waitOne)
                 {
                     Debug.LogError("[Socket Lower Sender]联结发送服务器失败");
-                    return "[Socket Lower Sender]连接服务器发送数据失败";
+                    return false;
                 }
                 else
                 {
-//#if __Debug
                     PB_BaseData cpbdata = PB_BaseData.Create(data);
-                    Debug.Log("[Socket Lower Sender]发送：" + cpbdata);
-//#endif
-                    return "发送数据成功";
+                    //Debug.Log("[Socket Lower Sender]发送：" + cpbdata);
+                    return true;
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError("[Socket Lower Sender]发送失败 " + e);
-                return e.ToString();
+                Debug.LogError("[Socket Lower Sender]发送失败 " + e.ToString());
+                return false;
             }
         }
 
