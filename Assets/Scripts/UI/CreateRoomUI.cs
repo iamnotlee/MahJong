@@ -13,7 +13,7 @@ public class CreateRoomUI : BaseUI
 
     protected override void OnAcitve()
     {
-        RoomModel.Instance.RegisterCreameRoom();
+
     }
 
     protected override void OnRelease()
@@ -33,7 +33,7 @@ public class CreateRoomUI : BaseUI
         {
             AudioManager.Instance.PlaySound(ESoundType.Click);
             //UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
-            RoomModel.Instance.RequestCreateRoom();
+            RoomModel.Instance.RqCreateRoom();
         };
     }
 }

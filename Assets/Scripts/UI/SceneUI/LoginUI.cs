@@ -10,20 +10,17 @@ public class LoginUI : MonoBehaviour
     void Awake()
     {
         AudioManager.Instance.PlayMusic(EMusicType.LogInMusic);
-
     }
 
     void Start()
     {
-        LoginModel.Instance.Regist();
-        HttpManager.Instance.Login();
-        HttpManager.Instance.CheckVersion();
-        SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack, SocketManager.MySocketType.GameCenterSocket);
+        GameInit();
+
+        StartConnet();
         UIEventListener.Get(LoginBtn).onClick = delegate (GameObject go)
         {
             AudioManager.Instance.PlaySound(ESoundType.Click);          
-            LoginModel.Instance.RequestConent();
-           
+            LoginModel.Instance.RequestConent();        
         };
     }
 
@@ -31,7 +28,22 @@ public class LoginUI : MonoBehaviour
     {
         
     }
-  
+    void StartConnet()
+    {
+        HttpManager.Instance.Login();
+        HttpManager.Instance.CheckVersion();
+        SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack, 
+            SocketManager.MySocketType.GameCenterSocket);
+    }
+    /// <summary>
+    /// 游戏注册
+    /// </summary>
+    void GameInit()
+    {
+        LoginModel.Instance.RegisterServer();
+        RoomModel.Instance.RegisterServer();
+        MahJongModel.Instance.RegisterServer();
+    }
 
 
 }

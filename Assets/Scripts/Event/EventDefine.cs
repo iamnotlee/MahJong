@@ -12,7 +12,11 @@ using System;
 public enum EEventId : int
 {
    
-    UpdateMahjong
+    UpdateMahjong,
+    /// <summary>
+    /// 进入房间失败，清楚房间id
+    /// </summary>
+    UpdateClearRoomId,
   
 
 

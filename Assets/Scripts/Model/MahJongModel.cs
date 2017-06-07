@@ -4,7 +4,7 @@ using proto.NetGame;
 public class MahJongModel : Singleton<MahJongModel> {
 
 	
-    public void RegistCallBack()
+    public void RegisterServer()
     {
         CDataListManager.Instance.RegisterDelegate<NetResponse>(MahJongActions);
 
@@ -21,7 +21,7 @@ public class MahJongModel : Singleton<MahJongModel> {
          NetResponse rp = baseData.GetObj<NetResponse>();
         if (rp != null)
         {
-            
+            MyLogger.Log("d " + rp.operateDatas.Count);
           
         }
     }

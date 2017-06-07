@@ -117,12 +117,12 @@ public class PBDataManager :Singleton<PBDataManager>
         AddInterface<RQEnterRoom>(GameTools.getCmd_M(10, 2));
         AddInterface<RPEnterRoom>(GameTools.getCmd_M(10, 2));
         // 推出房间
-        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 3));
+        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 3));
         AddInterface<RQExit>(GameTools.getCmd_M(10, 3));
         // 托管
-        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 4));
+        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 4));
         //准备
-        AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 5));
+        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 5));
         // 投票解散
         AddInterface<RPVote>(GameTools.getCmd_M(10, 6));
         // 游戏

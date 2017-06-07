@@ -304,7 +304,7 @@ public class UiManager : Singleton<UiManager>
 
         }
 #if Debug
-        Debug.LogError(" 没有缓存该UI!_uiType:" + uiType);
+        //Debug.LogError(" 没有缓存该UI!_uiType:" + uiType);
 #endif
 
         return false;
@@ -419,7 +419,7 @@ public class UiManager : Singleton<UiManager>
         {
             startDepth = 100;
 #if Debug
-            Debug.LogError(" 当前打开的UI个数为0！StartDepth = " + startDepth);
+            //Debug.LogError(" 当前打开的UI个数为0！StartDepth = " + startDepth);
 #endif
         }
         else

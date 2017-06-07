@@ -5,7 +5,7 @@ using proto.NetGame;
 public class LoginModel : Singleton<LoginModel> {
 
 
-    public void Regist()
+    public void RegisterServer()
     {
         CDataListManager.Instance.RegisterDelegate<RQConnect>(CallBackAppList);
     }
@@ -19,13 +19,14 @@ public class LoginModel : Singleton<LoginModel> {
     void CallBackAppList(PB_BaseData baseData)
     {
         RQConnect rp = baseData.GetObj<RQConnect>();
-        if (rp != null && rp.roomId == 0)
+        if (rp != null)
         {
             //PingManager.Instance.StartPing();
             if (rp.roomId != 0)
             {
                 MyLogger.Log(rp.roomId);
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("game");
+                RoomModel.Instance.RqEnterRoom(rp.roomId);
+                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("game");
             }
             else
             {

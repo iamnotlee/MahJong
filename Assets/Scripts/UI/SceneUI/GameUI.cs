@@ -12,7 +12,7 @@ public class GameUI : MonoBehaviour
 
     void Awake()
     {
-        MahJongModel.Instance.RegistCallBack();
+     
     }
 	void Start ()
 	{

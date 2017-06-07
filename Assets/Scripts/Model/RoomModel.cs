@@ -5,19 +5,24 @@ using proto.NetGame;
 
 public class RoomModel : Singleton<RoomModel>
 {
-    public override void Init()
+
+    /// <summary>
+    /// 注册服务器回掉
+    /// </summary>
+    public void RegisterServer()
     {
+        CDataListManager.Instance.RegisterDelegate<RPEnterRoom>(EnterRoom);
+        CDataListManager.Instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
+
 
     }
-
     #region 创建房间
 
-    public void RegisterCreameRoom()
-    {
-        CDataListManager.Instance.RegisterDelegate<RPCreateRoom>(CreateRoom);
-    }
+    /// <summary>
+    /// 请求创建房间
+    /// </summary>
 
-    public void RequestCreateRoom()
+    public void RqCreateRoom()
     {
         RPCreateRoom rq = new RPCreateRoom();
         rq.gameId = 1;
@@ -25,7 +30,10 @@ public class RoomModel : Singleton<RoomModel>
         int cmd = GameTools.getCmd_M(GameConst.ModelGameComm, 1);
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
     }
-
+    /// <summary>
+    /// 创建房间回掉
+    /// </summary>
+    /// <param name="baseData"></param>
     void CreateRoom(PB_BaseData baseData)
     {
         RQCreateRoom rp = baseData.GetObj<RQCreateRoom>();
@@ -38,6 +46,10 @@ public class RoomModel : Singleton<RoomModel>
             {
                 MyLogger.Log(rp.users[i].uid);
             }
+            for (int i = 0; i < rp.type.Count; i++)
+            {
+                MyLogger.Log(rp.type[i]);
+            }
         
         }
     }
@@ -45,24 +57,27 @@ public class RoomModel : Singleton<RoomModel>
     #endregion
 
     #region 进入房间
-    public void RegisterEnterRoom()
-    {
-        CDataListManager.Instance.RegisterDelegate<RPEnterRoom>(EnterRoom);
-    }
-
-    public void RequestEnterRoom(int roomid)
+    /// <summary>
+    /// 请求进入房间
+    /// </summary>
+    /// <param name="roomid"></param>
+    public void RqEnterRoom(int roomid)
     {
         RPEnterRoom rq = new RPEnterRoom();
         rq.roomId = roomid;
         int cmd = GameTools.getCmd_M(GameConst.ModelGameComm, 2);
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
     }
+    /// <summary>
+    /// 进入房间回掉
+    /// </summary>
+    /// <param name="baseData"></param>
     void EnterRoom(PB_BaseData baseData)
     {
         RQEnterRoom rp = baseData.GetObj<RQEnterRoom>();
         if (rp != null)
         {
-            Debug.Log(rp.user.uid);
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("game");         
         }
     }
     #endregion
