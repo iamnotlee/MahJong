@@ -26,4 +26,8 @@ public class MahJongModel : Singleton<MahJongModel> {
         }
     }
 
+
+    #region
+    #endregion
+
 }

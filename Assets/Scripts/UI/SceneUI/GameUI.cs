@@ -22,7 +22,7 @@ public class GameUI : MonoBehaviour
 	    UIEventListener.Get(HelpBtn).onClick = ClickHelp;
 	    UIEventListener.Get(ChatBtn).onClick = ClickChat;
 	    UIEventListener.Get(InviteBtn).onClick = ClickInvite;
-        MahJongModel.Instance.RqReady();
+        //MahJongModel.Instance.RqReady();
 	}
 
     private void ClickSetting(GameObject go)
