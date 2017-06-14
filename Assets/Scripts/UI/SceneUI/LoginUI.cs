@@ -22,6 +22,7 @@ public class LoginUI : MonoBehaviour
             AudioManager.Instance.PlaySound(ESoundType.Click);          
             LoginModel.Instance.RequestConent();        
         };
+       
     }
 
     void ConentCallBack(bool rs)

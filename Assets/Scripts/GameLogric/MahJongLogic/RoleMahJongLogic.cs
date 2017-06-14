@@ -2,18 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RoleMahJongLogic : MonoBehaviour
+public class RoleMahJongLogic : MahJongBaseLogic
 {
 
-    public Transform ThreeParent;
-    public Transform GridParent;
-    public Transform SingleParent;
-    private const int ThreeLength = 155;
-    private const int SingleLenght = 76;
+
     public UIGrid ThreeGrid;
     public UIGrid SingleGrid;
     private const string SingleMahongPath = "GamePrefab/Mahjong/Self/MahjongSelf";
     private const string ThreeMahJongPath = "GamePrefab/Mahjong/Self/ThreeTypeMahJong";
+
+    void Awake()
+    {
+
+    }
     void Start()
     {
         Create();
@@ -59,24 +60,7 @@ public class RoleMahJongLogic : MonoBehaviour
         item.Init(type);
     }
 
-    private void RefreshPosition()
-    {
-        RefreshGridPositon();
-        RefreshSinglePosition();
-    }
 
-    private void RefreshGridPositon()
-    {
-        int count = threeList.Count;
-        GridParent.localPosition = new Vector3(-525+count*ThreeLength,0,0);
-    }
-
-    private void RefreshSinglePosition()
-    {
-        int count = threeList.Count;
-        int cout = singleList.Count;
-        SingleParent.localPosition = new Vector3(-525 + count * ThreeLength+cout*SingleLenght+16, 0, 0);
-    }
 
     #region Random
 
