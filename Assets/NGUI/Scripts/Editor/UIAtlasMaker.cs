@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -363,7 +363,7 @@ public class UIAtlasMaker : EditorWindow
 					sprite.name = oldTex.name;
 					sprite.SetTexture(newPixels, newWidth, newHeight);
 
-					// Remember the padding offset
+					// Remember the padding Offset
 					sprite.SetPadding(xmin, ymin, oldWidth - newWidth - xmin, oldHeight - newHeight - ymin);
 				}
 				list.Add(sprite);

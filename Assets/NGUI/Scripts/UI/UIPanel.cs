@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -344,7 +344,7 @@ public class UIPanel : UIRect
 	public float height { get { return GetViewSize().y; } }
 
 	/// <summary>
-	/// Whether the panel's drawn geometry needs to be offset by a half-pixel.
+	/// Whether the panel's drawn geometry needs to be Offset by a half-pixel.
 	/// </summary>
 
 	public bool halfPixelOffset
@@ -370,7 +370,7 @@ public class UIPanel : UIRect
 #endif
 
 	/// <summary>
-	/// Directx9 pixel offset, used for drawing.
+	/// Directx9 pixel Offset, used for drawing.
 	/// </summary>
 
 	public Vector3 drawCallOffset
@@ -469,8 +469,8 @@ public class UIPanel : UIRect
 	public bool clipsChildren { get { return hasCumulativeClipping; } }
 
 	/// <summary>
-	/// Clipping area offset used to make it possible to move clipped panels (scroll views) efficiently.
-	/// Scroll views move by adjusting the clip offset by one value, and the transform position by the inverse.
+	/// Clipping area Offset used to make it possible to move clipped panels (scroll views) efficiently.
+	/// Scroll views move by adjusting the clip Offset by one value, and the transform position by the inverse.
 	/// This makes it possible to not have to rebuild the geometry, greatly improving performance.
 	/// </summary>
 
@@ -587,7 +587,7 @@ public class UIPanel : UIRect
 	}
 
 	/// <summary>
-	/// Final clipping region after the offset has been taken into consideration. XY = center, ZW = size.
+	/// Final clipping region after the Offset has been taken into consideration. XY = center, ZW = size.
 	/// </summary>
 
 	public Vector4 finalClipRegion
@@ -1231,7 +1231,7 @@ public class UIPanel : UIRect
 			else tt = mClipRange.y + 0.5f * size.y;
 		}
 
-		// Take the offset into consideration
+		// Take the Offset into consideration
 		lt -= offset.x + mClipOffset.x;
 		rt -= offset.x + mClipOffset.x;
 		bt -= offset.y + mClipOffset.y;
@@ -1533,7 +1533,7 @@ public class UIPanel : UIRect
 		if (drawCallClipRange.z == 0f) drawCallClipRange.z = w * 0.5f;
 		if (drawCallClipRange.w == 0f) drawCallClipRange.w = h * 0.5f;
 
-		// DirectX 9 half-pixel offset
+		// DirectX 9 half-pixel Offset
 		if (halfPixelOffset)
 		{
 			drawCallClipRange.x -= 0.5f;
@@ -1807,7 +1807,7 @@ public class UIPanel : UIRect
 	}
 
 	/// <summary>
-	/// Calculate the offset needed to be constrained within the panel's bounds.
+	/// Calculate the Offset needed to be constrained within the panel's bounds.
 	/// </summary>
 
 	public virtual Vector3 CalculateConstrainOffset (Vector2 min, Vector2 max)

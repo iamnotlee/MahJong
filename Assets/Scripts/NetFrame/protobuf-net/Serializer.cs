@@ -376,7 +376,7 @@ namespace ProtoBuf
 
         /// <summary>Indicates the number of bytes expected for the next message.</summary>
         /// <param name="buffer">The buffer containing the data to investigate for a length.</param>
-        /// <param name="index">The offset of the first byte to read from the buffer.</param>
+        /// <param name="index">The Offset of the first byte to read from the buffer.</param>
         /// <param name="count">The number of bytes to read from the buffer.</param>
         /// <param name="style">The algorithm used to encode the length.</param>
         /// <param name="length">The length of the message, if it could be identified.</param>

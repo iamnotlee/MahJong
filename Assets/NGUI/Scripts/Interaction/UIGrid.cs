@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -395,7 +395,7 @@ public class UIGrid : UIWidgetContainer
 			}
 		}
 
-		// Apply the origin offset
+		// Apply the origin Offset
 		if (pivot != UIWidget.Pivot.TopLeft)
 		{
 			Vector2 po = NGUIMath.GetPivotOffset(pivot);

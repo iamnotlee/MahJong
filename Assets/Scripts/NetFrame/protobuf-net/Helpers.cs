@@ -623,7 +623,7 @@ namespace ProtoBuf
                 throw new InvalidOperationException("Unable to obtain underlying MemoryStream buffer");
             } else if(segment.Offset != 0)
             {
-                throw new InvalidOperationException("Underlying MemoryStream buffer was not zero-offset");
+                throw new InvalidOperationException("Underlying MemoryStream buffer was not zero-Offset");
             } else
             {
                 return segment.Array;

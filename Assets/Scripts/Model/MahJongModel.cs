@@ -46,11 +46,11 @@ public class MahJongModel : Singleton<MahJongModel> {
                 idex = 1,
                 uid = 1000
             });
-            //players.Add(new NetUserData()
-            //{
-            //    idex = 2,
-            //    uid = 10001
-            //});
+            players.Add(new NetUserData()
+            {
+                idex = 2,
+                uid = 10001
+            });
             players.Add(new NetUserData()
             {
                 idex = 3,

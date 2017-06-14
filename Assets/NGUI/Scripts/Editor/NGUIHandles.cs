@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -123,7 +123,7 @@ static public class NGUIHandles
 	static public void DrawLine (Plane p, Vector2 v0, Vector2 v1)
 	{
 #if UNITY_3_5
-		// Unity 3.5 exhibits a strange offset...
+		// Unity 3.5 exhibits a strange Offset...
 		v0.x += 1f;
 		v1.x += 1f;
 		v0.y -= 1f;

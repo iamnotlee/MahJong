@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -1915,7 +1915,7 @@ public class UILabel : UIWidget
 
 	/// <summary>
 	/// Align the vertices, making the label positioned correctly based on the pivot.
-	/// Returns the offset that was applied.
+	/// Returns the Offset that was applied.
 	/// </summary>
 
 	public Vector2 ApplyOffset (List<Vector3> verts, int start)
@@ -1978,7 +1978,7 @@ public class UILabel : UIWidget
 	}
 
 	/// <summary>
-	/// Calculate the character index offset necessary in order to print the end of the specified text.
+	/// Calculate the character index Offset necessary in order to print the end of the specified text.
 	/// </summary>
 
 	public int CalculateOffsetToFit (string text)

@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -6,7 +6,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Simple example script of how a button can be offset visibly when the mouse hovers over it or it gets pressed.
+/// Simple example script of how a button can be Offset visibly when the mouse hovers over it or it gets pressed.
 /// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Button Offset")]

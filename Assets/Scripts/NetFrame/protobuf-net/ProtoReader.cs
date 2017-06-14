@@ -908,7 +908,7 @@ namespace ProtoBuf
                         value = tmp;
                     }
                     // value is now sized with the final length, and (if necessary)
-                    // contains the old data up to "offset"
+                    // contains the old data up to "Offset"
                     reader.position += len; // assume success
                     while (len > reader.available)
                     {
@@ -944,8 +944,8 @@ namespace ProtoBuf
         //    if (stream == null) throw new ArgumentNullException("stream");
         //    if (length < 0) throw new ArgumentOutOfRangeException("length");
         //    byte[] buffer = new byte[length];
-        //    int offset = 0, read;
-        //    while (length > 0 && (read = stream.Read(buffer, offset, length)) > 0)
+        //    int Offset = 0, read;
+        //    while (length > 0 && (read = stream.Read(buffer, Offset, length)) > 0)
         //    {
         //        length -= read;
         //    }
@@ -1187,7 +1187,7 @@ namespace ProtoBuf
 #if !CF && !FX11 && !PORTABLE
             if (exception != null && source != null && !exception.Data.Contains("protoSource"))
             {
-                exception.Data.Add("protoSource", string.Format("tag={0}; wire-type={1}; offset={2}; depth={3}",
+                exception.Data.Add("protoSource", string.Format("tag={0}; wire-type={1}; Offset={2}; depth={3}",
                     source.fieldNumber, source.wireType, source.position, source.depth));
             }
 #endif

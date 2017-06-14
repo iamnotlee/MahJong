@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LeftMahJongLogic : MonoBehaviour {
+public class LeftMahJongLogic : MahJongBaseLogic {
 
 	// Use this for initialization
 	void Start () {

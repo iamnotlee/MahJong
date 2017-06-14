@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -1058,7 +1058,7 @@ static public class NGUIText
 	static BetterList<float> mSizes = new BetterList<float>();
 
 	/// <summary>
-	/// Calculate the character index offset required to print the end of the specified text.
+	/// Calculate the character index Offset required to print the end of the specified text.
 	/// </summary>
 
 	static public int CalculateOffsetToFit (string text)
@@ -1428,7 +1428,7 @@ static public class NGUIText
 				}
 			}
 
-			// Advance the offset past the symbol
+			// Advance the Offset past the symbol
 			if (symbol != null)
 			{
 				offset += symbol.length - 1;

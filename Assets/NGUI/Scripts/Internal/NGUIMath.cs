@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -318,7 +318,7 @@ static public class NGUIMath
 	}
 
 	/// <summary>
-	/// Constrain 'rect' to be within 'area' as much as possible, returning the Vector2 offset necessary for this to happen.
+	/// Constrain 'rect' to be within 'area' as much as possible, returning the Vector2 Offset necessary for this to happen.
 	/// This function is useful when trying to restrict one area (window) to always be within another (viewport).
 	/// </summary>
 
@@ -709,7 +709,7 @@ static public class NGUIMath
 	}
 
 	/// <summary>
-	/// Helper function that converts the pivot offset to a pivot point.
+	/// Helper function that converts the pivot Offset to a pivot point.
 	/// </summary>
 
 	static public UIWidget.Pivot GetPivot (Vector2 offset)

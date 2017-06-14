@@ -117,7 +117,7 @@ public class UITooltip : MonoBehaviour
 			// Calculate the dimensions of the printed text
 			mSize = text.printedSize;
 
-			// Scale by the transform and adjust by the padding offset
+			// Scale by the transform and adjust by the padding Offset
 			mSize.x *= textScale.x;
 			mSize.y *= textScale.y;
 

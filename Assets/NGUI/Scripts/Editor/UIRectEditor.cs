@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -35,7 +35,7 @@ public class UIRectEditor : Editor
 	protected bool[] mCustom = new bool[] { false, false, false, false };
 
 	/// <summary>
-	/// Whether the specified relative offset is a common value (0, 0.5, or 1)
+	/// Whether the specified relative Offset is a common value (0, 0.5, or 1)
 	/// </summary>
 
 	static protected bool IsCommon (float relative) { return (relative == 0f || relative == 0.5f || relative == 1f); }
@@ -519,7 +519,7 @@ public class UIRectEditor : Editor
 			// Anchored to a rectangle -- must anchor to the same side
 			Vector3[] targetCorners = anchor.rect.worldCorners;
 
-			// We want to choose the side with the shortest offset
+			// We want to choose the side with the shortest Offset
 			Vector3 side0 = parent.InverseTransformPoint(Vector3.Lerp(targetCorners[0], targetCorners[1], 0.5f));
 			Vector3 side1 = parent.InverseTransformPoint(Vector3.Lerp(targetCorners[2], targetCorners[3], 0.5f));
 
@@ -604,7 +604,7 @@ public class UIRectEditor : Editor
 			// Anchored to a rectangle -- must anchor to the same side
 			Vector3[] targetCorners = anchor.rect.worldCorners;
 
-			// We want to choose the side with the shortest offset
+			// We want to choose the side with the shortest Offset
 			Vector3 side0 = parent.InverseTransformPoint(Vector3.Lerp(targetCorners[0], targetCorners[3], 0.5f));
 			Vector3 side1 = parent.InverseTransformPoint(Vector3.Lerp(targetCorners[1], targetCorners[2], 0.5f));
 

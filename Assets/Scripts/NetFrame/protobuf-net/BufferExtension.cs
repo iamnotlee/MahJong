@@ -44,10 +44,10 @@ namespace ProtoBuf
                         int bytesRead;
                         long oldPos = ms.Position;
                         ms.Position = 0;
-                        while (len > 0 && (bytesRead = ms.Read(tmp, offset, len)) > 0)
+                        while (len > 0 && (bytesRead = ms.Read(tmp, Offset, len)) > 0)
                         {
                             len -= bytesRead;
-                            offset += bytesRead;
+                            Offset += bytesRead;
                         }
                         if(len != 0) throw new EndOfStreamException();
                         ms.Position = oldPos;

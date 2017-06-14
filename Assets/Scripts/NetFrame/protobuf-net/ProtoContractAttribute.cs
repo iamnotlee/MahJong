@@ -16,7 +16,7 @@ namespace ProtoBuf
         private string name;
 
         /// <summary>
-        /// Gets or sets the fist offset to use with implicit field tags;
+        /// Gets or sets the fist Offset to use with implicit field tags;
         /// only uesd if ImplicitFields is set.
         /// </summary>
         public int ImplicitFirstTag
@@ -87,7 +87,7 @@ namespace ProtoBuf
         private int dataMemberOffset;
 
         /// <summary>
-        /// Specifies an offset to apply to [DataMember(Order=...)] markers;
+        /// Specifies an Offset to apply to [DataMember(Order=...)] markers;
         /// this is useful when working with mex-generated classes that have
         /// a different origin (usually 1 vs 0) than the original data-contract.
         /// 

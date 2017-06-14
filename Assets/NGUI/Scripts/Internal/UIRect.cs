@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -56,7 +56,7 @@ public abstract class UIRect : MonoBehaviour
 		public void SetToNearest (float abs0, float abs1, float abs2) { SetToNearest(0f, 0.5f, 1f, abs0, abs1, abs2); }
 
 		/// <summary>
-		/// Set the anchor's value given the 3 possible anchor combinations. Chooses the one with the smallest absolute offset.
+		/// Set the anchor's value given the 3 possible anchor combinations. Chooses the one with the smallest absolute Offset.
 		/// </summary>
 
 		public void SetToNearest (float rel0, float rel1, float rel2, float abs0, float abs1, float abs2)

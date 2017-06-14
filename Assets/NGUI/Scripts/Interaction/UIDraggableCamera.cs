@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -82,7 +82,7 @@ public class UIDraggableCamera : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Calculate the offset needed to be constrained within the panel's bounds.
+	/// Calculate the Offset needed to be constrained within the panel's bounds.
 	/// </summary>
 
 	Vector3 CalculateConstrainOffset ()

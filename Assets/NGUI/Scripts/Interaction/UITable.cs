@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -253,7 +253,7 @@ public class UITable : UIWidgetContainer
 			}
 		}
 
-		// Apply the origin offset
+		// Apply the origin Offset
 		if (pivot != UIWidget.Pivot.TopLeft)
 		{
 			po = NGUIMath.GetPivotOffset(pivot);

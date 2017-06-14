@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -606,7 +606,7 @@ public class UIScrollView : MonoBehaviour
 			top += mPanel.clipSoftness.y;
 		}
 
-		// Calculate the offset based on the scroll value
+		// Calculate the Offset based on the scroll value
 		float ox = Mathf.Lerp(left, right, x);
 		float oy = Mathf.Lerp(top, bottom, y);
 
@@ -622,7 +622,7 @@ public class UIScrollView : MonoBehaviour
 		if (canMoveHorizontally) clip.x = ox;
 		if (canMoveVertically) clip.y = oy;
 
-		// Update the clipping offset
+		// Update the clipping Offset
 		Vector4 cr = mPanel.baseClipRegion;
 		mPanel.clipOffset = new Vector2(clip.x - cr.x, clip.y - cr.y);
 

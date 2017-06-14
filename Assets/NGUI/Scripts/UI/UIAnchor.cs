@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -52,13 +52,13 @@ public class UIAnchor : MonoBehaviour
 	public bool runOnlyOnce = true;
 
 	/// <summary>
-	/// Relative offset value, if any. For example "0.25" with 'side' set to Left, means 25% from the left side.
+	/// Relative Offset value, if any. For example "0.25" with 'side' set to Left, means 25% from the left side.
 	/// </summary>
 
 	public Vector2 relativeOffset = Vector2.zero;
 	
 	/// <summary>
-	/// Pixel offset value if any. For example "10" in x will move the widget 10 pixels to the right 
+	/// Pixel Offset value if any. For example "10" in x will move the widget 10 pixels to the right 
 	/// while "-10" in x is 10 pixels to the left based on the pixel values set in UIRoot.
 	/// </summary>
 	

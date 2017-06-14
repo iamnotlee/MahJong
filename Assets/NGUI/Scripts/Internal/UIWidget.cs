@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -186,7 +186,7 @@ public class UIWidget : UIRect
 	}
 
 	/// <summary>
-	/// Pivot offset in relative coordinates. Bottom-left is (0, 0). Top-right is (1, 1).
+	/// Pivot Offset in relative coordinates. Bottom-left is (0, 0). Top-right is (1, 1).
 	/// </summary>
 
 	public Vector2 pivotOffset { get { return NGUIMath.GetPivotOffset(pivot); } }

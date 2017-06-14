@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -38,7 +38,7 @@ public class BMFont
 	public int charSize { get { return mSize; } set { mSize = value; } }
 
 	/// <summary>
-	/// Base offset applied to characters.
+	/// Base Offset applied to characters.
 	/// </summary>
 
 	public int baseOffset { get { return mBase; } set { mBase = value; } }

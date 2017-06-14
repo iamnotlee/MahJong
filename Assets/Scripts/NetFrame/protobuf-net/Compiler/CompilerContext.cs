@@ -1098,7 +1098,7 @@ namespace ProtoBuf.Compiler
                 // too many to jump easily (especially on Android) - need to split up (note: uses a local pulled from the stack)
                 using (Local val = GetLocalWithValue(MapType(typeof(int)), null))
                 {
-                    int count = jumpTable.Length, offset = 0;
+                    int count = jumpTable.Length, Offset = 0;
                     int blockCount = count / MAX_JUMPS;
                     if ((count % MAX_JUMPS) != 0) blockCount++;
 
@@ -1127,10 +1127,10 @@ namespace ProtoBuf.Compiler
                         count -= itemsThisBlock;
                         if (innerLabels.Length != itemsThisBlock) innerLabels = new Label[itemsThisBlock];
 
-                        int subtract = offset;
+                        int subtract = Offset;
                         for (int j = 0; j < itemsThisBlock; j++)
                         {
-                            innerLabels[j] = jumpTable[offset++].Value;
+                            innerLabels[j] = jumpTable[Offset++].Value;
                         }
                         LoadValue(val);
                         if (subtract != 0) // switches are always zero-based

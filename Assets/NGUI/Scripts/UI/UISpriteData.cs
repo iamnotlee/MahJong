@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -35,7 +35,7 @@ public class UISpriteData
 	public bool hasBorder { get { return (borderLeft | borderRight | borderTop | borderBottom) != 0; } }
 
 	/// <summary>
-	/// Whether the sprite has been offset via padding.
+	/// Whether the sprite has been Offset via padding.
 	/// </summary>
 
 	public bool hasPadding { get { return (paddingLeft | paddingRight | paddingTop | paddingBottom) != 0; } }

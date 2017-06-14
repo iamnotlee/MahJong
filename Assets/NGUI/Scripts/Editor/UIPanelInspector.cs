@@ -1,4 +1,4 @@
-//-------------------------------------------------
+﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2017 Tasharen Entertainment Inc
 //-------------------------------------------------
@@ -498,7 +498,7 @@ public class UIPanelInspector : UIRectEditor
 		{
 			Vector4 range = mPanel.baseClipRegion;
 
-			// Scroll view is anchored, meaning it adjusts the offset itself, so we don't want it to be modifiable
+			// Scroll view is anchored, meaning it adjusts the Offset itself, so we don't want it to be modifiable
 			//EditorGUI.BeginDisabledGroup(mPanel.GetComponent<UIScrollView>() != null);
 			GUI.changed = false;
 			GUILayout.BeginHorizontal();

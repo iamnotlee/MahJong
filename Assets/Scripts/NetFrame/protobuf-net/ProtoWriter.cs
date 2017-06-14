@@ -223,7 +223,7 @@ namespace ProtoBuf
                     Flush(writer); // commit any existing data from the buffer
                     // now just write directly to the underlying stream
                     writer.dest.Write(data, offset, length);
-                    writer.position += length; // since we've flushed offset etc is 0, and remains
+                    writer.position += length; // since we've flushed Offset etc is 0, and remains
                                         // zero since we're writing directly to the stream
                     return;
             }
@@ -310,7 +310,7 @@ namespace ProtoBuf
                 }
                 Helpers.DebugWriteLine(instance == null ? "<null>" : instance.ToString());
 #endif
-                throw new ProtoException("Possible recursion detected (offset: " + (recursionStack.Count - hitLevel).ToString() + " level(s)): " + instance.ToString());
+                throw new ProtoException("Possible recursion detected (Offset: " + (recursionStack.Count - hitLevel).ToString() + " level(s)): " + instance.ToString());
             }
             recursionStack.Add(instance);
         }
