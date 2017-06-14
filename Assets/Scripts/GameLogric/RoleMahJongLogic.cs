@@ -23,10 +23,10 @@ public class RoleMahJongLogic : MonoBehaviour
 
     private void Create()
     {
-        //CreateThreeMahJongs();
-        //CreateMahJongs();
-        //CreateMahiong();
-        //RefreshPosition();
+        CreateThreeMahJongs();
+        CreateMahJongs();
+        CreateMahiong();
+        RefreshPosition();
     }
     private void CreateThreeMahJongs()
     {

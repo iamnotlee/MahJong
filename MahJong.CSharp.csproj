@@ -216,6 +216,7 @@
     <Compile Include="Assets\Scripts\Event\EventDefine.cs" />
     <Compile Include="Assets\Scripts\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\GameLogric\MahJongTimeLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\PlayerItem.cs" />
     <Compile Include="Assets\Scripts\GameLogric\RoleMahJongLogic.cs" />
     <Compile Include="Assets\Scripts\GameLogric\SingleMahJongItem.cs" />
     <Compile Include="Assets\Scripts\GameLogric\ThreeMahJongItem.cs" />

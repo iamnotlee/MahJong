@@ -126,7 +126,7 @@ public class PBDataManager :Singleton<PBDataManager>
         // 投票解散
         AddInterface<RPVote>(GameTools.getCmd_M(10, 6));
         // 游戏
-        AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
+        //AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
         // 结算
         AddInterface<RQREsult>(GameTools.getCmd_M(11, 2));
         // 压跑
