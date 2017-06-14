@@ -27,14 +27,14 @@ public class RoleMahJongLogic : MahJongBaseLogic
         CreateThreeMahJongs();
         CreateMahJongs();
         CreateMahiong();
-        RefreshPosition();
+        ResetMahJongPos();
     }
     private void CreateThreeMahJongs()
     {
-        threeList = RandomThreeMahjongs();
+        threeList = MahJongModel.Instance.RandomThreeMahjongs();
         for (int i = 0; i < threeList.Count; i++)
         {
-            ThreeMahJongItem item = GameUtils.New<ThreeMahJongItem>(ThreeMahJongPath, ThreeParent);
+            ThreeMahJongItem item = GameUtils.New<ThreeMahJongItem>(ThreeMahJongPath, GangMahjongParent);
             item.name = "item" + i + 1;
             item.Init(threeList[i]);
         }
@@ -42,10 +42,10 @@ public class RoleMahJongLogic : MahJongBaseLogic
     }
     public void CreateMahJongs()
     {
-        singleList = RandomMahjongs(10);
+        singleList = MahJongModel.Instance.RandomMahjongs(10);
         for (int i = 0; i < singleList.Count; i++)
         {
-            SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, GridParent);
+            SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, HandMajongParent);
             item.name = "item" + i + 1;
             item.Init(singleList[i]);
         }
@@ -54,47 +54,13 @@ public class RoleMahJongLogic : MahJongBaseLogic
 
     private void CreateMahiong()
     {
-        EMahJongType type = RandomMahjong();
-        SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, SingleParent);
+        EMahJongType type = MahJongModel.Instance.RandomMahjong();
+        SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, ReceiveMahjongParent);
         item.name = type.ToString();
         item.Init(type);
     }
 
 
 
-    #region Random
-
-    private List<EMahJongType> RandomMahjongs(int count)
-    {
-        List<EMahJongType> tmp = new List<EMahJongType>();
-        for (int i = 0; i < count; i++)
-        {
-
-            int random = NGUITools.RandomRange(1, 34);
-            EMahJongType type = (EMahJongType) random;
-            tmp.Add(type);
-            tmp.Sort();
-        }
-        return tmp;
-    }
-    private List<EMahJongType> RandomThreeMahjongs()
-    {
-        List<EMahJongType> tmp = new List<EMahJongType>();
-        int random = NGUITools.RandomRange(1, 34);
-        EMahJongType type = (EMahJongType)random;
-        tmp.Add(type);
-        tmp.Sort();
-       
-        return tmp;
-    }
-
-    private EMahJongType RandomMahjong()
-    {
-        int random = NGUITools.RandomRange(1, 34);
-        EMahJongType type = (EMahJongType) random;
-        return type;
-    }
-
-    #endregion
 
 }

@@ -200,6 +200,7 @@
      <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\RoleMahJongLogic.cs" />
      <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\TopMahJongLogic.cs" />
      <Compile Include="Assets\Scripts\GameLogric\MahJongTimeLogic.cs" />
+     <Compile Include="Assets\Scripts\GameLogric\PlayerItem.cs" />
      <Compile Include="Assets\Scripts\GameLogric\SingleMahJongItem.cs" />
      <Compile Include="Assets\Scripts\GameLogric\ThreeMahJongItem.cs" />
      <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />

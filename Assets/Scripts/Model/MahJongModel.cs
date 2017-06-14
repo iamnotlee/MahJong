@@ -65,6 +65,42 @@ public class MahJongModel : Singleton<MahJongModel> {
         return players;
     }
 
+
+
+    #region Random
+
+    public List<EMahJongType> RandomMahjongs(int count)
+    {
+        List<EMahJongType> tmp = new List<EMahJongType>();
+        for (int i = 0; i < count; i++)
+        {
+
+            int random = NGUITools.RandomRange(1, 34);
+            EMahJongType type = (EMahJongType)random;
+            tmp.Add(type);
+            tmp.Sort();
+        }
+        return tmp;
+    }
+    public List<EMahJongType> RandomThreeMahjongs()
+    {
+        List<EMahJongType> tmp = new List<EMahJongType>();
+        int random = NGUITools.RandomRange(1, 34);
+        EMahJongType type = (EMahJongType)random;
+        tmp.Add(type);
+        tmp.Sort();
+
+        return tmp;
+    }
+
+    public EMahJongType RandomMahjong()
+    {
+        int random = NGUITools.RandomRange(1, 34);
+        EMahJongType type = (EMahJongType)random;
+        return type;
+    }
+
+    #endregion
     #endregion
 
 }

@@ -78,7 +78,7 @@ public class GameUI : MonoBehaviour
         List<NetUserData> tmp = MahJongModel.Instance.GetNetUserDatas();
         for (int i = 0; i < Players.Length; i++)
         {
-            MyLogger.Log(tmp[i].idex);
+            //MyLogger.Log(tmp[i].idex);
             PlayerItem item = Players[tmp[i].idex];
             item.gameObject.SetActive(true);
             item.Init(tmp[i]);
