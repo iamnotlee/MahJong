@@ -45,9 +45,9 @@ public abstract class MahJongBaseLogic : MonoBehaviour
     /// </summary>
     public float OriginVec = -525;
     /// <summary>
-    /// 偏移量
+    /// 不同类型麻将间隔
     /// </summary>
-    public int Offset = 16;
+    public int Offset = 6;
     public int GangParentOff = 0;
     void Start()
     {
@@ -72,11 +72,11 @@ public abstract class MahJongBaseLogic : MonoBehaviour
         float valueF = 0;
         if(progress == ProgressType.Plus)
         {
-            valueF = OriginVec+ count * ThreeLength;
+            valueF = OriginVec + count * ThreeLength + Offset * count;
         }
         else
         {
-            valueF = OriginVec - count * ThreeLength;
+            valueF = OriginVec - count * ThreeLength - Offset * count;
         }
         if (direction == Direction.Horizontal)
         {
@@ -94,16 +94,16 @@ public abstract class MahJongBaseLogic : MonoBehaviour
     private void ResetReceeveMahJongPos()
     {
 
-        int count = GangMahjongParent.childCount;
-        int cout = HandMajongParent.childCount;
-        float valueF = count * ThreeLength + cout * SingleLenght + Offset;
+        int threeCount = GangMahjongParent.childCount;
+        int singleCount = HandMajongParent.childCount;
+        float valueF = 0;
         if(progress == ProgressType.Plus)
         {
-            valueF = OriginVec + count * ThreeLength + cout * SingleLenght + Offset;
+            valueF = OriginVec + threeCount * ThreeLength + +threeCount * Offset + singleCount * SingleLenght + Offset;
         }
         else
         {
-            valueF = OriginVec - (count * ThreeLength + cout * SingleLenght + Offset);
+            valueF = OriginVec - (threeCount * ThreeLength + +threeCount * Offset + singleCount * SingleLenght + Offset);
         }
         if (direction == Direction.Horizontal)
         {

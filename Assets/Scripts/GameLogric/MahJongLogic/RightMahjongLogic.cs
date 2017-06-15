@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RightMahjongLogic : MahJongBaseLogic {
+public class RightMahjongLogic : MonoBehaviour {
 
-    public UIGrid ThreeGrid;
-    public UIGrid SingleGrid;
+    public UITable HandMahJongs;
     private const string SingleMahongPath = "GamePrefab/Mahjong/Right/MahJongRight";
     private const string ThreeMahJongPath = "GamePrefab/Mahjong/Right/ThreeTypeMahJong";
 
@@ -26,18 +25,18 @@ public class RightMahjongLogic : MahJongBaseLogic {
         CreateThreeMahJongs();
         CreateMahJongs();
         CreateMahiong();
-        ResetMahJongPos();
+        //ResetMahJongPos();
     }
     private void CreateThreeMahJongs()
     {
         List<EMahJongType> threeList = MahJongModel.Instance.RandomThreeMahjongs();
         for (int i = 0; i < threeList.Count; i++)
         {
-            ThreeMahJongItem item = GameUtils.New<ThreeMahJongItem>(ThreeMahJongPath, GangMahjongParent);
+            ThreeMahJongItem item = GameUtils.New<ThreeMahJongItem>(ThreeMahJongPath, HandMahJongs.transform);
             item.name = "item" + i + 1;
             item.Init(threeList[i]);
         }
-        ThreeGrid.repositionNow = true;
+        //ThreeGrid.repositionNow = true;
     }
     public void CreateMahJongs()
     {
@@ -45,11 +44,11 @@ public class RightMahjongLogic : MahJongBaseLogic {
         MyLogger.Log(singleList.Count);
         for (int i = 0; i < singleList.Count; i++)
         {
-           GameUtils.New<UISprite>(SingleMahongPath, HandMajongParent);
+           GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform);
             //item.name = "item" + i + 1;
             //item.Init(singleList[i]);
         }
-        SingleGrid.repositionNow = true;
+        //SingleGrid.repositionNow = true;
     }
 
     private void CreateMahiong()
@@ -57,7 +56,7 @@ public class RightMahjongLogic : MahJongBaseLogic {
         //EMahJongType type = MahJongModel.Instance.RandomMahjong();
         //SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, SingleParent);
 
-        GameUtils.New<UISprite>(SingleMahongPath, ReceiveMahjongParent);
+        GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform);
         //item.name = type.ToString();
         //item.Init(type);
     }

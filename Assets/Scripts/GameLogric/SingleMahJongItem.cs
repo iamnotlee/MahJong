@@ -6,6 +6,8 @@ public class SingleMahJongItem : MonoBehaviour
 
 
     public UISprite MahJongSpr;
+    public GameObject SpaceObj;
+
     void Start()
     {
         UIEventListener.Get(gameObject).onClick = ClickMahJong;
@@ -18,10 +20,11 @@ public class SingleMahJongItem : MonoBehaviour
 
     }
     private EMahJongType MahJongType = EMahJongType.None;
-    public void Init(EMahJongType type)
+    public void Init(EMahJongType type,bool isShowSpace = false)
     {
         MahJongType = type;
         MahJongSpr.spriteName = MahJongConfig.Instance.GetMahJongSprName(type);
+        SpaceObj.SetActive(isShowSpace);
     }
 
     private bool IsUp = false;
@@ -30,7 +33,7 @@ public class SingleMahJongItem : MonoBehaviour
         AudioManager.Instance.PlaySound(ESoundType.ChooseMahjong);
         EventCenter.SendEvent(new EventParam(EEventId.UpdateMahjong, GetInstanceID()));
         float offset = IsUp ? 0 : 25;
-        transform.localPosition = new Vector3(transform.localPosition.x, offset, 0);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+offset, 0);
         IsUp = !IsUp;
     }
 
