@@ -101,6 +101,7 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
 
     public override string ToString()
     {
+        cmd = GameTools.getCmd(cmd);
         Type T = PBDataManager.Instance.GetTypeByCmd(cmd);
         string str = " cmd = " + cmd + "(" + T + ") errorCode = " + errorCode + "  uid=" + uid + " time = " + time + " obj.Length = " + (obj == null ? "null" : obj.Length.ToString()) + " sequence = " + sequence + "\n";
         return str + base.ToString();
@@ -130,8 +131,14 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
             this.obj = tempD;
         }
         if (obj != null)
+        {
             this.sn = EncryptManager.instance.MD5Encrypt(this.obj, GameConst.GameKey);
+            MyLogger.Log(" 加密 密钥： " + GameConst.GameKey);
+
+        }
         this.errorCode = 0;
+            MyLogger.Log(" 是否为空： " +(obj == null));
+
         this.uid = HttpModel.Instance.GetHttpUid();
     }
 
@@ -174,7 +181,7 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
         //}
         //rp.cmd = GameTools.getCmd(rp.cmd);
         ms.Close();
-
+        
         //Debug.LogError("cmd=====:" + rp.cmd);
         //Debug.LogError("rp=====:" + rp.ToString());
         return rp;

@@ -233,10 +233,10 @@ namespace DataFrame.Net
                     //当没有数据可以解析的时候跳出
                     if (cmd_data == null) break;
                     PBDataManager.Instance.GetBaseDataFromPb(cmd_data);
-//#if Debug
-                    //PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
-                    //Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata);
-//#endif
+                    //#if Debug
+                    PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
+                    Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata.ToString());
+                    //#endif
                 }
                 while (true);
             }
@@ -259,6 +259,7 @@ namespace DataFrame.Net
             if (!clientSocket.Connected)
             {
                 Debug.LogError("[Socket Lower Sender]停止接受数据~！~");
+                
                 return false;
             }
             try
@@ -285,7 +286,7 @@ namespace DataFrame.Net
                 else
                 {
                     PB_BaseData cpbdata = PB_BaseData.Create(data);
-                    //Debug.Log("[Socket Lower Sender]发送：" + cpbdata);
+                    Debug.Log("[Socket Lower Sender]发送：" + cpbdata.ToString());
                     return true;
                 }
             }

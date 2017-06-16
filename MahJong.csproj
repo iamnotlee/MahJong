@@ -215,8 +215,13 @@
     <Compile Include="Assets\Scripts\Event\EventCenter.cs" />
     <Compile Include="Assets\Scripts\Event\EventDefine.cs" />
     <Compile Include="Assets\Scripts\Event\EventDispatcher.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\LeftMahJongLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\MahJongBaseLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\RightMahjongLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\RoleMahJongLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\TopMahJongLogic.cs" />
     <Compile Include="Assets\Scripts\GameLogric\MahJongTimeLogic.cs" />
-    <Compile Include="Assets\Scripts\GameLogric\RoleMahJongLogic.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\PlayerItem.cs" />
     <Compile Include="Assets\Scripts\GameLogric\SingleMahJongItem.cs" />
     <Compile Include="Assets\Scripts\GameLogric\ThreeMahJongItem.cs" />
     <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
@@ -236,6 +241,7 @@
     <Compile Include="Assets\Scripts\NetFrame\PBData\Base\PB_BaseData.cs" />
     <Compile Include="Assets\Scripts\NetFrame\PBData\NetGame.cs" />
     <Compile Include="Assets\Scripts\NetFrame\PBData\PB_ConnetData.cs" />
+    <Compile Include="Assets\Scripts\NetFrame\PBData\PB_ExtraData.cs" />
     <Compile Include="Assets\Scripts\NetFrame\PBData\PB_PingData.cs" />
     <Compile Include="Assets\Scripts\NetFrame\PBData\PB_RoomData.cs" />
     <Compile Include="Assets\Scripts\NetFrame\Socket\JFSocket.cs" />

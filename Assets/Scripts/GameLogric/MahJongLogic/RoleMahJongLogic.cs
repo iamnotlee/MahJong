@@ -16,7 +16,7 @@ public class RoleMahJongLogic : MonoBehaviour
     }
     void Start()
     {
-        Create();
+        //Create();
     }
     private List<EMahJongType> singleList = new List<EMahJongType>();
     private List<EMahJongType> threeList = new List<EMahJongType>();

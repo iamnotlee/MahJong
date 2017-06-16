@@ -14,7 +14,7 @@ public class LeftMahJongLogic : MonoBehaviour {
     }
     void Start()
     {
-        Create();
+        //Create();
     }
     void Init()
     {

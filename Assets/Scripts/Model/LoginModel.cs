@@ -9,24 +9,40 @@ public class LoginModel : Singleton<LoginModel> {
     {
         CDataListManager.Instance.RegisterDelegate<RQConnect>(CallBackAppList);
     }
+    #region C2S
     public void RequestConent()
     {
         NetLoginConfirm rq = new NetLoginConfirm();
         rq.uid = HttpModel.Instance.GetHttpUid();
         int cmd = GameTools.getCmd_M(GameConst.ModelSystem, 2);
+        MyLogger.Log(" " + (rq == null));
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
     }
+    #endregion
+
+   private   RQConnect connectData = null;
+
+    public int GetRoleId()
+    {
+        if(connectData!=null)
+        {
+            return connectData.roleId;
+        }
+        return 0;
+    }
+
+    #region S2C
     void CallBackAppList(PB_BaseData baseData)
     {
         RQConnect rp = baseData.GetObj<RQConnect>();
         if (rp != null)
         {
             //PingManager.Instance.StartPing();
+            connectData = rp;
             if (rp.roomId != 0)
             {
-                MyLogger.Log(rp.roomId);
+                //MyLogger.Log(rp.roomId);
                 RoomModel.Instance.RqEnterRoom(rp.roomId);
-                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("game");
             }
             else
             {
@@ -35,4 +51,5 @@ public class LoginModel : Singleton<LoginModel> {
             
         }
     }
+    #endregion
 }

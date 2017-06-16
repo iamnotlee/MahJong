@@ -25,15 +25,25 @@ public class PlayerItem: MonoBehaviour
 
     void OnDisable()
     {
+        EventCenter.RemoveEventListener(EEventId.OtherEnterRoom, ExitRoom);
 
     }
     void OnEnable()
     {
+        EventCenter.AddEventListener(EEventId.OtherEnterRoom, ExitRoom);
 
     }
-
+    private int uid = 0;
     public void Init(NetUserData data)
     {
         PlayerName.text = "Uid:" + data.uid;
+        uid = data.uid;
     }
+
+   void ExitRoom(EventParam arg)
+    {
+        int tepUid = arg.GetData<int>();
+        gameObject.SetActive(uid == tepUid);
+    }
+
 }

@@ -14,7 +14,7 @@ public class TopMahJongLogic : MonoBehaviour {
     }
     void Start()
     {
-        Create();
+        //Create();
     }
     void Init()
     {

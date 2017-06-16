@@ -19,9 +19,12 @@ public class HttpManager : Singleton<HttpManager>
     private const string login = "http://47.92.115.60:8080/LGameLogin/gameserver/login";
     private const string version = "http://47.92.115.60:8080/LGameLogin/gameserver/version";
     WWWForm form = new WWWForm();
-    public void Login()
+    /// <summary>
+    /// http 登陆
+    /// </summary>
+    public void Login(string accout)
     {
-        RqLoginData rqLogin = HttpModel.Instance.GetLoginData();
+        RqLoginData rqLogin = HttpModel.Instance.GetLoginData(accout);
         form.AddField("data", JsonUtility.ToJson(rqLogin));
         WWW www = new WWW(login, form);
         CoroutineController.Instance.StartCoroutine(WaitForLogin(www));

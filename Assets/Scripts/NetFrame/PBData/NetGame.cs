@@ -207,7 +207,6 @@ namespace proto.NetGame
         {
             get { return _type; }
             set { _type = value; }
-
         }
 
         private global::ProtoBuf.IExtension extensionObject;
@@ -489,6 +488,14 @@ namespace proto.NetGame
         {
             get { return _roomId; }
             set { _roomId = value; }
+        }
+        private int _roleId = default(int);
+        [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name = @"roleId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+        [global::System.ComponentModel.DefaultValue(default(int))]
+        public int roleId
+        {
+            get { return _roleId; }
+            set { _roleId = value; }
         }
         private global::ProtoBuf.IExtension extensionObject;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

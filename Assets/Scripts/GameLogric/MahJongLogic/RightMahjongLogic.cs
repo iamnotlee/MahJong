@@ -14,7 +14,7 @@ public class RightMahjongLogic : MonoBehaviour {
     }
     void Start()
     {
-        Create();
+        //Create();
     }   
     void Init()
     {

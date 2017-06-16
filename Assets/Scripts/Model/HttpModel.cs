@@ -6,14 +6,21 @@ public class HttpModel : Singleton<HttpModel>
 {
 
     
-
-    public RqLoginData GetLoginData()
+    /// <summary>
+    /// http登陆数据
+    /// </summary>
+    /// <param name="accout"></param>
+    /// <returns></returns>
+    public RqLoginData GetLoginData(string accout)
     {
         RqDeviceData dev = new RqDeviceData(Application.platform.ToString(),"xxddsp12", SystemInfo.deviceUniqueIdentifier);
-        RqLoginData data = new RqLoginData("admin", "admin", dev);
+        RqLoginData data = new RqLoginData(accout, "", dev);
         return data;
     }
-
+    /// <summary>
+    /// 检测版本数据
+    /// </summary>
+    /// <returns></returns>
     public RqVersionData GetVersionData()
     {
         RqVersionData data = new RqVersionData("0.1.0", new List<int>() { 1 }, "0", "0");
@@ -21,13 +28,30 @@ public class HttpModel : Singleton<HttpModel>
     }
 
     public RpLoginData loginData;
-
+    /// <summary>
+    /// httpdengue成功处理
+    /// </summary>
+    /// <param name="json"></param>
     public void RecevieLogin(string json)
     {
         loginData = JsonUtility.FromJson<RpLoginData>(json);
         GameConst.GameKey = loginData.suc.key;
+        MyLogger.Log(" 加密 密钥： " + loginData.suc.key);
+        SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack,
+         SocketManager.MySocketType.GameCenterSocket);
     }
-
+    /// <summary>
+    /// 链接socket成功
+    /// </summary>
+    /// <param name="rs"></param>
+    void ConentCallBack(bool rs)
+    {
+        if (rs)
+        {
+            // 第一次链接
+            LoginModel.Instance.RequestConent();
+        }
+    }
     public int GetHttpUid()
     {
         if (loginData != null)

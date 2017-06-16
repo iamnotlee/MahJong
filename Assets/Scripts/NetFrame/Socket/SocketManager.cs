@@ -112,6 +112,10 @@ public class SocketManager : Singleton<SocketManager>
     /// <param name="data"></param>
     public bool SendMessageToSocket(byte[] data) {
 
+        //for(int i=0;i<data.Length;i++)
+        //{
+        //    MyLogger.Log(data[i]);
+        //}
         if (mySocketDic.ContainsKey(curConnectSocket))
         {
             if (mySocketDic[curConnectSocket].isConnected)

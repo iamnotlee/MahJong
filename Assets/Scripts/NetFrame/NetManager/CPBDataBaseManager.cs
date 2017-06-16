@@ -116,21 +116,24 @@ public class PBDataManager :Singleton<PBDataManager>
         // 进入房间
         AddInterface<RQEnterRoom>(GameTools.getCmd_M(10, 2));
         AddInterface<RPEnterRoom>(GameTools.getCmd_M(10, 2));
-        // 推出房间
-        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 3));
+        //退出房间,房主解散房间
+        AddInterface<RPEixtRoom>(GameTools.getCmd_M(10, 3));
         AddInterface<RQExit>(GameTools.getCmd_M(10, 3));
-        // 托管
-        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 4));
+        //托管
+        AddInterface<RPAuto>(GameTools.getCmd_M(10, 4));
         //准备
-        //AddInterface<PB_BaseData>(GameTools.getCmd_M(10, 5));
+        AddInterface<RPReady>(GameTools.getCmd_M(10, 5));
         // 投票解散
         AddInterface<RPVote>(GameTools.getCmd_M(10, 6));
         // 游戏
-        //AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
+        AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
+        AddInterface<NetResponse>(GameTools.getCmd_M(11, 1));
         // 结算
         AddInterface<RQREsult>(GameTools.getCmd_M(11, 2));
         // 压跑
-        AddInterface<NetOprateData>(GameTools.getCmd_M(11, 3));
+        AddInterface<RPSelectScore>(GameTools.getCmd_M(11, 3));
+        AddInterface<RQSelectScore>(GameTools.getCmd_M(11, 3));
+
     }
     /// <summary>
     /// 添加接口

@@ -17,11 +17,19 @@ public enum EEventId : int
     /// 进入房间失败，清楚房间id
     /// </summary>
     UpdateClearRoomId,
-  
+    /// <summary>
+    /// 其他玩家进入房间
+    /// </summary>
+    OtherEnterRoom,
+    /// <summary>
+    /// 其他玩家进入房间
+    /// </summary>
+    OtherExitRoom,
 
 
 
- 
+
+
 
 }
 

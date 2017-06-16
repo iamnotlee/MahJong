@@ -6,7 +6,7 @@ public class LoginUI : MonoBehaviour
 {
 
     public GameObject LoginBtn;
-
+    public UIInput AccoutInput;
     void Awake()
     {
         AudioManager.Instance.PlayMusic(EMusicType.LogInMusic);
@@ -15,26 +15,25 @@ public class LoginUI : MonoBehaviour
     void Start()
     {
         GameInit();
-
         StartConnet();
         UIEventListener.Get(LoginBtn).onClick = delegate (GameObject go)
         {
-            AudioManager.Instance.PlaySound(ESoundType.Click);          
-            LoginModel.Instance.RequestConent();        
+            AudioManager.Instance.PlaySound(ESoundType.Click);
+            HttpManager.Instance.Login(AccoutInput.value);
+            HttpManager.Instance.CheckVersion();
+       
         };
        
     }
 
-    void ConentCallBack(bool rs)
-    {
-        
-    }
+
+    /// <summary>
+    /// 开始http登陆和Scoket链接
+    /// </summary>
     void StartConnet()
     {
-        HttpManager.Instance.Login();
-        HttpManager.Instance.CheckVersion();
-        SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack, 
-            SocketManager.MySocketType.GameCenterSocket);
+       
+     
     }
     /// <summary>
     /// 游戏注册
