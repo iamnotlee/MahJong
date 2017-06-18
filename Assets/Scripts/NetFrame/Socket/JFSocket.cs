@@ -9,17 +9,11 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-//using DataFrame.ProtoBuf;
-
-
-
 namespace DataFrame.Net
 {
 
     public class JFSocket
     {
-
-
         class CReciverData
         {
             public const int BufferDataLength = 1024;
@@ -30,8 +24,6 @@ namespace DataFrame.Net
                 len = 0;
                 data = null;
             }
-
-
             /// <summary>
             /// 获取包含CMD头长度的CMD数据
             /// </summary>
@@ -127,11 +119,14 @@ namespace DataFrame.Net
 
         bool success;
 
-        public JFSocket()
-        {
-        }
+        public JFSocket() { }
 
-
+        /// <summary>
+        /// socket 链接
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <param name="callback"></param>
         public void ConnectServer(string ip, int port, ConnectedResult callback)
         {
 
@@ -185,7 +180,9 @@ namespace DataFrame.Net
 
         }
 
-
+        /// <summary>
+        /// 收包
+        /// </summary>
         private void ReceiveSorket()
         {
             try
@@ -193,8 +190,6 @@ namespace DataFrame.Net
                 CReciverData recive_data_buffer = new CReciverData();
                 while (true)
                 {
-
-
                     if (clientSocket == null ||
                         !clientSocket.Connected)
                     {
@@ -205,19 +200,15 @@ namespace DataFrame.Net
                     {
                         continue;
                     }
-
                     CReciverData rc = new CReciverData();
                     rc.data = new byte[CReciverData.BufferDataLength];
                     rc.len = clientSocket.Receive(rc.data);
-                    //Debug.Log("[Socket Lower Reciver] : Recive Data :" + rc.len);
                     SplitPackage(recive_data_buffer, rc);
-
-
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError("[Socket Lower Reciver]Socer Recive Error：" + e);
+                MyLogger.LogError("[Socket Lower Reciver]Socer Recive Error：" + e);
             }
         }
 
@@ -233,16 +224,16 @@ namespace DataFrame.Net
                     //当没有数据可以解析的时候跳出
                     if (cmd_data == null) break;
                     PBDataManager.Instance.GetBaseDataFromPb(cmd_data);
-                    //#if Debug
+
                     PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
-                    Debug.Log("[Socket Lower Reciver] Recive：" + cpbdata.ToString());
-                    //#endif
+                    MyLogger.Log("[Socket Lower Reciver] Recive：" + cpbdata.ToString());
+
                 }
                 while (true);
             }
             catch (Exception ex)
             {
-                Debug.LogError("[Socket Lower Reciver]Data Press Error：" + ex);
+                MyLogger.LogError("[Socket Lower Reciver]Data Press Error：" + ex);
                 // 清理缓冲数据
                 buffer.data = null;
                 buffer.len = 0;
@@ -258,8 +249,7 @@ namespace DataFrame.Net
         {
             if (!clientSocket.Connected)
             {
-                Debug.LogError("[Socket Lower Sender]停止接受数据~！~");
-                
+                MyLogger.LogError("[Socket Lower Sender]停止接受数据~！~");
                 return false;
             }
             try
@@ -280,34 +270,33 @@ namespace DataFrame.Net
                 bool waitOne = asyncSend != null && asyncSend.AsyncWaitHandle.WaitOne(5000, true);
                 if (!waitOne)
                 {
-                    Debug.LogError("[Socket Lower Sender]联结发送服务器失败");
+                    MyLogger.LogError("[Socket Lower Sender]联结发送服务器失败");
                     return false;
                 }
                 else
                 {
                     PB_BaseData cpbdata = PB_BaseData.Create(data);
-                    Debug.Log("[Socket Lower Sender]发送：" + cpbdata.ToString());
+                    MyLogger.Log("[Socket Lower Sender]发送：" + cpbdata.ToString());
                     return true;
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError("[Socket Lower Sender]发送失败 " + e.ToString());
+                MyLogger.LogError("[Socket Lower Sender]发送失败 " + e.ToString());
                 return false;
             }
         }
-
-
-
-
+        /// <summary>
+        /// 发送会掉
+        /// </summary>
+        /// <param name="asyncSend"></param>
         private void sendCallback(IAsyncResult asyncSend)
         {
             //Debug.Log("发送回掉： "+asyncSend.IsCompleted+",,,,ddd:"+asyncSend.CompletedSynchronously);
         }
-
-
-
-
+        /// <summary>
+        /// 关闭socket
+        /// </summary>
         public void Closed()
         {
             if (clientSocket != null && clientSocket.Connected)

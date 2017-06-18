@@ -34,11 +34,22 @@ public class HttpModel : Singleton<HttpModel>
     /// <param name="json"></param>
     public void RecevieLogin(string json)
     {
-        loginData = JsonUtility.FromJson<RpLoginData>(json);
-        GameConst.GameKey = loginData.suc.key;
-        MyLogger.Log(" 加密 密钥： " + loginData.suc.key);
-        SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack,
-         SocketManager.MySocketType.GameCenterSocket);
+        if(json.Contains("error"))
+        {
+
+        }
+        else
+        {
+            loginData = JsonUtility.FromJson<RpLoginData>(json);
+            GameConst.GameKey = loginData.suc.key;
+            //MyLogger.Log(" 加密 密钥： " + loginData.suc.key);
+            if(!string.IsNullOrEmpty(LoginUI.Instance.IpInput.value))
+            {
+                GameConst.GameCenter_IP_Address = LoginUI.Instance.IpInput.value;
+            }
+            SocketManager.Instance.ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, ConentCallBack,
+             SocketManager.MySocketType.GameCenterSocket);
+        }
     }
     /// <summary>
     /// 链接socket成功

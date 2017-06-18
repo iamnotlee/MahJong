@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-public class RoleMahJongLogic : MonoBehaviour
+using proto.NetGame;
+public class RoleMahJongLogic : MahJongBaseLogic
 {
 
 
-    public UITable HandMahJongs;
+    //public UITable HandMahJongs;
     private const string SingleMahongPath = "GamePrefab/Mahjong/Self/MahjongSelf";
     private const string ThreeMahJongPath = "GamePrefab/Mahjong/Self/ThreeTypeMahJong";
 
@@ -14,52 +14,32 @@ public class RoleMahJongLogic : MonoBehaviour
     {
 
     }
-    void Start()
+    void OnEnable()
     {
-        //Create();
+        EventCenter.AddEventListener(EEventId.UpdateFaPai, UpdateMahJongs);
     }
-    private List<EMahJongType> singleList = new List<EMahJongType>();
-    private List<EMahJongType> threeList = new List<EMahJongType>();
+    void OnDisable()
+    {
+        EventCenter.RemoveEventListener(EEventId.UpdateFaPai, UpdateMahJongs);
+    }
 
-    private void Create()
+    void UpdateMahJongs(EventParam arg)
     {
-        CreateThreeMahJongs();
-        CreateMahJongs();
-        CreateMahiong();
-        HandMahJongs.repositionNow = true;
-    }
-    private void CreateThreeMahJongs()
-    {
-        threeList = MahJongModel.Instance.RandomThreeMahjongs();
-        for (int i = 0; i < threeList.Count; i++)
+        NetOprateData data = arg.GetData<NetOprateData>();
+        MyLogger.Log("拍的数量：  "+data.dlist.Count);
+
+        for (int i = 0; i < data.dlist.Count; i++)
         {
-            ThreeMahJongItem item = GameUtils.New<ThreeMahJongItem>(ThreeMahJongPath, HandMahJongs.transform);
-            item.name = "item" + i + 1;
-            item.Init(threeList[i]);
+            MyLogger.Log(data.dlist[i]);
         }
-        //ThreeGrid.repositionNow = true;
-    }
-    public void CreateMahJongs()
-    {
-        singleList = MahJongModel.Instance.RandomMahjongs(10);
-        for (int i = 0; i < singleList.Count; i++)
+        for (int i = 0; i < data.dlist.Count; i++)
         {
             SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, HandMahJongs.transform);
             item.name = "item" + i + 1;
-            item.Init(singleList[i]);
+            EMahJongType type = (EMahJongType)data.dlist[i];
+            MyLogger.Log(type);
+            item.Init(type);
         }
-        //SingleGrid.repositionNow = true;
+        HandMahJongs.repositionNow = true;
     }
-
-    private void CreateMahiong()
-    {
-        EMahJongType type = MahJongModel.Instance.RandomMahjong();
-        SingleMahJongItem item = GameUtils.New<SingleMahJongItem>(SingleMahongPath, HandMahJongs.transform);
-        item.name = type.ToString();
-        item.Init(type,true);
-    }
-
-
-
-
 }

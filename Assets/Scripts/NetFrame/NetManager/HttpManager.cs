@@ -30,6 +30,11 @@ public class HttpManager : Singleton<HttpManager>
         CoroutineController.Instance.StartCoroutine(WaitForLogin(www));
 
     }
+    /// <summary>
+    /// 登陆
+    /// </summary>
+    /// <param name="www"></param>
+    /// <returns></returns>
     IEnumerator WaitForLogin(WWW www)
     {
         yield return www;
@@ -41,7 +46,7 @@ public class HttpManager : Singleton<HttpManager>
         {
             if (www.isDone)
             {
-                //Debug.Log(www.text);
+                Debug.Log(www.text);
                 HttpModel.Instance.RecevieLogin(www.text);
             }
         }

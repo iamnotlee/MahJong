@@ -215,6 +215,8 @@
     <Compile Include="Assets\Scripts\Event\EventCenter.cs" />
     <Compile Include="Assets\Scripts\Event\EventDefine.cs" />
     <Compile Include="Assets\Scripts\Event\EventDispatcher.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\ClockArrowItem.cs" />
+    <Compile Include="Assets\Scripts\GameLogric\GiveScoreLogic.cs" />
     <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\LeftMahJongLogic.cs" />
     <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\MahJongBaseLogic.cs" />
     <Compile Include="Assets\Scripts\GameLogric\MahJongLogic\RightMahjongLogic.cs" />

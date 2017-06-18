@@ -20,8 +20,8 @@ public class AudioManager : MonoSingleton<AudioManager>
 
     private bool needSound = true;
     private bool _NeedMusic;
-    private float musicVolume = 1.0f;
-    private float soundVoluem = 1.0f;
+    private float musicVolume = 0f;
+    private float soundVoluem = 0f;
     /// <summary>
     /// 是否需要音效
     /// </summary>

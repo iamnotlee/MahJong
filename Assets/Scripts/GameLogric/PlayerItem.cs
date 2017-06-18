@@ -14,6 +14,7 @@ public class PlayerItem: MonoBehaviour
 
     public UILabel PlayerName;
     public UILabel PlayerScore;
+    public GameObject ReadyStatusObj;
     void Start()
     {
 
@@ -25,12 +26,16 @@ public class PlayerItem: MonoBehaviour
 
     void OnDisable()
     {
-        EventCenter.RemoveEventListener(EEventId.OtherEnterRoom, ExitRoom);
+        //EventCenter.RemoveEventListener(EEventId.ExitRoom, ExitRoom);
+        //EventCenter.AddEventListener(EEventId.UpdateReady, UpdateReady);
+
 
     }
     void OnEnable()
     {
-        EventCenter.AddEventListener(EEventId.OtherEnterRoom, ExitRoom);
+        //EventCenter.AddEventListener(EEventId.ExitRoom, ExitRoom);
+        //EventCenter.AddEventListener(EEventId.UpdateReady, UpdateReady);
+
 
     }
     private int uid = 0;
@@ -39,11 +44,27 @@ public class PlayerItem: MonoBehaviour
         PlayerName.text = "Uid:" + data.uid;
         uid = data.uid;
     }
-
-   void ExitRoom(EventParam arg)
+    /// <summary>
+    /// 退出房间
+    /// </summary>
+    public void RefreshExitRoom()
     {
-        int tepUid = arg.GetData<int>();
-        gameObject.SetActive(uid == tepUid);
+        ReadyStatusObj.SetActive(false);
+        PlayerScore.text = "";
+        gameObject.SetActive(false);
     }
+    /// <summary>
+    /// 准备
+    /// </summary>
+    /// <param name="isShow"></param>
+    public void RefrehReadyObj(bool isShow)
+    {
+        ReadyStatusObj.SetActive(isShow);
 
+    }
+    public void RefrehScore(int score)
+    {
+        PlayerScore.text = "跑："+score;
+
+    }
 }

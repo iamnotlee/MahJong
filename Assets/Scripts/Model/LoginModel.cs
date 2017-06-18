@@ -10,12 +10,14 @@ public class LoginModel : Singleton<LoginModel> {
         CDataListManager.Instance.RegisterDelegate<RQConnect>(CallBackAppList);
     }
     #region C2S
+    /// <summary>
+    /// 第一次链接
+    /// </summary>
     public void RequestConent()
     {
         NetLoginConfirm rq = new NetLoginConfirm();
         rq.uid = HttpModel.Instance.GetHttpUid();
         int cmd = GameTools.getCmd_M(GameConst.ModelSystem, 2);
-        MyLogger.Log(" " + (rq == null));
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
     }
     #endregion

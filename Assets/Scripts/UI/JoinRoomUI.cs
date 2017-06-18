@@ -9,7 +9,7 @@ public class JoinRoomUI : BaseUI
     public GameObject DelBtn;
     public UISprite[] InputSprites;
 
-    private int roomIDLeng = 8;
+    private int roomIDLeng = 6;
     private string roomId = "";
     #region 方法重写
     public override EnumUiType GetUiType()
@@ -69,6 +69,7 @@ public class JoinRoomUI : BaseUI
                 {
                     MyLogger.Log(roomId);
                     int roomID = GameUtils.StringToInt(roomId);
+                    UiManager.Instance.CloseUi(EnumUiType.Room_JoinRoomUI);
                     RoomModel.Instance.RqEnterRoom(roomID);
                 }
                 break;

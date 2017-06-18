@@ -133,12 +133,8 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
         if (obj != null)
         {
             this.sn = EncryptManager.instance.MD5Encrypt(this.obj, GameConst.GameKey);
-            MyLogger.Log(" 加密 密钥： " + GameConst.GameKey);
-
         }
         this.errorCode = 0;
-            MyLogger.Log(" 是否为空： " +(obj == null));
-
         this.uid = HttpModel.Instance.GetHttpUid();
     }
 
@@ -165,25 +161,11 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
     /// <returns></returns>
     public static PB_BaseData Create(byte[] data)
     {
-
         //Debug.LogError("CPB_Net_BaseDatreceive=====:" + data.Length);
         MemoryStream ms = new MemoryStream(data);
         ms.Position = 0;
         PB_BaseData rp = Serializer.Deserialize<PB_BaseData>(ms);
-        //if (rp.cmd / 1000 == (int)PB_RQOBase.EModule.EMPlayBull || rp.cmd / 1000 == (int)PB_RQOBase.EModule.EMPlayWinThree)
-        //{
-        //    tempCurModule = (PB_RQOBase.EModule)(rp.cmd / 1000);
-        //}
-
-        //if (rp.cmd / 1000 == (int)PB_RQOBase.EModule.EMPlayBull || (rp.cmd / 1000 == (int)PB_RQOBase.EModule.EMPlayBanker && rp.cmd % 1000 == 3))
-        //{
-        //    rp.cmd = rp.cmd % 1000 + (int)PB_RQOBase.EModule.EMPlayWinThree * 1000;
-        //}
-        //rp.cmd = GameTools.getCmd(rp.cmd);
-        ms.Close();
-        
-        //Debug.LogError("cmd=====:" + rp.cmd);
-        //Debug.LogError("rp=====:" + rp.ToString());
+        ms.Close();      
         return rp;
     }
 

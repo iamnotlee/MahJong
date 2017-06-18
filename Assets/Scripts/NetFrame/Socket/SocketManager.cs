@@ -5,8 +5,9 @@ using DataFrame.Net;
 using UnityEngine;
 public class SocketManager : Singleton<SocketManager>
 {
-    public enum MySocketType { 
-        
+    public enum MySocketType
+    {
+
         /// <summary>
         /// 默认 错误
         /// </summary>
@@ -46,56 +47,40 @@ public class SocketManager : Singleton<SocketManager>
 
     private Dictionary<MySocketType, JFSocket> mySocketDic = null;
 
-	private JFSocket.ConnectedResult myCallBack = null;
+    private JFSocket.ConnectedResult myCallBack = null;
 
     public override void Init()
     {
-       mySocketDic = new Dictionary<MySocketType, JFSocket>();
+        mySocketDic = new Dictionary<MySocketType, JFSocket>();
     }
-    public void ConnectNewSocket(string ip, int port, JFSocket.ConnectedResult callback , MySocketType type)
+    public void ConnectNewSocket(string ip, int port, JFSocket.ConnectedResult callback, MySocketType type)
     {
-#if !normal
-
-		if (mySocketDic.ContainsKey(curConnectSocket))
+        if (mySocketDic.ContainsKey(curConnectSocket))
         {
             CloseSocket(curConnectSocket);
         }
-
-#endif
-
         myCallBack = callback;
         if (mySocketDic.ContainsKey(type) && mySocketDic[type].isConnected)
         {
-            Debug.LogError("该地方的 socket 连接着，无需连接新的socket   " + type);
+            MyLogger.LogError("该地方的 socket 连接着，无需连接新的socket   " + type);
             jfs = mySocketDic[type];
             AsyncCallback(true);
         }
         else
         {
-
             tempConnectSocketType = type;
             jfs = new JFSocket();
             jfs.ConnectServer(ip, port, AsyncCallback);
         }
     }
 
-    void AsyncCallback(bool ar) {
-        Debug.LogError("CSocketManager " + tempConnectSocketType + " 连接" + (ar ? "完成" : "未完成"));
-        
-	
+    void AsyncCallback(bool ar)
+    {
+        //Debug.LogError("CSocketManager " + tempConnectSocketType + " 连接" + (ar ? "完成" : "未完成"));
         if (ar)
         {
             curConnectSocket = tempConnectSocketType;
-            //if (mySocketDic.Count == 0 && curConnectSocket != MySocketType.LoginSocket)
-            //{
-
-            //    //Debug.LogError("打开心跳");
-            //}
-            
             mySocketDic.Add(curConnectSocket, jfs);
-
-            //Debug.LogError("myCallBack = " + (myCallBack == null));
-
         }
         if (myCallBack != null)
         {
@@ -103,25 +88,22 @@ public class SocketManager : Singleton<SocketManager>
             myCallBack = null;
         }
         tempConnectSocketType = MySocketType.None;
-        
+
     }
 
     /// <summary>
     /// 发送消息
     /// </summary>
     /// <param name="data"></param>
-    public bool SendMessageToSocket(byte[] data) {
-
-        //for(int i=0;i<data.Length;i++)
-        //{
-        //    MyLogger.Log(data[i]);
-        //}
+    public bool SendMessageToSocket(byte[] data)
+    {
         if (mySocketDic.ContainsKey(curConnectSocket))
         {
             if (mySocketDic[curConnectSocket].isConnected)
             {
                 bool isSuccess = mySocketDic[curConnectSocket].SendMessage(data);
-                if (!isSuccess) {
+                if (!isSuccess)
+                {
                     CloseSocket(curConnectSocket);
                 }
                 return isSuccess;
@@ -131,8 +113,9 @@ public class SocketManager : Singleton<SocketManager>
                 return false;
             }
         }
-        else {
-            Debug.LogError(curConnectSocket + "这个socket 已断开了连接");
+        else
+        {
+            MyLogger.LogError(curConnectSocket + "这个socket 已断开了连接");
             return false;
         }
     }
@@ -142,7 +125,8 @@ public class SocketManager : Singleton<SocketManager>
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public bool isConneted() {
+    public bool isConneted()
+    {
         if (mySocketDic.ContainsKey(curConnectSocket))
         {
             return mySocketDic[curConnectSocket].isConnected;
@@ -165,38 +149,40 @@ public class SocketManager : Singleton<SocketManager>
     /// <summary>
     /// 断开socket
     /// </summary>
-    private void CloseSocket(MySocketType type) {
-		try {
+    private void CloseSocket(MySocketType type)
+    {
+        try
+        {
             if (mySocketDic.ContainsKey(type) && mySocketDic[type].isConnected)
             {
+                MyLogger.LogError("CSocketManager " + " 断开已连接的  " + type);
+                mySocketDic[type].Closed();
+            }
 
-                Debug.LogError("CSocketManager " + " 断开已连接的  " + type);
-
-				mySocketDic[type].Closed();
-			}
-
-		} catch (Exception ex) {
-            Debug.LogError("NC >>>>>> Step 4" + ex);
-		}
+        }
+        catch (Exception ex)
+        {
+            MyLogger.LogError("NC >>>>>> Step 4" + ex);
+        }
         mySocketDic.Remove(type);
         if (mySocketDic == null || mySocketDic.Count == 0)
         {
             PingManager.Instance.EndPing();
-        }    
+        }
     }
 
     /// <summary>
     /// 断开所有已连接的socket
     /// </summary>
-    public void CloseAllSocket() {
-
-        Debug.LogError(" 断开所有已连接的socket   " + mySocketDic.Count);
-
+    public void CloseAllSocket()
+    {
+        MyLogger.LogError(" 断开所有已连接的socket   " + mySocketDic.Count);
         if (mySocketDic.Count > 0)
         {
             List<MySocketType> listSocket = new List<MySocketType>();
 
-            foreach (MySocketType type in mySocketDic.Keys) {
+            foreach (MySocketType type in mySocketDic.Keys)
+            {
                 listSocket.Add(type);
             }
 
@@ -220,14 +206,15 @@ public class SocketManager : Singleton<SocketManager>
         }
         else if (curConnectSocket == MySocketType.LoginSocket)
         {
-           ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, callback, curConnectSocket);
+            ConnectNewSocket(GameConst.GameCenter_IP_Address, GameConst.LoginSever_Port, callback, curConnectSocket);
         }
     }
 
     /// <summary>
     /// 检测socket
     /// </summary>
-    public void CheckSockets() {
-        
+    public void CheckSockets()
+    {
+
     }
 }

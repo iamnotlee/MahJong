@@ -139,15 +139,6 @@ public class RoomModel : Singleton<RoomModel>
             UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
             UnityEngine.SceneManagement.SceneManager.LoadScene("game");
             NGUIDebug.Log(rp.roomId);
-            //for (int i = 0; i < rp.users.Count; i++)
-            //{
-            //    MyLogger.Log(rp.users[i].uid);
-            //}
-            //for (int i = 0; i < rp.type.Count; i++)
-            //{
-            //    MyLogger.Log(rp.type[i]);
-            //}
-
         }
     }
     /// <summary>
@@ -159,7 +150,7 @@ public class RoomModel : Singleton<RoomModel>
         RQEnterRoom rp = baseData.GetObj<RQEnterRoom>();
         if (rp != null)
         {
-
+            MyLogger.Log(" 有人进入房间了： " + rp.user.uid);
             EventCenter.SendEvent(new EventParam(EEventId.OtherEnterRoom, rp));
         }
     }
@@ -174,7 +165,15 @@ public class RoomModel : Singleton<RoomModel>
             }
             else
             {
-                EventCenter.SendEvent(new EventParam(EEventId.OtherExitRoom, rp.uid));
+                int myRoleId = LoginModel.Instance.GetRoleId();
+                if (myRoleId == rp.uid)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("main");
+                }
+                else
+                {
+                    EventCenter.SendEvent(new EventParam(EEventId.OtherExitRoom, rp.uid));
+                }
             }
         }
     }

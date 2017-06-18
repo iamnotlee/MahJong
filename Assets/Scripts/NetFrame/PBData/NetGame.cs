@@ -145,6 +145,11 @@ namespace proto.NetGame
         private global::ProtoBuf.IExtension extensionObject;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+
+        public override string ToString()
+        {
+            return base.ToString() + "otype:" + otype + "dval:" + dval + "dlist" + dlist.Count + "kvDatas:" + kvDatas.Count;
+        }
     }
 
     [global::System.Serializable, global::ProtoBuf.ProtoContract(Name = @"NetKvData")]

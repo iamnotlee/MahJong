@@ -10,9 +10,14 @@ public class MainUI : MonoBehaviour
     public GameObject ChargeBtn;
     public GameObject HelpBtn;
     public GameObject MailBtn;
+
+    void Awake()
+    {
+        //AudioManager.Instance.PlayMusic(EMusicType.HallMusic);
+
+    }
     void Start()
     {
-        AudioManager.Instance.PlayMusic(EMusicType.HallMusic);
         UIEventListener.Get(CreateRoomBtn).onClick = ClickCreateRoom;        
         UIEventListener.Get(JoinRoomBtn).onClick = ClickJoinRoom;        
         UIEventListener.Get(SettingBtn).onClick = ClickSetting;        

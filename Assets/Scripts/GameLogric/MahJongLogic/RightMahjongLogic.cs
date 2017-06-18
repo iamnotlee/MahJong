@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RightMahjongLogic : MonoBehaviour {
+public class RightMahjongLogic : MahJongBaseLogic
+{
 
-    public UITable HandMahJongs;
+    //public UITable HandMahJongs;
     private const string SingleMahongPath = "GamePrefab/Mahjong/Right/MahJongRight";
     private const string ThreeMahJongPath = "GamePrefab/Mahjong/Right/ThreeTypeMahJong";
 

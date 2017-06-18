@@ -27,6 +27,17 @@ public class CDataListManager : MonoBehaviour
         Instance = this;
         _delegateDic = new Dictionary<int, List<GetDataCallback>>();
         DontDestroyOnLoad(gameObject);
+        GameInit();
+
+    }
+    /// <summary>
+    /// 游戏注册
+    /// </summary>
+    void GameInit()
+    {
+        LoginModel.Instance.RegisterServer();
+        RoomModel.Instance.RegisterServer();
+        MahJongModel.Instance.RegisterServer();
     }
     void Update()
     {
@@ -52,7 +63,7 @@ public class CDataListManager : MonoBehaviour
     /// <param name="data"></param>
     void GetDataCallBack(PB_BaseData data)
     {
-        if (data.status == 0)
+        if (data.errorCode == 0)
         {
             List<GetDataCallback> tempListDelegate = GetDelegateListByCmd(data.cmd);
             if (tempListDelegate != null)
@@ -72,7 +83,7 @@ public class CDataListManager : MonoBehaviour
         }
         else
         {
-            MyLogger.Log("返回错误码："+data.status);
+            MyLogger.Log("返回错误码："+data.errorCode);
         }
     }
 

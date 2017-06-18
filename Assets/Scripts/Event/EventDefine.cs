@@ -25,6 +25,29 @@ public enum EEventId : int
     /// 其他玩家进入房间
     /// </summary>
     OtherExitRoom,
+    /// <summary>
+    /// 更新压跑
+    /// </summary>
+    UpdateSelectScore,
+    /// <summary>
+    /// 显示哑炮
+    /// </summary>
+    UpdateShowScore,
+    /// <summary>
+    /// 更新准备
+    /// </summary>
+    UpdateReady,
+    /// <summary>
+    /// 发牌
+    /// </summary>
+    UpdateFaPai,
+    /// <summary>
+    /// 该谁了
+    /// </summary>
+    UpdateTimeToWho,
+
+
+
 
 
 

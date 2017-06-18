@@ -1,10 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using proto.NetGame;
 
 public abstract class MahJongBaseLogic : MonoBehaviour
 {
 
+    public UITable HandMahJongs;
+    public Transform TableMahJongP;
+    public Transform OtherParent;
 
+    [HideInInspector]
+    public NetUserData userData;
+
+    protected virtual void InitData(NetUserData data)
+    {
+        userData = data;
+    }
+
+
+
+    /*
     public enum Direction
     {
         Horizontal,
@@ -115,5 +130,6 @@ public abstract class MahJongBaseLogic : MonoBehaviour
         }
 
 
-    }
+    }*/
+
 }
