@@ -46,7 +46,7 @@ public class HttpManager : Singleton<HttpManager>
         {
             if (www.isDone)
             {
-                Debug.Log(www.text);
+                MyLogger.Log(www.text);
                 HttpModel.Instance.RecevieLogin(www.text);
             }
         }

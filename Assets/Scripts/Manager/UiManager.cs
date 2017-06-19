@@ -166,7 +166,7 @@ public class UiManager : Singleton<UiManager>
         GameObject uiObj = null;
         if (!_dicOpenUIs.TryGetValue(uiType, out uiObj))
         {
-            Debug.LogError("关闭失败！当前已打开的UI中没有该UI!!!, EnumUIType :" + uiType.ToString());
+            MyLogger.LogError("关闭失败！当前已打开的UI中没有该UI!!!, EnumUIType :" + uiType.ToString());
             return;
         }
         CloseUi(uiType, uiObj);
