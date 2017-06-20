@@ -25,7 +25,7 @@ public class RunModeManager : MonoBehaviour
 
     void Start()
     {
-        LoadCSVData.Instance.LoadCSV_toList("Csv/JiaNianHuaType", CarnivalLoad.LoadCarnivalType);
+        LoadCSVData.Instance.LoadCSV_toList("Csv/code", CodeCsvLoad.LoadCodeCsv);
     }
     void OnGUI()
     {

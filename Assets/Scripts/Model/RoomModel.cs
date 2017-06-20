@@ -136,9 +136,11 @@ public class RoomModel : Singleton<RoomModel>
         if (rp != null)
         {
             roomData = rp;
-            UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("game");
+            //UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
+            //UiManager.Instance.CloseUi(EnumUiType.Room_JoinRoomUI);
+            //UnityEngine.SceneManagement.SceneManager.LoadScene("game");
             NGUIDebug.Log(rp.roomId);
+            CoroutineController.Instance.StartCoroutine(WaitForGoGame());
         }
     }
     /// <summary>
@@ -179,5 +181,17 @@ public class RoomModel : Singleton<RoomModel>
     }
 
     #endregion
-
+    IEnumerator WaitForGoGame()
+    {
+        bool isOpen = UiManager.Instance.CheckIsOpening(new EnumUiType[] { EnumUiType.Room_CreateRoomUI, EnumUiType.Room_JoinRoomUI });
+        if(isOpen)
+        {
+            yield return new WaitForSeconds(0.3f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("game");
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("game");
+        }
+    }
 }

@@ -43,10 +43,19 @@ public class CodeCsvLoad
             if (data[i][0].StartsWith("#") || string.IsNullOrEmpty(data[i][0]))
                 continue;
             CodeCsvData type = new CodeCsvData(data[i], tableIndexs);
-            MyLogger.Log(type.CodeDesc);
 
         }
     }
+
+    public static CodeCsvData GetErrorData(int errorCode)
+    {
+        if (_codeDic.ContainsKey(errorCode))
+        {
+            return _codeDic[errorCode];
+        }
+        return null;
+    }
+
 }
 
 public class CodeCsvData
@@ -60,4 +69,7 @@ public class CodeCsvData
         ErrorCode = GameUtils.StringToInt(data[tb["code"]]);
         CodeDesc =data[tb["tip"]];
     }
+
+
+
 }

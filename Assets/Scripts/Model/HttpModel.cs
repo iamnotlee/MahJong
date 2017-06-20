@@ -36,13 +36,12 @@ public class HttpModel : Singleton<HttpModel>
     {
         if(json.Contains("error"))
         {
-
+            MsgManager.Instance.ShowHint(json, 3.0f);
         }
         else
         {
             loginData = JsonUtility.FromJson<RpLoginData>(json);
             GameConst.GameKey = loginData.suc.key;
-            //MyLogger.Log(" 加密 密钥： " + loginData.suc.key);
             if(!string.IsNullOrEmpty(LoginUI.Instance.IpInput.value))
             {
                 GameConst.GameCenter_IP_Address = LoginUI.Instance.IpInput.value;

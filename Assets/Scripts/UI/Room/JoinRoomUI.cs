@@ -69,7 +69,6 @@ public class JoinRoomUI : BaseUI
                 {
                     MyLogger.Log(roomId);
                     int roomID = GameUtils.StringToInt(roomId);
-                    UiManager.Instance.CloseUi(EnumUiType.Room_JoinRoomUI);
                     RoomModel.Instance.RqEnterRoom(roomID);
                 }
                 break;

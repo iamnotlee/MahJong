@@ -83,7 +83,8 @@ public class CDataListManager : MonoBehaviour
         }
         else
         {
-            MyLogger.Log("返回错误码："+data.errorCode);
+            MyLogger.LogS2C("返回错误码："+data.errorCode);
+            ErrorManger.Instance.ProgressServerError(data.errorCode);
         }
     }
 

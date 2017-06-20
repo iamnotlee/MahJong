@@ -270,19 +270,19 @@ namespace DataFrame.Net
                 bool waitOne = asyncSend != null && asyncSend.AsyncWaitHandle.WaitOne(5000, true);
                 if (!waitOne)
                 {
-                    MyLogger.LogError("[Socket Lower Sender]联结发送服务器失败");
+                    MyLogger.LogC2S("[Socket Lower Sender]联结发送服务器失败");
                     return false;
                 }
                 else
                 {
                     PB_BaseData cpbdata = PB_BaseData.Create(data);
-                    MyLogger.Log("[Socket Lower Sender]发送：" + cpbdata.ToString());
+                    MyLogger.LogC2S("[Socket Lower Sender]发送：" + cpbdata.ToString());
                     return true;
                 }
             }
             catch (Exception e)
             {
-                MyLogger.LogError("[Socket Lower Sender]发送失败 " + e.ToString());
+                MyLogger.LogC2S("[Socket Lower Sender]发送失败 " + e.ToString());
                 return false;
             }
         }

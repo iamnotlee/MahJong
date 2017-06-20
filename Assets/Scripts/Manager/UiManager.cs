@@ -106,8 +106,21 @@ public class UiManager : Singleton<UiManager>
         return retObj;
     }
     #endregion
-
-
+    /// <summary>
+    /// ui是否已经打开
+    /// </summary>
+    /// <param name="uiTypes"></param>
+    /// <returns></returns>
+    public bool CheckIsOpening(EnumUiType[] uiTypes)
+    {
+        int count = 0;
+        for (int i = 0; i < uiTypes.Length; i++)
+        {
+            if (_dicOpenUIs.ContainsKey(uiTypes[i]))
+                count++;
+        }
+        return count > 0;
+    }
     #region 打开UI
 
     /// <summary>

@@ -211,10 +211,10 @@
     <Compile Include="Assets\Scripts\BaseClass\Singleton.cs" />
     <Compile Include="Assets\Scripts\ConfigData\AudioConfig.cs" />
     <Compile Include="Assets\Scripts\ConfigData\MahJongConfig.cs" />
-    <Compile Include="Assets\Scripts\Csv\CSVReader.cs" />
     <Compile Include="Assets\Scripts\Csv\CsvData\CarnivalData.cs" />
     <Compile Include="Assets\Scripts\Csv\CsvData\CodeCsvData.cs" />
-    <Compile Include="Assets\Scripts\Csv\LoadCSVData.cs" />
+    <Compile Include="Assets\Scripts\Csv\CsvReader\CSVReader.cs" />
+    <Compile Include="Assets\Scripts\Csv\CsvReader\LoadCSVData.cs" />
     <Compile Include="Assets\Scripts\Defines\Defines.cs" />
     <Compile Include="Assets\Scripts\Event\EventCenter.cs" />
     <Compile Include="Assets\Scripts\Event\EventDefine.cs" />
@@ -232,6 +232,7 @@
     <Compile Include="Assets\Scripts\GameLogric\ThreeMahJongItem.cs" />
     <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Manager\CoroutineController.cs" />
+    <Compile Include="Assets\Scripts\Manager\ErrorManger.cs" />
     <Compile Include="Assets\Scripts\Manager\ResManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIsContainer.cs" />
@@ -344,9 +345,11 @@
     <Compile Include="Assets\Scripts\NetFrame\protobuf-net\SubItemToken.cs" />
     <Compile Include="Assets\Scripts\NetFrame\protobuf-net\WireType.cs" />
     <Compile Include="Assets\Scripts\RunModeManager.cs" />
-    <Compile Include="Assets\Scripts\UI\CreateRoomUI.cs" />
-    <Compile Include="Assets\Scripts\UI\JoinRoomUI.cs" />
     <Compile Include="Assets\Scripts\UI\Load\LoadingUI.cs" />
+    <Compile Include="Assets\Scripts\UI\MsgBox\MsgHintPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\MsgBox\MsgManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Room\CreateRoomUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Room\JoinRoomUI.cs" />
     <Compile Include="Assets\Scripts\UI\SceneUI\GameUI.cs" />
     <Compile Include="Assets\Scripts\UI\SceneUI\LoginUI.cs" />
     <Compile Include="Assets\Scripts\UI\SceneUI\MainUI.cs" />
