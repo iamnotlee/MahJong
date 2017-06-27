@@ -42,8 +42,8 @@ public class CodeCsvLoad
             }
             if (data[i][0].StartsWith("#") || string.IsNullOrEmpty(data[i][0]))
                 continue;
-            CodeCsvData type = new CodeCsvData(data[i], tableIndexs);
-
+            CodeCsvData code = new CodeCsvData(data[i], tableIndexs);
+            _codeDic.Add(code.ErrorCode, code);
         }
     }
 

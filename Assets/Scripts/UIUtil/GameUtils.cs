@@ -31,7 +31,32 @@ public class GameUtils
     {
         return (_bool ? 1 : 0);
     }
+    /// <summary>
+    /// 日志用的格式化List
+    /// </summary>
+    /// <returns>The to string.</returns>
+    /// <param name="list">List.</param>
+    /// <param name="name">Name.</param>
+    public static string ListToString(IList list, string name = "")
+    {
 
+        if (list != null)
+        {
+            StringBuilder sbuilder = new StringBuilder();
+            sbuilder.Append(name);
+            //sbuilder.Append("(" + list.Count + ")");
+            for (int i = 0; i < list.Count; i++)
+            {
+                sbuilder.Append(list[i].ToString());
+                if (i != list.Count - 1)
+                {
+                    sbuilder.Append(",");
+                }
+            }
+            return sbuilder.ToString();
+        }
+        return "null";
+    }
     /// <summary>
     /// 将双精度浮点数按设定的小数位四舍五入
     /// </summary>

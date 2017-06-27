@@ -271,7 +271,7 @@ public abstract class BaseUI : MonoBehaviour
     {
         if (_mask == null)
         {
-            _mask = NGUITools.AddWidget<UITexture>(gameObject);
+            _mask = NGUITools.AddWidget<UITexture>(UiWindow);
             _mask.name = "_mask";
             _mask.mainTexture = new Texture2D(2, 2);
             _mask.color = new Color(0, 0, 0, 0.5f);

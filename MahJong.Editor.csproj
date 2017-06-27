@@ -103,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\RunModeManagerInspector.cs" />
+    <Compile Include="Assets\Editor\UIEditorTools.cs" />
+    <Compile Include="Assets\Editor\UIPathTool.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvDatabaseInspector.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvFindItem.cs" />
     <Compile Include="Assets\NGUI\Scripts\Editor\ActiveAnimationEditor.cs" />

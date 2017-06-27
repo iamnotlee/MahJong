@@ -6,13 +6,13 @@ public abstract class MahJongBaseLogic : MonoBehaviour
 {
 
     public UITable HandMahJongs;
-    public Transform TableMahJongP;
-    public Transform OtherParent;
+    public UITable TableMahJongP;
+    public Transform ThrowMahjongP;
 
     [HideInInspector]
     public NetUserData userData;
 
-    protected virtual void InitData(NetUserData data)
+    public virtual void InitData(NetUserData data)
     {
         userData = data;
     }

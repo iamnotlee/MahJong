@@ -15,6 +15,8 @@ public class PlayerItem: MonoBehaviour
     public UILabel PlayerName;
     public UILabel PlayerScore;
     public GameObject ReadyStatusObj;
+    public GameObject BankerObj;
+
     void Start()
     {
 
@@ -66,5 +68,9 @@ public class PlayerItem: MonoBehaviour
     {
         PlayerScore.text = "跑："+score;
 
+    }
+    public void RefreshBacker(bool isBanker)
+    {
+        BankerObj.SetActive(isBanker);
     }
 }

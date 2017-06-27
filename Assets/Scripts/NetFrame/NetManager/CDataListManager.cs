@@ -143,7 +143,7 @@ public class CDataListManager : MonoBehaviour
         bool isSucc = PBDataManager.Instance.SendBaseDataToPB_Net(cmd, rq);
         if (!isSucc)
         {
-            MyLogger.LogC2S("发送失败");
+            MsgManager.Instance.ShowHint("发送失败", 1.5f);
         }
     }
 

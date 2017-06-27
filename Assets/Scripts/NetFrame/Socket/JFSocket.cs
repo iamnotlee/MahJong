@@ -226,7 +226,7 @@ namespace DataFrame.Net
                     PBDataManager.Instance.GetBaseDataFromPb(cmd_data);
 
                     PB_BaseData cpbdata = PB_BaseData.Create(cmd_data);
-                    MyLogger.Log("[Socket Lower Reciver] Recive：" + cpbdata.ToString());
+                    //MyLogger.Log("[Socket Lower Reciver] Recive：" + cpbdata.ToString());
 
                 }
                 while (true);
@@ -267,7 +267,7 @@ namespace DataFrame.Net
                     , new AsyncCallback(sendCallback)
                     , clientSocket);
 
-                bool waitOne = asyncSend != null && asyncSend.AsyncWaitHandle.WaitOne(5000, true);
+                bool waitOne = asyncSend != null && asyncSend.AsyncWaitHandle.WaitOne(50000, true);
                 if (!waitOne)
                 {
                     MyLogger.LogC2S("[Socket Lower Sender]联结发送服务器失败");

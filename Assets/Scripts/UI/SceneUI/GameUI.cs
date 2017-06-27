@@ -7,27 +7,26 @@ public class GameUI : MonoBehaviour
 {
 
     public GameObject SettingBtn;
-
     public GameObject HelpBtn;
     public GameObject ChatBtn;
     public GameObject InviteBtn;
     public GameObject ShareBtn;
-
     public GameObject DissRoomBtn;
     public GameObject QuitRoomBtn;
     public PlayerItem[] Players;
     public MahJongBaseLogic[] MahJongs;
     public ClockArrowItem[] Arrows;
     public GameObject SelectScoreObj;
+    public MahJongOprateLogic MahJongOprate;
+    public MahJongTimeLogic MahJongTime;
     private Dictionary<int, PlayerItem> playerDic = new Dictionary<int, PlayerItem>();
 
     void Awake()
     {
-        //AudioManager.Instance.PlayMusic(EMusicType.GameMusic);
+        AudioManager.Instance.PlayMusic(EMusicType.GameMusic);
     }
     void Start()
     {
-
         UIEventListener.Get(SettingBtn).onClick = ClickSetting;
         UIEventListener.Get(DissRoomBtn).onClick = ClickDiss;
         UIEventListener.Get(QuitRoomBtn).onClick = ClickDiss;
@@ -40,19 +39,18 @@ public class GameUI : MonoBehaviour
     {
         EventCenter.AddEventListener(EEventId.OtherEnterRoom, OtherEnterRoom);  // 其他玩家进入房间
         EventCenter.AddEventListener(EEventId.OtherExitRoom, OtherExitRoom);   // 其他玩家退出房间
-        EventCenter.AddEventListener(EEventId.UpdateReady, UpdateReady);        // 准备
-        EventCenter.AddEventListener(EEventId.UpdateShowScore, ShowScoreUI); // 显示压跑
-        EventCenter.AddEventListener(EEventId.UpdateSelectScore, UpdateScore); // 显示压跑分数
-
+        EventCenter.AddEventListener(EEventId.UpdatePlayerState, UpdatePlayer);        // 准备
+        EventCenter.AddEventListener(EEventId.UpdateCanOprate, UpdateCanOprate); // 可操作类型
+        EventCenter.AddEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 
 
     }
     void OnDisable()
     {
         EventCenter.RemoveEventListener(EEventId.OtherEnterRoom, OtherEnterRoom);
         EventCenter.RemoveEventListener(EEventId.OtherExitRoom, OtherExitRoom);
-        EventCenter.RemoveEventListener(EEventId.UpdateReady, UpdateReady);
-        EventCenter.RemoveEventListener(EEventId.UpdateShowScore, ShowScoreUI);
-        EventCenter.AddEventListener(EEventId.UpdateSelectScore, UpdateScore); // 显示压跑分数
+        EventCenter.RemoveEventListener(EEventId.UpdatePlayerState, UpdatePlayer);
+        EventCenter.RemoveEventListener(EEventId.UpdateCanOprate, UpdateCanOprate); // 可操作类型
+        EventCenter.RemoveEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 可操作类型
 
 
     }
@@ -103,16 +101,20 @@ public class GameUI : MonoBehaviour
     }
 
     #endregion
+
+    #region 进入推出房间
     /// <summary>
     /// 玩家自己进入房间
     /// </summary>
     private void RoleEnterRoom()
     {
-        RQCreateRoom  roomData = RoomModel.Instance.GetRoomData();
+        RQCreateRoom roomData = RoomModel.Instance.GetRoomData();
         for (int i = 0; i < roomData.users.Count; i++)
         {
             NetUserData tmp = roomData.users[i];
             PlayerItem item = Players[tmp.idex];
+            MahJongs[tmp.idex].InitData(tmp);
+            Arrows[tmp.idex].Init(tmp.uid);
             item.gameObject.SetActive(true);
             item.Init(tmp);
             playerDic.Add(tmp.uid, item);
@@ -136,6 +138,8 @@ public class GameUI : MonoBehaviour
             data.idex -= myServerPos;
             data.idex = data.idex < 0 ? data.idex + 4 : data.idex;
             PlayerItem item = Players[data.idex];
+            MahJongs[data.idex].InitData(data);
+            Arrows[data.idex].Init(data.uid);
             item.gameObject.SetActive(true);
             item.Init(data);
             playerDic.Add(data.uid, item);
@@ -146,9 +150,7 @@ public class GameUI : MonoBehaviour
 
     private void OtherExitRoom(EventParam arg)
     {
-
         int roleId = arg.GetData<int>();
-        MyLogger.Log(" 有人推出房间了： " + roleId);
         if (playerDic.ContainsKey(roleId))
         {
             playerDic[roleId].RefreshExitRoom();
@@ -156,46 +158,137 @@ public class GameUI : MonoBehaviour
 
         }
     }
-    private void UpdateReady(EventParam arg)
+    #endregion
+
+    #region  玩家信息更新
+    void UpdatePlayer(EventParam arg)
     {
-        NetOprateData oprate = arg.GetData<NetOprateData>();
-        if (playerDic.ContainsKey(oprate.uid))
+        NetOprateData data = arg.GetData<NetOprateData>();
+        MahJongOprateType oprateType = (MahJongOprateType)data.otype;
+        switch (oprateType)
         {
-            playerDic[oprate.uid].RefrehReadyObj(true);
+            case MahJongOprateType.Ready:
+                SetPlayerReady(data.uid);
+                break;
+            case MahJongOprateType.RandomBanker:
+                SetPlayerBacker(data.uid);
+                break;
+            case MahJongOprateType.SelectScore:
+                ResetPlayersReady();
+                SetPlayerScore(data);
+                break;
         }
     }
     /// <summary>
-    /// 显示哑炮
+    /// 设置玩家准备
     /// </summary>
-    /// <param name="arg"></param>
-    private void ShowScoreUI(EventParam arg)
+    /// <param name="uid"></param>
+    private void SetPlayerReady(int uid)
     {
-        SelectScoreObj.SetActive(true);
-        InviteBtn.SetActive(false);
-        ShareBtn.SetActive(false);
+        if (playerDic.ContainsKey(uid))
+        {
+            playerDic[uid].RefrehReadyObj(true);
+        }
+    }
+    /// <summary>
+    /// 设置谁是庄家
+    /// </summary>
+    /// <param name="uid"></param>
+    private void SetPlayerBacker(int uid)
+    {
+        if (playerDic.ContainsKey(uid))
+        {
+            int myUid = LoginModel.Instance.GetRoleId();
+            playerDic[uid].RefreshBacker(myUid == uid);
+        }
+    }
+    /// <summary>
+    /// 重置玩家准备状态
+    /// </summary>
+    private void ResetPlayersReady()
+    {
         foreach (var item in playerDic.Values)
         {
             item.RefrehReadyObj(false);
         }
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="arg"></param>
-    private void UpdateScore(EventParam arg)
+    private void SetPlayerScore(NetOprateData data)
     {
-        NetOprateData oprate = arg.GetData<NetOprateData>();
         int myId = LoginModel.Instance.GetRoleId();
-        if(myId == oprate.uid)
+        if (myId == data.uid)
         {
             SelectScoreObj.SetActive(false);
         }
 
-        if (playerDic.ContainsKey(oprate.uid))
+        if (playerDic.ContainsKey(data.uid))
         {
-            playerDic[oprate.uid].RefrehScore(oprate.dval);
+            playerDic[data.uid].RefrehScore(data.dval);
         }
 
     }
+    #endregion
+
+    #region
+    /// <summary>
+    /// 更新可操作类型
+    /// </summary>
+    /// <param name="arg"></param>
+    private void UpdateCanOprate(EventParam arg)
+    {
+        NetOprateData data = arg.GetData<NetOprateData>();
+        for (int i = 0; i < data.kvDatas.Count; i++)
+        {
+            int OprateK = data.kvDatas[i].k;
+            MahJongOprateType oprateType = (MahJongOprateType)OprateK;
+            switch (oprateType)
+            {
+                case MahJongOprateType.SelectScore:
+                    SelectScoreObj.SetActive(true);
+                    InviteBtn.SetActive(false);
+                    ShareBtn.SetActive(false);
+                    break;
+                case MahJongOprateType.HitMahJong:
+                    MahJongModel.Instance.SetTimeToWhoUid(data.uid);
+                    break;
+                //case MahJongOprateType.ChangeThree:
+                case MahJongOprateType.PongMahJong:
+                case MahJongOprateType.ChiMahJong:
+                case MahJongOprateType.GangMahJong:
+                case MahJongOprateType.TingMahJong:
+                case MahJongOprateType.HuMahJong:
+                    MahJongOprate.Init(data.kvDatas[i],data);
+                    break;
+            }
+
+        }
+    }
+    #endregion
+
+    #region 麻将更新
+    void UpdateMahJongs(EventParam arg)
+    {
+        NetOprateData data = arg.GetData<NetOprateData>();
+        MahJongOprateType oprateType = (MahJongOprateType)data.otype;
+        switch (oprateType)
+        {
+
+            case MahJongOprateType.TimeToWho:
+                MahJongTime.RefreshTime(data);
+                break;
+            case MahJongOprateType.HitMahJong:
+            case MahJongOprateType.PongMahJong:
+            case MahJongOprateType.GiveUp:
+            case MahJongOprateType.ChiMahJong:
+            case MahJongOprateType.GangMahJong:
+            case MahJongOprateType.TingMahJong:
+            case MahJongOprateType.HuMahJong:
+                if(data.uid == LoginModel.Instance.GetRoleId())
+                {
+                    MahJongOprate.gameObject.SetActive(false);
+                }
+                break;
+        }
+    }
+    #endregion
 
 }

@@ -13,7 +13,7 @@ public class MainUI : MonoBehaviour
 
     void Awake()
     {
-        //AudioManager.Instance.PlayMusic(EMusicType.HallMusic);
+        AudioManager.Instance.PlayMusic(EMusicType.HallMusic);
 
     }
     void Start()

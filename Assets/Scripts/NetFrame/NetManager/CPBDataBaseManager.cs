@@ -125,11 +125,15 @@ public class PBDataManager :Singleton<PBDataManager>
         AddInterface<RPReady>(GameTools.getCmd_M(10, 5));
         // 投票解散
         AddInterface<RPVote>(GameTools.getCmd_M(10, 6));
+        AddInterface<RQVote>(GameTools.getCmd_M(10, 6));
+
         // 游戏
         AddInterface<NetOprateData>(GameTools.getCmd_M(11, 1));
         AddInterface<NetResponse>(GameTools.getCmd_M(11, 1));
         // 结算
         AddInterface<RQREsult>(GameTools.getCmd_M(11, 2));
+        AddInterface<NetMjUserResult>(GameTools.getCmd_M(11, 2));
+
         // 压跑
         AddInterface<RPSelectScore>(GameTools.getCmd_M(11, 3));
         AddInterface<RQSelectScore>(GameTools.getCmd_M(11, 3));

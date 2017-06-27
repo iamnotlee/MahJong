@@ -169,7 +169,7 @@ public enum EMahJongType
 {
     None = 0,
     //万子
-    WanOne,
+    WanOne = 11,
     WanTwo,
     WanThree,
     WanFour,
@@ -178,18 +178,8 @@ public enum EMahJongType
     WanSeven,
     WanEight,
     WanNine,
-    //筒子
-    TongOne,
-    TongTwo,
-    TongThree,
-    TongFour,
-    TongFive,
-    TongSix,
-    TongSeven,
-    TongEight,
-    TongNine,
     //条子
-    TiaoOne,
+    TiaoOne = 21,
     TiaoTwo,
     TiaoThree,
     TiaoFour,
@@ -198,13 +188,24 @@ public enum EMahJongType
     TiaoSeven,
     TiaoEight,
     TiaoNine,
+    //筒子
+    TongOne = 31,
+    TongTwo,
+    TongThree,
+    TongFour,
+    TongFive,
+    TongSix,
+    TongSeven,
+    TongEight,
+    TongNine,
+
     // 四风
-    East,
+    East = 41,
     West,
     South,
     North,
     //三箭
-    RedMiddle,
+    RedMiddle = 45,
     FaCai,
     BaiBan,
 

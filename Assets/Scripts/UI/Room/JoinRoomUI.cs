@@ -7,7 +7,7 @@ public class JoinRoomUI : BaseUI
     public GameObject[] NumBtns;
     public GameObject ClearBtn;
     public GameObject DelBtn;
-    public UISprite[] InputSprites;
+    public UILabel[] InputrNum;
 
     private int roomIDLeng = 6;
     private string roomId = "";
@@ -55,19 +55,18 @@ public class JoinRoomUI : BaseUI
     private void ClickNum(GameObject go)
     {
         string[] strs = go.name.Split('_');
-        for (int i = 0; i < InputSprites.Length; i++)
+        for (int i = 0; i < InputrNum.Length; i++)
         {
-            UISprite spr = InputSprites[i];
-            if (spr.spriteName == "input_xing")
+            UILabel tmp = InputrNum[i];
+            if (!GameUtils.CheckInputCharNum(tmp.text))
             {
-                spr.spriteName = "input_" + strs[0];
+                tmp.text = strs[0];
                 if (roomId.Length < roomIDLeng)
                 {
                     roomId += strs[0];
                 }
                 if (roomId.Length == roomIDLeng)
                 {
-                    MyLogger.Log(roomId);
                     int roomID = GameUtils.StringToInt(roomId);
                     RoomModel.Instance.RqEnterRoom(roomID);
                 }
@@ -85,12 +84,12 @@ public class JoinRoomUI : BaseUI
         {
             roomId = roomId.Remove(roomId.Length - 1);
         }
-        for (int i = InputSprites.Length - 1; i >= 0; i--)
+        for (int i = InputrNum.Length - 1; i >= 0; i--)
         {
-            UISprite spr = InputSprites[i];
-            if (spr.spriteName != "input_xing")
+            UILabel tmp = InputrNum[i];
+            if (GameUtils.CheckInputCharNum(tmp.text))
             {
-                spr.spriteName = "input_xing";
+                tmp.text = "-";
                 break;
             }
         }
@@ -102,9 +101,9 @@ public class JoinRoomUI : BaseUI
     private void ClickClear(GameObject go)
     {
         roomId = "";
-        for (int i = 0; i < InputSprites.Length; i++)
+        for (int i = 0; i < InputrNum.Length; i++)
         {
-            InputSprites[i].spriteName = "input_xing";
+            InputrNum[i].text = "-";
         }
     }
     /// <summary>

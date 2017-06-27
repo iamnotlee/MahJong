@@ -13,7 +13,7 @@ public class LoginUI : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        //AudioManager.Instance.PlayMusic(EMusicType.LogInMusic);
+        AudioManager.Instance.PlayMusic(EMusicType.LogInMusic);
         IpInput.value = GameConst.GameCenter_IP_Address;
     }
 

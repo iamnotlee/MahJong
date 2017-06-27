@@ -12,7 +12,7 @@ using System;
 public enum EEventId : int
 {
    
-    UpdateMahjong,
+    UpdateMahjongPos,
     /// <summary>
     /// 进入房间失败，清楚房间id
     /// </summary>
@@ -28,15 +28,11 @@ public enum EEventId : int
     /// <summary>
     /// 更新压跑
     /// </summary>
-    UpdateSelectScore,
+    UpdatePlayerState,
     /// <summary>
-    /// 显示哑炮
+    /// 更新可操作类型
     /// </summary>
-    UpdateShowScore,
-    /// <summary>
-    /// 更新准备
-    /// </summary>
-    UpdateReady,
+    UpdateCanOprate,
     /// <summary>
     /// 发牌
     /// </summary>
@@ -44,7 +40,7 @@ public enum EEventId : int
     /// <summary>
     /// 该谁了
     /// </summary>
-    UpdateTimeToWho,
+    UpdateMahjong,
 
 
 

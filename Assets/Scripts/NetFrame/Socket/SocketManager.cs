@@ -104,7 +104,8 @@ public class SocketManager : Singleton<SocketManager>
                 bool isSuccess = mySocketDic[curConnectSocket].SendMessage(data);
                 if (!isSuccess)
                 {
-                    CloseSocket(curConnectSocket);
+                    //CloseSocket(curConnectSocket);
+                    MyLogger.LogError(curConnectSocket + "这个socket 已断开了连接");
                 }
                 return isSuccess;
             }

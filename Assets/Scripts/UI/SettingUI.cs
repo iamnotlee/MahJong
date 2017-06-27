@@ -25,11 +25,23 @@ public class SettingUI : BaseUI
         };
         UIEventListener.Get(QuitBtn).onClick = delegate(GameObject go)
         {
-            
+            AudioConfig.Instance.SetIsNeedMusic(MusicToggle.value);
         };
         UIEventListener.Get(SoundToggle.gameObject).onClick = delegate(GameObject go)
         {
-            
+            AudioConfig.Instance.SetIsNeedSound(SoundToggle.value);
         };
+        EventDelegate.Add(MusicSlider.onChange, MusicSliderChange);
+        EventDelegate.Add(SoundSlider.onChange, SoundSliderChange);
+
+    }
+    void MusicSliderChange()
+    {
+        AudioConfig.Instance.SetMusicVolume(MusicSlider.value);
+    }
+    void SoundSliderChange()
+    {
+        AudioConfig.Instance.SetSoundVolume(SoundSlider.value);
+
     }
 }

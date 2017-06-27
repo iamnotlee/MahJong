@@ -8,9 +8,23 @@ public class MahJongModel : Singleton<MahJongModel> {
     public void RegisterServer()
     {
         CDataListManager.Instance.RegisterDelegate<NetResponse>(MahJongActions);
+        CDataListManager.Instance.RegisterDelegate<RQVote>(VoteDissRoom);
+        CDataListManager.Instance.RegisterDelegate<NetMjUserResult>(MahjongResult);
 
+        
     }
     #region  C2S
+    /// <summary>
+    /// 发送投票请求
+    /// </summary>
+    /// <param name="isAgree"></param>
+    public void RqVote(bool isAgree)
+    {
+        RPVote rq = new RPVote();
+        rq.isagree = isAgree;
+        int cmd = GameTools.getCmd_M(10, 6);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
+    }
     public void RqReady()
     {
         PB_BaseData rq = new PB_BaseData();
@@ -30,7 +44,90 @@ public class MahJongModel : Singleton<MahJongModel> {
         int cmd = GameTools.getCmd_M(11, 3);
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
     }
+    /// <summary>
+    /// 请求打牌
+    /// </summary>
+    /// <param name="mahjongs"></param>
+    public void RqHitMahjong(List<int> mahjongs)
+    {
+        NetOprateData rq = new NetOprateData();
+        rq.dlist = mahjongs;
+        RqMahJong(rq, MahJongOprateType.HitMahJong);
+    }
+    /// <summary>
+    /// 过牌
+    /// </summary>
+    public void RqGiveUpMahjong()
+    {
+        NetOprateData rq = new NetOprateData();
+        RqMahJong(rq, MahJongOprateType.GiveUp);
+    }
+    /// <summary>
+    /// 吃牌
+    /// </summary>
+    /// <param name="mahjongs"></param>
+    public void RqChiMahjong(List<int> mahjongs)
+    {
+        NetOprateData rq = new NetOprateData();
+        rq.dlist = mahjongs;
+        RqMahJong(rq, MahJongOprateType.ChiMahJong);
+    }
+    public void RqGangMahjong(List<int> mahjongs)
+    {
+        NetOprateData rq = new NetOprateData();
+        rq.dlist = mahjongs;
+        RqMahJong(rq, MahJongOprateType.GangMahJong);
+    }
+    public void RqTingMahjong(int dvalue)
+    {
+        NetOprateData rq = new NetOprateData();
+        rq.dval = dvalue;
+        RqMahJong(rq, MahJongOprateType.TingMahJong);
+    }
+    public void RqHuMahjong()
+    {
+        NetOprateData rq = new NetOprateData();
+        RqMahJong(rq, MahJongOprateType.HuMahJong);
+    }
+    /// <summary>
+    /// 请求碰牌
+    /// </summary>
+    /// <param name="mahjongs"></param>
+    public void RqPongMahjong()
+    {
+        NetOprateData rq = new NetOprateData();
+        rq.dlist = hitMahjong;
+        for (int i = 0; i < hitMahjong.Count; i++)
+        {
+            MyLogger.Log("D:" + hitMahjong[i]);
+        }
+        RqMahJong(rq, MahJongOprateType.PongMahJong);
+    }
+    /// <summary>
+    /// 麻将操作
+    /// </summary>
+    /// <param name="rq"></param>
+    private void RqMahJong(NetOprateData rq,MahJongOprateType type)
+    {
+        rq.otype = (int)type;
+        rq.uid = LoginModel.Instance.GetRoleId();
+        int cmd = GameTools.getCmd_M(11, 1);
+        CDataListManager.Instance.SendBaseDataToPB_Net(cmd, rq);
+        MyLogger.LogC2S("C2S:",cmd, rq.ToString());
+    }
     #endregion
+
+    private int timeToWhoUid = 0;
+    public bool IsCanGiveMahJong()
+    {
+        int myUid = LoginModel.Instance.GetRoleId();
+        return myUid == timeToWhoUid;
+    }
+    public void SetTimeToWhoUid(int uid)
+    {
+        timeToWhoUid = uid;
+    }
+    private List<int> hitMahjong = new List<int>();
     #region S2C
     void MahJongActions(PB_BaseData baseData)
     {
@@ -48,146 +145,55 @@ public class MahJongModel : Singleton<MahJongModel> {
     {
       
         MahJongOprateType oprateType = (MahJongOprateType)data.otype;
-        MyLogger.Log(data.otype+","+ oprateType);
+        MyLogger.LogS2C("S2C",data.ToString());
         switch (oprateType)
         {
             case MahJongOprateType.Ready:
-                EventCenter.SendEvent(new EventParam(EEventId.UpdateReady, data));
-                break;
-            case MahJongOprateType.GiveMahJong:
-                EventCenter.SendEvent(new EventParam(EEventId.UpdateFaPai, data));
+            case MahJongOprateType.RandomBanker:
+            case MahJongOprateType.SelectScore:
+                EventCenter.SendEvent(new EventParam(EEventId.UpdatePlayerState, data));  // 玩家信息
                 break;
             case MahJongOprateType.TimeToWho:
-                EventCenter.SendEvent(new EventParam(EEventId.UpdateTimeToWho, data));
+            case MahJongOprateType.ReceiveMahjongs:
+                EventCenter.SendEvent(new EventParam(EEventId.UpdateMahjong, data)); // 麻将信息
                 break;
-            case MahJongOprateType.RandomBanker:
+            case MahJongOprateType.HitMahJong:
+                hitMahjong =  data.dlist;
+                EventCenter.SendEvent(new EventParam(EEventId.UpdateMahjong, data)); // 麻将信息
                 break;
-            case MahJongOprateType.SelectQue:
+            case MahJongOprateType.PongMahJong:
+            case MahJongOprateType.GiveUp:
+            case MahJongOprateType.ChiMahJong:
+            case MahJongOprateType.GangMahJong:
+            case MahJongOprateType.TingMahJong:
+            case MahJongOprateType.HuMahJong:
+                EventCenter.SendEvent(new EventParam(EEventId.UpdateMahjong, data)); // 麻将信息
+                break;
+            case MahJongOprateType.CanOprate:
+                EventCenter.SendEvent(new EventParam(EEventId.UpdateCanOprate, data)); //可操作信息
                 break;
             case MahJongOprateType.ChangeThree:
                 break;
             case MahJongOprateType.ChangeThreeResult:
                 break;
-            case MahJongOprateType.SelectScore:
-                EventCenter.SendEvent(new EventParam(EEventId.UpdateSelectScore, data));
-                break;
-            case MahJongOprateType.CanOprate:
-                ProgressCanOprate(data);
-                break;
-            case MahJongOprateType.HitMahJong:
-                break;
-            case MahJongOprateType.PongMahJong:
-                break;
-            case MahJongOprateType.GiveUp:
-                break;
-            case MahJongOprateType.ChiMahJong:
-                break;
-            case MahJongOprateType.GangMahJong:
-                break;
-            case MahJongOprateType.TingMahJong:
-                break;
-            case MahJongOprateType.HuMahJong:
-                break;
-
             default:
                 break;
         }
     }
-
-    private void ProgressCanOprate(NetOprateData data)
+    /// <summary>
+    /// 投票解散房间
+    /// </summary>
+    /// <param name="baseData"></param>
+    void VoteDissRoom(PB_BaseData baseData)
     {
-        MyLogger.Log(data.ToString());
-        for (int i = 0; i < data.kvDatas.Count; i++)
-        {
-            int OprateK = data.kvDatas[i].k;
-            MahJongOprateType oprateType = (MahJongOprateType)OprateK;
-            switch (oprateType)
-            {
-                case MahJongOprateType.SelectScore:
-                    EventCenter.SendEvent(new EventParam(EEventId.UpdateShowScore));
-                    break;
+        MyLogger.LogS2C("投票结果");
 
-            }
-
-        }
+    }
+    void MahjongResult(PB_BaseData baseData)
+    {
+        MyLogger.LogS2C("麻将结算");
     }
     #endregion
-    #region 测试数据
-
-    private int myUid = 1000;
-    private int myIndex = 3;
-    public List<NetUserData> GetNetUserDatas()
-    {
-        List<NetUserData> players = new List<NetUserData>();
-        for (int i = 0; i < 4; i++)
-        {
-            players.Add(new NetUserData()
-            {
-                idex = 0,
-                uid = 10003
-            });
-            players.Add(new NetUserData()
-            {
-                idex = 1,
-                uid = 1000
-            });
-            players.Add(new NetUserData()
-            {
-                idex = 2,
-                uid = 10001
-            });
-            players.Add(new NetUserData()
-            {
-                idex = 3,
-                uid = 10002
-            });
-        }
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].idex -= myIndex;
-            players[i].idex = players[i].idex < 0 ? players[i].idex + 4 : players[i].idex;
-        }
-        return players;
-    }
-
-
-
-    #region Random
-
-    public List<EMahJongType> RandomMahjongs(int count)
-    {
-        List<EMahJongType> tmp = new List<EMahJongType>();
-        for (int i = 0; i < count; i++)
-        {
-
-            int random = NGUITools.RandomRange(1, 34);
-            EMahJongType type = (EMahJongType)random;
-            tmp.Add(type);
-            tmp.Sort();
-        }
-        return tmp;
-    }
-    public List<EMahJongType> RandomThreeMahjongs()
-    {
-        List<EMahJongType> tmp = new List<EMahJongType>();
-        int random = NGUITools.RandomRange(1, 34);
-        EMahJongType type = (EMahJongType)random;
-        tmp.Add(type);
-        tmp.Sort();
-
-        return tmp;
-    }
-
-    public EMahJongType RandomMahjong()
-    {
-        int random = NGUITools.RandomRange(1, 34);
-        EMahJongType type = (EMahJongType)random;
-        return type;
-    }
-
-    #endregion
-    #endregion
-
 }
 /// <summary>
 /// 麻将操作类型
@@ -201,7 +207,7 @@ public enum MahJongOprateType
     /// <summary>
     /// 发牌
     /// </summary>
-    GiveMahJong = 5,
+    ReceiveMahjongs = 5,
     /// <summary>
     /// 轮到谁
     /// </summary>

@@ -136,8 +136,7 @@ public class RoomModel : Singleton<RoomModel>
         if (rp != null)
         {
             roomData = rp;
-            //UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
-            //UiManager.Instance.CloseUi(EnumUiType.Room_JoinRoomUI);
+            
             //UnityEngine.SceneManagement.SceneManager.LoadScene("game");
             NGUIDebug.Log(rp.roomId);
             CoroutineController.Instance.StartCoroutine(WaitForGoGame());
@@ -186,6 +185,8 @@ public class RoomModel : Singleton<RoomModel>
         bool isOpen = UiManager.Instance.CheckIsOpening(new EnumUiType[] { EnumUiType.Room_CreateRoomUI, EnumUiType.Room_JoinRoomUI });
         if(isOpen)
         {
+            UiManager.Instance.CloseUi(EnumUiType.Room_CreateRoomUI);
+            UiManager.Instance.CloseUi(EnumUiType.Room_JoinRoomUI);
             yield return new WaitForSeconds(0.3f);
             UnityEngine.SceneManagement.SceneManager.LoadScene("game");
         }
