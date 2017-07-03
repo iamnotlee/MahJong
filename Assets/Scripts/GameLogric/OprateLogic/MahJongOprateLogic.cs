@@ -64,4 +64,15 @@ public class MahJongOprateLogic : MonoBehaviour {
         }
         mGrid.repositionNow = true;
     }
+
+    public void Reset()
+    {
+        ChiBtn.SetActive(false);
+        PongBtn.SetActive(false);
+        HuBtn.SetActive(false);
+        GangBtn.SetActive(false);
+        TingBtn.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
 }

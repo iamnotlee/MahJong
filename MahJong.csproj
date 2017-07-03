@@ -351,6 +351,10 @@
     <Compile Include="Assets\Scripts\UI\Load\LoadingUI.cs" />
     <Compile Include="Assets\Scripts\UI\MsgBox\MsgHintPanel.cs" />
     <Compile Include="Assets\Scripts\UI\MsgBox\MsgManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Result\FinalResultItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Result\FinalResultUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Result\ResultItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Result\ResultUI.cs" />
     <Compile Include="Assets\Scripts\UI\Room\CreateRoomUI.cs" />
     <Compile Include="Assets\Scripts\UI\Room\JoinRoomUI.cs" />
     <Compile Include="Assets\Scripts\UI\SceneUI\GameUI.cs" />

@@ -41,7 +41,10 @@ public enum EEventId : int
     /// 该谁了
     /// </summary>
     UpdateMahjong,
-
+    /// <summary>
+    /// 开始下一局
+    /// </summary>
+    UpdateNext,
 
 
 

@@ -132,7 +132,7 @@ public class PBDataManager :Singleton<PBDataManager>
         AddInterface<NetResponse>(GameTools.getCmd_M(11, 1));
         // 结算
         AddInterface<RQREsult>(GameTools.getCmd_M(11, 2));
-        AddInterface<NetMjUserResult>(GameTools.getCmd_M(11, 2));
+        //AddInterface<NetMjUserResult>(GameTools.getCmd_M(11, 2));
 
         // 压跑
         AddInterface<RPSelectScore>(GameTools.getCmd_M(11, 3));

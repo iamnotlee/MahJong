@@ -41,6 +41,9 @@ public enum EnumUiType : int
     Load_LoadingUI,
     Room_JoinRoomUI,
     Room_CreateRoomUI,
+    Result_ResultUI,
+    Result_FInalResultUI,
+
 
 }
 // <summary>

@@ -9,7 +9,7 @@ public class MahJongModel : Singleton<MahJongModel> {
     {
         CDataListManager.Instance.RegisterDelegate<NetResponse>(MahJongActions);
         CDataListManager.Instance.RegisterDelegate<RQVote>(VoteDissRoom);
-        CDataListManager.Instance.RegisterDelegate<NetMjUserResult>(MahjongResult);
+        CDataListManager.Instance.RegisterDelegate<RQREsult>(MahjongResult);
 
         
     }
@@ -27,6 +27,7 @@ public class MahJongModel : Singleton<MahJongModel> {
     }
     public void RqReady()
     {
+        MyLogger.LogC2S("发送准备");
         PB_BaseData rq = new PB_BaseData();
         int cmd = GameTools.getCmd_M(10, 5);
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
@@ -191,7 +192,12 @@ public class MahJongModel : Singleton<MahJongModel> {
     }
     void MahjongResult(PB_BaseData baseData)
     {
-        MyLogger.LogS2C("麻将结算");
+        RQREsult rp = baseData.GetObj<RQREsult>();
+        if (rp != null)
+        {
+
+            UiManager.Instance.OpenUi(EnumUiType.Result_ResultUI, rp);
+        }
     }
     #endregion
 }

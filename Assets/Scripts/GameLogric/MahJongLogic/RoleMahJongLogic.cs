@@ -19,10 +19,14 @@ public class RoleMahJongLogic : MahJongBaseLogic
     void OnEnable()
     {
         EventCenter.AddEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 
+        EventCenter.AddEventListener(EEventId.UpdateNext, UpdateClear); // 
+
     }
     void OnDisable()
     {
         EventCenter.RemoveEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 
+        EventCenter.RemoveEventListener(EEventId.UpdateNext, UpdateClear); // 
+
     }
 
     void UpdateMahJongs(EventParam arg)
@@ -115,16 +119,21 @@ public class RoleMahJongLogic : MahJongBaseLogic
         }
 
     }
+    /// <summary>
+    /// 碰牌
+    /// </summary>
+    /// <param name="data"></param>
     private void PongMahjong(NetOprateData data)
     {
         bool isMe = data.uid == userData.uid;
         if (data.dlist.Count > 0 && isMe)
         {
+            // 创建碰牌
             EMahJongType type = (EMahJongType)data.dlist[0];
-            MahjongsItem tableItem = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
-            tableItem.Init(type);
-            tableItem.name = "A_" + data.dlist[0];
-            TableMahJongP.repositionNow = true;
+            MahjongsItem pong = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
+            pong.Init(type);
+            pong.name = "A_" + data.dlist[0];
+            //删除碰掉的牌
             for (int i = 0; i < cache.Count; i++)
             {
                 if (cache[i].MahJongType == type)
@@ -141,9 +150,14 @@ public class RoleMahJongLogic : MahJongBaseLogic
     {
 
     }
+    /// <summary>
+    /// 吃牌
+    /// </summary>
+    /// <param name="data"></param>
     private void ChiMahjong(NetOprateData data)
     {
         EMahJongType type = (EMahJongType)data.dlist[0];
+        //
         MahjongsItem tableItem = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
         tableItem.Init(type);
         tableItem.name = "A_" + data.dlist[0];
@@ -155,6 +169,10 @@ public class RoleMahJongLogic : MahJongBaseLogic
         }
         HandMahJongs.repositionNow = true;
     }
+    /// <summary>
+    /// 杠牌
+    /// </summary>
+    /// <param name="data"></param>
     private void GangMahjiong(NetOprateData data)
     {
         bool isMe = data.uid == userData.uid;
@@ -218,4 +236,10 @@ public class RoleMahJongLogic : MahJongBaseLogic
         }
     }
     #endregion
+
+    void UpdateClear(EventParam arg)
+    {
+        GameUtils.ClearChildren(HandMahJongs.transform);
+        GameUtils.ClearChildren(TableMahJongP.transform);
+    }
 }

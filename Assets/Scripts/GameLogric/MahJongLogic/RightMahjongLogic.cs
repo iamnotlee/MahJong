@@ -22,10 +22,14 @@ public class RightMahjongLogic : MahJongBaseLogic
     void OnEnable()
     {
         EventCenter.AddEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 
+        EventCenter.AddEventListener(EEventId.UpdateNext, UpdateClear); // 
+
     }
     void OnDisable()
     {
         EventCenter.RemoveEventListener(EEventId.UpdateMahjong, UpdateMahJongs); // 
+        EventCenter.RemoveEventListener(EEventId.UpdateNext, UpdateClear); // 
+
     }
 
     void UpdateMahJongs(EventParam arg)
@@ -63,12 +67,14 @@ public class RightMahjongLogic : MahJongBaseLogic
                 break;
         }
     }
+    private List<GameObject> cache = new List<GameObject>();
     private void ReceiveMahjongs(NetOprateData data)
     {
         GameUtils.ClearChildren(HandMahJongs.transform);
         for (int i = 0; i < data.dlist.Count; i++)
         {
-            GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform);
+            GameObject obj = GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform).gameObject;
+            cache.Add(obj);
         }
         HandMahJongs.repositionNow = true;
     }
@@ -76,7 +82,8 @@ public class RightMahjongLogic : MahJongBaseLogic
     {
         if (data.dval > 0)
         {
-            cacheObj= GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform).gameObject;
+            GameObject obj = GameUtils.New<UISprite>(SingleMahongPath, HandMahJongs.transform).gameObject;
+            cache.Add(obj);
         }
         HandMahJongs.repositionNow = true;
     }
@@ -92,8 +99,13 @@ public class RightMahjongLogic : MahJongBaseLogic
             item.Init(type);
             TableMahjongItem tableItem = GameUtils.New<TableMahjongItem>(TableMahjongPath, TableMahJongP.transform);
             tableItem.Init(type);
-            if (cacheObj != null) Destroy(cacheObj);
             TableMahJongP.repositionNow = true;
+            if (cache.Count > 0)
+            {
+                Destroy(cache[cache.Count - 1]);
+                cache.RemoveAt(cache.Count - 1);
+            }
+            HandMahJongs.repositionNow = true;
 
         }
 
@@ -103,15 +115,19 @@ public class RightMahjongLogic : MahJongBaseLogic
 
     private void PongMahjong(NetOprateData data)
     {
-        bool isMe = data.uid == LoginModel.Instance.GetRoleId();
-        if (data.dval > 0 && isMe)
+        bool isMe = data.uid == userData.uid;
+        if (data.dlist.Count > 0 && isMe)
         {
-            EMahJongType type = (EMahJongType)data.dval;
-
+            EMahJongType type = (EMahJongType)data.dlist[0];
             MahjongsItem tableItem = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
             tableItem.Init(type);
-            TableMahJongP.repositionNow = true;
-
+            tableItem.name = "A_" + data.dlist[0];
+            if (cache.Count > 0)
+            {
+                Destroy(cache[cache.Count - 1]);
+                cache.RemoveAt(cache.Count - 1);
+            }
+            HandMahJongs.repositionNow = true;
         }
 
     }
@@ -121,11 +137,37 @@ public class RightMahjongLogic : MahJongBaseLogic
     }
     private void ChiMahjong(NetOprateData data)
     {
-
+        bool isMe = data.uid == userData.uid;
+        if (data.dlist.Count > 0 && isMe)
+        {
+            EMahJongType type = (EMahJongType)data.dlist[0];
+            MahjongsItem tableItem = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
+            tableItem.Init(type);
+            tableItem.name = "A_" + data.dlist[0];
+            if (cache.Count > 0)
+            {
+                Destroy(cache[cache.Count - 1]);
+                cache.RemoveAt(cache.Count - 1);
+            }
+            HandMahJongs.repositionNow = true;
+        }
     }
     private void GangMahjiong(NetOprateData data)
     {
-
+        bool isMe = data.uid == userData.uid;
+        if (data.dlist.Count > 0 && isMe)
+        {
+            EMahJongType type = (EMahJongType)data.dlist[0];
+            MahjongsItem tableItem = GameUtils.New<MahjongsItem>(ThreeMahJongPath, HandMahJongs.transform);
+            tableItem.Init(type);
+            tableItem.name = "A_" + data.dlist[0];
+            if (cache.Count > 0)
+            {
+                Destroy(cache[cache.Count - 1]);
+                cache.RemoveAt(cache.Count - 1);
+            }
+            HandMahJongs.repositionNow = true;
+        }
     }
     private void TingMahjiong(NetOprateData data)
     {
@@ -134,6 +176,11 @@ public class RightMahjongLogic : MahJongBaseLogic
     private void HuMahjiong(NetOprateData data)
     {
 
+    }
+    void UpdateClear(EventParam arg)
+    {
+        GameUtils.ClearChildren(HandMahJongs.transform);
+        GameUtils.ClearChildren(TableMahJongP.transform);
     }
 
 }

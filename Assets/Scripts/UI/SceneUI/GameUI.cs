@@ -284,7 +284,7 @@ public class GameUI : MonoBehaviour
             case MahJongOprateType.HuMahJong:
                 if(data.uid == LoginModel.Instance.GetRoleId())
                 {
-                    MahJongOprate.gameObject.SetActive(false);
+                    MahJongOprate.Reset();
                 }
                 break;
         }

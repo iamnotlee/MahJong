@@ -26,19 +26,13 @@ public class PlayerItem: MonoBehaviour
 
     }
 
-    void OnDisable()
-    {
-        //EventCenter.RemoveEventListener(EEventId.ExitRoom, ExitRoom);
-        //EventCenter.AddEventListener(EEventId.UpdateReady, UpdateReady);
-
-
-    }
     void OnEnable()
     {
-        //EventCenter.AddEventListener(EEventId.ExitRoom, ExitRoom);
-        //EventCenter.AddEventListener(EEventId.UpdateReady, UpdateReady);
-
-
+        EventCenter.AddEventListener(EEventId.UpdateNext, ResetPlayer); // 
+    }
+    void OnDisable()
+    {
+        EventCenter.RemoveEventListener(EEventId.UpdateNext, ResetPlayer); // 
     }
     private int uid = 0;
     public void Init(NetUserData data)
@@ -72,5 +66,11 @@ public class PlayerItem: MonoBehaviour
     public void RefreshBacker(bool isBanker)
     {
         BankerObj.SetActive(isBanker);
+    }
+
+    private void ResetPlayer(EventParam arg)
+    {
+        PlayerScore.text = "";
+        BankerObj.SetActive(false);
     }
 }
