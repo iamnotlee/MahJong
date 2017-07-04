@@ -113,7 +113,7 @@ public class PB_BaseData : global::ProtoBuf.IExtensible
     /// <typeparam name="T"></typeparam>
     /// <param name="rq"></param>
     /// <returns></returns>
-    public void Init(object rq) 
+    public void Init<T>(T rq) 
     {
         MemoryStream ms = new MemoryStream();
         Serializer.Serialize(ms, rq);

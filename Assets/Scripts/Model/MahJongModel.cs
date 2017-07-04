@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using proto.NetGame;
+using ProtoBuf;
+
 public class MahJongModel : Singleton<MahJongModel> {
 
 	
@@ -29,7 +31,7 @@ public class MahJongModel : Singleton<MahJongModel> {
     {
         MyLogger.LogC2S("发送准备");
         PB_BaseData rq = new PB_BaseData();
-        int cmd = GameTools.getCmd_M(10, 5);
+        int cmd = GameTools.getCmd_M(10, 5);      
         CDataListManager.Instance.SendBaseDataToPB_Net(cmd,rq);
     }
     /// <summary>
@@ -98,10 +100,6 @@ public class MahJongModel : Singleton<MahJongModel> {
     {
         NetOprateData rq = new NetOprateData();
         rq.dlist = hitMahjong;
-        for (int i = 0; i < hitMahjong.Count; i++)
-        {
-            MyLogger.Log("D:" + hitMahjong[i]);
-        }
         RqMahJong(rq, MahJongOprateType.PongMahJong);
     }
     /// <summary>
@@ -146,7 +144,7 @@ public class MahJongModel : Singleton<MahJongModel> {
     {
       
         MahJongOprateType oprateType = (MahJongOprateType)data.otype;
-        MyLogger.LogS2C("S2C",data.ToString());
+        MyLogger.LogS2C("S2C:",data.ToString());
         switch (oprateType)
         {
             case MahJongOprateType.Ready:

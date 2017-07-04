@@ -8,6 +8,11 @@
 //------------------------------------------------------------------------------
 
 // Generated from: proto/NetGame.proto
+
+using ICSharpCode.SharpZipLib.Tar;
+using ProtoBuf;
+using ProtoBuf.Serializers;
+
 namespace proto.NetGame
 {
     [global::System.Serializable, global::ProtoBuf.ProtoContract(Name = @"NetUserData")]
@@ -128,7 +133,7 @@ namespace proto.NetGame
             get { return _flag; }
             set { _flag = value; }
         }
-        private  global::System.Collections.Generic.List<int> _dlist = new global::System.Collections.Generic.List<int>();
+        private global::System.Collections.Generic.List<int> _dlist = new global::System.Collections.Generic.List<int>();
         [global::ProtoBuf.ProtoMember(5, Name = @"dlist", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
         public global::System.Collections.Generic.List<int> dlist
         {
@@ -146,10 +151,12 @@ namespace proto.NetGame
         private global::ProtoBuf.IExtension extensionObject;
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
         { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-
         public override string ToString()
         {
-            return "otype:" + otype + " uid:" + uid + " flag:" + flag + " dval:" + dval + " dlist:" + GameUtils.ListToString(dlist) + " kvDatas:" + GameUtils.ListToString(kvDatas);
+            return
+                string.Format(
+                    "otype: {0}, uid: {1}, dval: {2}, flag: {3}, dlist: {4}, kvDatas: {5}",
+                    otype, uid, dval, flag, GameUtils.ListToString(dlist), GameUtils.ListToString(kvDatas));
         }
     }
 
@@ -187,7 +194,10 @@ namespace proto.NetGame
 
         public override string ToString()
         {
-            return base.ToString() + "k:" + k + "v:" + v + "dlist:" + GameUtils.ListToString(dlist);
+            return
+                string.Format(
+                    "k: {0}, v: {1}, dlist: {2}",
+                    k, v, GameUtils.ListToString(dlist), GameUtils.ListToString(dlist, "dlist"));
         }
     }
 
